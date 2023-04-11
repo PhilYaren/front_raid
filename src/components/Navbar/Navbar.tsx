@@ -1,4 +1,4 @@
-import { AppBar, Box, Tab, Tabs, Toolbar, Typography } from '@material-ui/core';
+import { AppBar, Box, Tab, Tabs, Toolbar, Typography } from '@mui/material';
 import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom';
 
@@ -14,7 +14,7 @@ function Navbar({user}) {
             <Typography variant='h6' color='inherit' >Raid</Typography>
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
             <Tabs value={tabIndex}  indicatorColor='secondary' onChange={handleTabChange} >
-            <Tab label='Главная' component={NavLink} to='/' />  
+            <Tab label='Главная' component={NavLink} to='/' />
             {user? ( [
                 <Tab key="user" label={user} component={NavLink} to='/statistic' />,
                 <Tab key="logout" label="Выйти" />
