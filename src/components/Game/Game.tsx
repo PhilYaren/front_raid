@@ -3,9 +3,9 @@ import './game.css'
 
 function Game() {
 
-  // const blabla = (e) => {
-  //   e.target.classList = 'cssanimation flipYZoomOut';
-  // }
+  const rouletteHandler = (e) => {
+    e.target.style.animation = '3s linear infinite rotate;'
+  }
 
   return (
     <div className='gamefield'>
@@ -23,8 +23,19 @@ function Game() {
         </ul>
       </div>
       <div className='field'>игровое поле</div>
-      <div className='roulette'>колесико</div>
+      <div onClick={rouletteHandler}  className='roulette'>
+        <div className="d15">
+          <div className='pivont-point'>&bull;</div>
+        </div>
+      </div>
       <div className='deck'>колода и копочка сдаться</div>
+      <div className='chat'>
+        <div className='massageList'>Здесь будут сообщения</div>
+        <form>
+          <textarea placeholder='Введите сообщение' />
+          <button>👊</button>
+        </form>
+      </div>
     </div>
   )
 }
