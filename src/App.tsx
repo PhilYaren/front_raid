@@ -14,12 +14,12 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/">
-          <Route index element={<Home user={user} />} />
+          <Route index element={<Home />} />
           <Route path="login" element={<Auth />} />
           <Route path="registration" element={<Auth />} />
         </Route>
         <Route path="/:user">
-          <Route index element={<Home user={user} />} />
+          <Route index element={<Home />} />
           <Route path="statistic" element={<UserStat />} />
           <Route path="game" element={<Game />} />
         </Route>

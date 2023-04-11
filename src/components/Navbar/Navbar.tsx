@@ -8,6 +8,7 @@ import { StateFromReducersMapObject } from '@reduxjs/toolkit';
 function Navbar() {
   const [tabIndex, setTabIndex] = useState(0);
   const user = useSelector((state: any) => state.user.user);
+  console.log(user);
 
   const handleTabChange = (
     event: React.ChangeEvent<{}>,
