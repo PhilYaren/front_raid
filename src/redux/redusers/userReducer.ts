@@ -1,17 +1,17 @@
-import { SET_AUTH, LOGOUT } from '../types'
+import { SET_AUTH, LOGOUT } from '../types';
 const initState = {
   user: null,
-  loaded: false
-}
+  loaded: false,
+};
 
-export default function userReducer (state = initState, action: any) {
-  const { type, payload } = action
+export default function userReducer(state = initState, action: any) {
+  const { type, payload } = action;
   switch (type) {
     case SET_AUTH:
-      return {...state, user: payload, loaded: true}
+      return { ...state, user: payload.user, loaded: true };
     case LOGOUT:
-      return {...state, user: null}
+      return { ...state, user: null };
     default:
-      return state
+      return state;
   }
 }

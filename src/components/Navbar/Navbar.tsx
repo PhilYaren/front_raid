@@ -1,20 +1,29 @@
 import { AppBar, Box, Tab, Tabs, Toolbar, Typography } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { User } from '../../types';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { StateFromReducersMapObject } from '@reduxjs/toolkit';
+import { logoutUserAsync } from '../../redux/actions/userActions';
+import { SocketContext } from '../../context/websoket/websoket-context';
 
 function Navbar() {
   const [tabIndex, setTabIndex] = useState(0);
   const user = useSelector((state: any) => state.user.user);
-  console.log(user);
+  const dispatch = useDispatch();
+  const socket = useContext(SocketContext);
+  console.log(socket);
 
   const handleTabChange = (
     event: React.ChangeEvent<{}>,
     newTabIndex: number
   ): void => {
     setTabIndex(newTabIndex);
+  };
+
+  const handleLogout = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    e.preventDefault();
+    dispatch(logoutUserAsync());
   };
   return (
     <AppBar position="fixed" color="primary">
@@ -37,7 +46,11 @@ function Navbar() {
                     component={NavLink}
                     to="/statistic"
                   />,
-                  <Tab key="logout" label="Выйти" />,
+                  <Tab
+                    key="logout"
+                    label="Выйти"
+                    onClick={(e) => handleLogout(e)}
+                  />,
                 ]
               : [
                   <Tab

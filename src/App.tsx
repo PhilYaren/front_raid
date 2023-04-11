@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import reactLogo from './assets/react.svg';
 import './App.css';
 import Navbar from './components/Navbar/Navbar';
@@ -7,8 +7,16 @@ import Home from './components/Home/Home';
 import UserStat from './components/UserStat/UserStat';
 import Game from './components/Game/Game';
 import Auth from './components/Auth/Auth';
+import { useDispatch } from 'react-redux';
+import { checkAuth } from './redux/actions/userActions';
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(checkAuth());
+  }, []);
+
   return (
     <>
       <Navbar />

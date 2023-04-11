@@ -1,8 +1,12 @@
-import { configureStore } from '@reduxjs/toolkit'
-import userReducer from './redusers/userReducer'
+import { configureStore } from '@reduxjs/toolkit';
+import userReducer from './redusers/userReducer';
 
 export default configureStore({
   reducer: {
-    user: userReducer
-  }
-})
+    user: userReducer,
+  },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      thunk: true,
+    }),
+});

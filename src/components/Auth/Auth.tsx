@@ -1,39 +1,54 @@
-import React from 'react'
-import { FormControl, FormLabel, TextField, Button } from '@mui/material'
-import { useLocation } from 'react-router-dom'
+import React from 'react';
+import { FormControl, FormLabel, TextField, Button } from '@mui/material';
+import { useLocation } from 'react-router-dom';
+import { loginUser, signupUser } from '../../redux/actions/userActions';
+import { useDispatch } from 'react-redux';
 
 function Auth() {
   const endPoint = useLocation().pathname;
-  console.log(endPoint);
-  
+  const dispatch = useDispatch();
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const data = new FormData(e.currentTarget);
+    const user = Object.fromEntries(data.entries());
+
+    try {
+      if (endPoint === '/login') {
+        dispatch(loginUser(user));
+      } else {
+        dispatch(signupUser(user));
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   const form = () => {
-    if(endPoint === '/login') {
-      return (<FormControl>
-        <h3> Войти </h3>
+    return (
+      <form
+        style={{ display: 'flex', flexDirection: 'column' }}
+        onSubmit={handleSubmit}
+      >
+        <h3> {endPoint === '/login' ? 'Войти' : 'Регистрация'} </h3>
+        {endPoint !== '/login' && (
+          <>
+            <FormLabel>Введите имя</FormLabel>
+            <TextField name="userName" />
+          </>
+        )}
         <FormLabel>Введите email</FormLabel>
-        <TextField/>
+        <TextField name="email" />
         <FormLabel>Введите пароль</FormLabel>
-        <TextField/>
-        <Button>Войти</Button>
-    </FormControl>)
-    } else return (
-    <FormControl>
-      <h3> Регистрация </h3>
-      <FormLabel>Введите имя</FormLabel>
-      <TextField/>
-      <FormLabel>Введите email</FormLabel>
-      <TextField/>
-      <FormLabel>Введите пароль</FormLabel>
-      <TextField/>
-      <Button>Войти</Button>
-  </FormControl>)
-  }
-    
-  return (
-    <div>
-        {form()}
-    </div>
-  )
+        <TextField name="password" />
+        <Button type="submit">
+          {endPoint === '/login' ? 'Войти' : 'Регистрация'}
+        </Button>
+      </form>
+    );
+  };
+
+  return <div>{form()}</div>;
 }
 
-export default Auth
+export default Auth;

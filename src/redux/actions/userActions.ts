@@ -8,12 +8,13 @@ export const logoutUser = () => ({ type: LOGOUT });
 
 export const checkAuth = () => (dispatch: Dispatch) => {
   axios
-    .post('/user/')
+    .get('/user/')
     .then((res) => dispatch(setAuthUser(res.data)))
     .catch((err) => console.log(err));
 };
 
 export const loginUser = (data: any) => (dispatch: Dispatch) => {
+  console.log(data);
   axios
     .post('/user/login', data)
     .then((res) => dispatch(setAuthUser(res.data)))
