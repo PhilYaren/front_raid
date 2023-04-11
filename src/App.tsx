@@ -15,7 +15,7 @@ function App() {
 
   return (
     <>
- 
+
     <Navbar user={user}/>
       <Routes>
         <Route path='/'>
@@ -23,13 +23,13 @@ function App() {
           <Route path='login' element={<Login/>}></Route>
           <Route path='registration' element={<Registration/>}/>
         </Route>
-        <Route path='/:user'>
+        <Route>
           <Route index element={<Home user={user}/>}/>
           <Route path='statistic' element={<UserStat/>}/>
-          <Route path='game' element={<Game/>}/>
+          <Route path='/game' element={<Game/>}/>
         </Route>
         </Routes>
-  
+
     </>
   )
 }
