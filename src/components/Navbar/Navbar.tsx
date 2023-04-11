@@ -2,9 +2,12 @@ import { AppBar, Box, Tab, Tabs, Toolbar, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { User } from '../../types';
+import { useSelector } from 'react-redux';
+import { StateFromReducersMapObject } from '@reduxjs/toolkit';
 
 function Navbar() {
   const [tabIndex, setTabIndex] = useState(0);
+  const user = useSelector((state: any) => state.user.user);
 
   const handleTabChange = (
     event: React.ChangeEvent<{}>,
