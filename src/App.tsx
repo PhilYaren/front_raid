@@ -4,10 +4,11 @@ import './App.css'
 import Navbar from './components/Navbar/Navbar'
 import { Route, Routes } from 'react-router-dom'
 import Home from './components/Home/Home'
-import Login from './components/Login/Login'
+import Login from './components/Auth/Auth'
 import Registration from './components/Registration/Registration'
 import UserStat from './components/UserStat/UserStat'
 import Game from './components/Game/Game'
+import Auth from './components/Auth/Auth'
 
 
 function App() {
@@ -20,8 +21,8 @@ function App() {
       <Routes>
         <Route path='/'>
           <Route index element={<Home user={user}/>}/>
-          <Route path='login' element={<Login/>}></Route>
-          <Route path='registration' element={<Registration/>}/>
+          <Route path='login' element={<Auth/>}></Route>
+          <Route path='registration' element={<Auth/>}/>
         </Route>
         <Route path='/:user'>
           <Route index element={<Home user={user}/>}/>
