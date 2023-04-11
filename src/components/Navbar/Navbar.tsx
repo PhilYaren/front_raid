@@ -1,8 +1,9 @@
 import { AppBar, Box, Tab, Tabs, Toolbar, Typography } from '@mui/material';
 import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom';
+import {User} from "../../types";
 
-function Navbar({user}) {
+function Navbar({user}: { user: User}) {
     const [tabIndex, setTabIndex] = useState(0);
 
     const handleTabChange = (event:React.ChangeEvent<{}>, newTabIndex:number ):void => {
@@ -16,7 +17,7 @@ function Navbar({user}) {
             <Tabs value={tabIndex}  indicatorColor='secondary' onChange={handleTabChange} >
             <Tab label='Главная' component={NavLink} to='/' />
             {user? ( [
-                <Tab key="user" label={user} component={NavLink} to='/statistic' />,
+                <Tab key="user" label={user.userName} component={NavLink} to='/statistic' />,
                 <Tab key="logout" label="Выйти" />
               ]
             ) : (
