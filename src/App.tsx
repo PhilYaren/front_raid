@@ -43,12 +43,12 @@ function App() {
           <Route path="login" element={<Auth />} />
           <Route path="registration" element={<Auth />} />
         </Route>
-        <Route path="/:user">
+        <Route>
           <Route index element={<Home />} />
           <Route path="statistic" element={<UserStat />} />
           <Route path="game" element={<Game />} />
         </Route>
-        </Routes>
+      </Routes>
     </>
   );
 }

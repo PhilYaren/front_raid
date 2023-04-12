@@ -1,7 +1,8 @@
-.activeGamesContainer { 
+.activeGamesContainer {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    margin: 0 auto;
     width: 90%;
     height: 90%;
 }
@@ -12,7 +13,7 @@
     margin: 0 ;
 }
 
-.homeContainer { 
+.homeContainer {
     width: 100%;
     height: 100%;
 
