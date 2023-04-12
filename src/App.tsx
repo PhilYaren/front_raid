@@ -18,6 +18,7 @@ function App() {
   const loaded = useSelector((state: any) => state.user.loaded);
   const { handleSetSocket } = useContext(SocketContext);
   const [first, setFirst] = useState(true);
+
   useEffect(() => {
     dispatch(checkAuth());
   }, []);
