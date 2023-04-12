@@ -29,6 +29,7 @@ function App() {
   if (user && first) {
     console.log('connect');
     socket.open();
+    socket.emit('set_user', user);
     chatSocket.open();
     setFirst(false);
   }
