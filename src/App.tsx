@@ -9,7 +9,7 @@ import Game from './components/Game/Game';
 import Auth from './components/Auth/Auth';
 import { useDispatch, useSelector } from 'react-redux';
 import { checkAuth } from './redux/actions/userActions';
-import { socket, chatSocket } from './socket';
+import { socket, chatSocket, sessionSocket } from './socket';
 import { SocketContext } from './context/websoket/websoket-context';
 
 function App() {
@@ -31,6 +31,7 @@ function App() {
     socket.open();
     socket.emit('set_user', user);
     chatSocket.open();
+    sessionSocket.open();
     setFirst(false);
   }
 

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Container } from '@mui/material';
-import { chatSocket, socket } from '../../socket';
+import { chatSocket, socket, sessionSocket } from '../../socket';
 import styles from './Home.module.css';
 import { Message } from '../../types';
 import { actionMessage } from '../../redux/actions/messageActions';
@@ -36,10 +36,14 @@ function Home() {
 
   const userHomePage = () => {
     const activeGames = [
-      { id: 1, name: 'Game 1' },
-      { id: 2, name: 'Game 2' },
-      { id: 3, name: 'Game 3' },
+      { id: 1, name: 'Game 1', players: 0 },
+      { id: 2, name: 'Game 2', players: 0},
+      { id: 3, name: 'Game 3', players: 0 },
     ];
+
+    const handleButtonGame = () => {
+      sessionSocket.emit('create_room');
+    }
 
     return (
       <div className={styles.activeGamesContainer}>
@@ -48,9 +52,11 @@ function Home() {
           {activeGames.map((game) => (
             <div key={game.id} className="game">
               {game.name}
+              <p>Игроков в комнате: {game.players}</p>
+              <button>Присоединиться</button>
             </div>
           ))}
-          <button className="create-game-button">Создать игру</button>
+          <button className="create-game-button" onClick={handleButtonGame}>Создать игру</button>
         </div>
         <div className={styles.chatContainer}>
           <>
