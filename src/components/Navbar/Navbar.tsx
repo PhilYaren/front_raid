@@ -11,7 +11,7 @@ function Navbar() {
   const [tabIndex, setTabIndex] = useState(0);
   const user = useSelector((state: any) => state.user.user);
   const dispatch = useDispatch();
-  const socket = useContext(SocketContext);
+  const { socket, handleUnsetSocket } = useContext(SocketContext);
   console.log(socket);
 
   const handleTabChange = (
@@ -23,7 +23,12 @@ function Navbar() {
 
   const handleLogout = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.preventDefault();
+    socket.close();
+    handleUnsetSocket();
     dispatch(logoutUserAsync());
+  };
+  const handleMessages = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    socket.emmit('message', 'hello');
   };
   return (
     <AppBar position="fixed" color="primary">
@@ -46,6 +51,7 @@ function Navbar() {
                     className="selectedTab"
                     component={NavLink}
                     to="/statistic"
+                    onClick={(e) => {}}
                   />,
                   <Tab
                     key="logout"
