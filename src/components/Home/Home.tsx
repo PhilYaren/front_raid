@@ -1,19 +1,40 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { Container } from '@mui/material';
+import styles from './Home.module.css'
+
 
 
 
 function Home() {
   const user = useSelector((state: any) => state.user.user);
   const userHomePage = () => {
+    const activeGames = [
+      { id: 1, name: "Game 1" },
+      { id: 2, name: "Game 2" },
+      { id: 3, name: "Game 3" },
+    ];
+  
     return (
-      <Container>
-        <p>userhome</p>
-      </Container>
-    )
-  }
+     
+      <div className={styles.activeGamesContainer}>
+        <div className="active-games">
+        <h2>Список активных игровых сессий</h2>
+          {activeGames.map((game) => (
+            <div key={game.id} className="game">
+              {game.name}
+            </div>
+          ))}
+        </div>
+        <button className="create-game-button">Создать игру</button>
+        <div className="chat-container">
+          <h3>Окно чата</h3>
+          {/* здесь можно добавить компонент для чата */}
+        </div>
+      </div>
+    );
+  };
+  
   return (
     <div>
       {user ? (

@@ -1,0 +1,5 @@
+.activeGamesContainer { 
+    display: flex;
+    flex-direction: row;
+
+}
