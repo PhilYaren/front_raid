@@ -1,12 +1,32 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Outlet } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { Container } from '@mui/material';
-
+import socket from '../../socket';
 
 
 function Home() {
+  const [form, setForm] = React.useState({message: ''});
+  const [messages, setMessages] = React.useState('');
   const user = useSelector((state: any) => state.user.user);
+
+  const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setForm({...form, message: event.target.value});
+  }
+
+  const sendMessage = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log(form.message)
+    socket.emit('send_message', form.message);
+    setForm({message: ''});
+  }
+
+  useEffect(() => {
+    socket.on('receive_message', (message: string) => {
+      setMessages(message);
+    })
+  }, [socket]);
+
   const userHomePage = () => {
     return (
       <Container>
@@ -18,11 +38,17 @@ function Home() {
     <div>
       {user ? (
         <>
+          <h3>Chat:</h3>
+          {messages}
+          <form onSubmit={sendMessage}>
+            <input placeholder='Message...' name='message' value={form.message} onChange={handleInput} type="text" />
+            <button type='submit'>submit</button>
+          </form>
           <p>Залогиненный home</p>
           {userHomePage()}
         </>
       ) : (
-        <div className='game-rules-container'> 
+        <div className='game-rules-container'>
         <h2>Правила игры "Рэйд"</h2>
         <ul className='game-rules'>
           <li> Каждому игроку раздается по три карты. Игрок, который ходит первым выбирается случайно. Всего на руках может быть не больше восьми карт.</li>
