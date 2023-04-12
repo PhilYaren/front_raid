@@ -3,6 +3,8 @@ import { Outlet } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { Container } from '@mui/material';
 import { chatSocket, socket } from '../../socket';
+import styles from './Home.module.css'
+
 
 function Home() {
   const [form, setForm] = React.useState({ message: '' });
@@ -26,16 +28,26 @@ function Home() {
   }, [chatSocket]);
 
   const userHomePage = () => {
+    const activeGames = [
+      { id: 1, name: "Game 1" },
+      { id: 2, name: "Game 2" },
+      { id: 3, name: "Game 3" },
+    ];
+
     return (
-      <Container>
-        <p>userhome</p>
-      </Container>
-    );
-  };
-  return (
-    <div>
-      {user ? (
-        <>
+
+      <div className={styles.activeGamesContainer}>
+        <div className={styles.activeGames}>
+        <h2>Список активных игровых сессий</h2>
+          {activeGames.map((game) => (
+            <div key={game.id} className="game">
+              {game.name}
+            </div>
+          ))}
+        <button className="create-game-button">Создать игру</button>
+        </div>
+        <div className={styles.chatContainer}>
+          <>
           <h3>Chat:</h3>
           {messages}
           <form onSubmit={sendMessage}>
@@ -48,9 +60,19 @@ function Home() {
             />
             <button type="submit">submit</button>
           </form>
-          <p>Залогиненный home</p>
-          {userHomePage()}
         </>
+        </div>
+      </div>
+    );
+  };
+
+  return (
+    <div className={styles.homeContainer}>
+      {user ? (
+
+          <>
+          {userHomePage()}
+          </>
       ) : (
         <div className="game-rules-container">
           <h2>Правила игры "Рэйд"</h2>

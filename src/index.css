@@ -13,7 +13,11 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 } */
-
+#root {
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
 /*mui tabs*/
 .css-1h9z7r5-MuiButtonBase-root-MuiTab-root.Mui-selected{
   color: black !important;
@@ -21,6 +25,10 @@
 .css-10ltm04-MuiToolbar-root {
   justify-content:space-between
 }
+.css-11b3ww9-MuiPaper-root-MuiAppBar-root{
+  margin-bottom: 0px;
+}
+
 
 /* home*/
 .game-rules-container {
@@ -43,7 +51,6 @@ a:hover {
 body {
   margin: 0;
   display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
 }
