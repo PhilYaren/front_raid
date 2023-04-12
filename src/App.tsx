@@ -48,7 +48,7 @@ function App() {
           <Route path="statistic" element={<UserStat />} />
           <Route path="game" element={<Game />} />
         </Route>
-      </Routes>
+        </Routes>
     </>
   );
 }
