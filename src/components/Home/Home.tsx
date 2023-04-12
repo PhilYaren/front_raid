@@ -38,36 +38,36 @@ function Home() {
     return (
      
       <div className={styles.activeGamesContainer}>
-        <div className="active-games">
+        <div className={styles.activeGames}>
         <h2>Список активных игровых сессий</h2>
           {activeGames.map((game) => (
             <div key={game.id} className="game">
               {game.name}
             </div>
           ))}
-        </div>
         <button className="create-game-button">Создать игру</button>
-        <div className="chat-container">
-          <h3>Окно чата</h3>
-          {/* здесь можно добавить компонент для чата */}
         </div>
-      </div>
-    );
-  };
-  
-  return (
-    <div>
-      {user ? (
-        <>
+        <div className={styles.chatContainer}>
+          <>
           <h3>Chat:</h3>
           {messages}
           <form onSubmit={sendMessage}>
             <input placeholder='Message...' name='message' value={form.message} onChange={handleInput} type="text" />
             <button type='submit'>submit</button>
           </form>
-          <p>Залогиненный home</p>
-          {userHomePage()}
         </>
+        </div>
+      </div>
+    );
+  };
+  
+  return (
+    <div className={styles.homeContainer}>
+      {user ? (
+       
+          <>
+          {userHomePage()}
+          </>
       ) : (
         <div className='game-rules-container'>
         <h2>Правила игры "Рэйд"</h2>
