@@ -11,6 +11,7 @@ function Home() {
   const [form, setForm] = React.useState({ message: '' });
   const messages = useSelector((state: any) => state.messages.messages);
   const user = useSelector((state: any) => state.user.user);
+  const [create, setCreate] = React.useState(false);
   const dispatch = useDispatch();
 
   const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -42,22 +43,33 @@ function Home() {
     ];
 
     const handleButtonGame = () => {
+      setCreate(true);
+    }
+    const handleNewGame = (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
       sessionSocket.emit('create_room');
     }
 
     return (
       <div className={styles.activeGamesContainer}>
-        <div className={styles.activeGames}>
-          <h2>Список активных игровых сессий</h2>
-          {activeGames.map((game) => (
-            <div key={game.id} className="game">
-              {game.name}
-              <p>Игроков в комнате: {game.players}</p>
-              <button>Присоединиться</button>
-            </div>
-          ))}
-          <button className="create-game-button" onClick={handleButtonGame}>Создать игру</button>
-        </div>
+        {!create ? (
+          <div className={styles.activeGames}>
+            <h2>Список активных игровых сессий</h2>
+            {activeGames.map((game) => (
+              <div key={game.id} className="game">
+                {game.name}
+                <p>Игроков в комнате: {game.players}</p>
+                <button>Присоединиться</button>
+              </div>
+            ))}
+            <button className="create-game-button" onClick={handleButtonGame}>Создать игру</button>
+          </div>
+        ) : (
+          <form onSubmit={handleNewGame}>
+            <input type="text" placeholder='Название комнаты'/>
+            <button>DA</button>
+          </form>
+        )}
         <div className={styles.chatContainer}>
           <>
             <h3>Chat:</h3>
