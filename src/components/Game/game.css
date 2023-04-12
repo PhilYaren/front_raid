@@ -45,7 +45,7 @@
 }
 
 .roulette {
-    position: absolute;
+    position: relative;
     border-radius: 100%;
     border: 1px solid white;
     top: 70%;
@@ -58,34 +58,34 @@
     justify-content: center;
 }
 
-.square {
-    position: relative;
-    width: 15%;
-    height: 5%;
-    border-radius: 100% 100%;
-    color: #fff;
-    font-size: 1.5em;
-    text-align: center;
-    background: #03a9f4;
-    animation: 3s linear infinite rotate;
-    transform-origin: left top;
-}
-
 .pivont-point {
-    position: absolute;
-    font-size: 100%;
+    position: fixed;
+    /*width: 100px;*/
+    font-size: 80px;
     opacity: 110;
     transform: translate(-50%, -25%);
 }
 
-@keyframes rotate {
-    from {
-        transform: rotate(0deg);
-    }
+.d10 {
+    left: 6vw;
+    width: 30px;
+    height: 10px;
+    margin: 5px 0;
+    background: #B74388;
+    position: fixed;
+    transform-origin: left top;
+}
 
-    to {
-        transform: rotate(360deg);
-    }
+.d10:after {
+    content: "";
+    width: 0;
+    height: 0;
+    position: absolute;
+    top: -5px;
+    left: 100%;
+    border-width: 10px 0 10px 20px;
+    border-style: solid;
+    border-color: transparent #B74388;
 }
 
 .d15 {

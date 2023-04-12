@@ -4,7 +4,10 @@ import './game.css'
 function Game() {
 
   const rouletteHandler = (e) => {
-    e.target.style.animation = '3s linear infinite rotate;'
+    e.target.className = 'd15';
+    setTimeout(() => {
+      e.target.className = 'd10';
+    }, 1000 * 5)
   }
 
   return (
@@ -23,8 +26,8 @@ function Game() {
         </ul>
       </div>
       <div className='field'>игровое поле</div>
-      <div onClick={rouletteHandler}  className='roulette'>
-        <div className="d15">
+      <div className='roulette'>
+        <div onClick={rouletteHandler} className="d10">
           <div className='pivont-point'>&bull;</div>
         </div>
       </div>
