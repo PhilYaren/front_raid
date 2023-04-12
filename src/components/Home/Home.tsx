@@ -48,7 +48,15 @@ function Home() {
     const handleNewGame = (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       sessionSocket.emit('create_room');
+      sessionSocket.emit('get_rooms');
+
     }
+
+    useEffect(() => {
+      sessionSocket.on('send_rooms', (listRoom: any) => {
+        console.log(listRoom);
+      })
+    }, [sessionSocket])
 
     return (
       <div className={styles.activeGamesContainer}>
@@ -67,7 +75,7 @@ function Home() {
         ) : (
           <form onSubmit={handleNewGame}>
             <input type="text" placeholder='Название комнаты'/>
-            <button>DA</button>
+            <button type='submit'>DA</button>
           </form>
         )}
         <div className={styles.chatContainer}>
