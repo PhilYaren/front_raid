@@ -1,6 +1,15 @@
 import { SET_STATISTIC } from '../types';
+import { Statistic } from '../../types';
 
-export default function statisticReduser(state = [], action: any) {
+declare interface Statistics {
+  statistics: Statistic[];
+}
+
+const initialState: Statistics = {
+  statistics: [],
+};
+
+export default function statisticReduser(state = initialState, action: any) {
   const { type, payload } = action;
   switch (type) {
     case SET_STATISTIC:
