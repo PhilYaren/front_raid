@@ -1,0 +1,17 @@
+.table {
+	width: 50%;
+	margin-bottom: 20px;
+}
+.table th {
+	font-weight: bold;
+	padding: 4px;
+	background: #dddddd;
+	border: 1px solid #dddddd;
+	text-align: center;
+	margin: auto;
+}
+.table td {
+	border: 1px solid #dddddd;
+	padding: 15px;
+	text-align: center
+}

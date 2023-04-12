@@ -5,3 +5,7 @@ export declare interface User {
     createdAt: string;
     updatedAt: string;
 }
+
+export declare interface Statistic {
+    bla: string;
+}
