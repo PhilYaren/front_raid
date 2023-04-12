@@ -6,12 +6,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { StateFromReducersMapObject } from '@reduxjs/toolkit';
 import { logoutUserAsync } from '../../redux/actions/userActions';
 import { SocketContext } from '../../context/websoket/websoket-context';
+import { socket, chatSocket } from '../../socket';
 
 function Navbar() {
   const [tabIndex, setTabIndex] = useState(0);
   const user = useSelector((state: any) => state.user.user);
   const dispatch = useDispatch();
-  const { socket, handleUnsetSocket } = useContext(SocketContext);
+
   console.log(socket);
 
   const handleTabChange = (
@@ -24,7 +25,7 @@ function Navbar() {
   const handleLogout = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.preventDefault();
     socket.close();
-    handleUnsetSocket();
+    chatSocket.close();
     dispatch(logoutUserAsync());
   };
   const handleMessages = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
@@ -33,7 +34,7 @@ function Navbar() {
   return (
     <AppBar position="fixed" color="primary">
       <Toolbar className="root" variant="dense">
-        <Typography className='game-logo '  variant="h5" color="inherit">
+        <Typography className="game-logo " variant="h5" color="inherit">
           Raid
         </Typography>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
@@ -42,7 +43,12 @@ function Navbar() {
             indicatorColor="primary"
             onChange={handleTabChange}
           >
-            <Tab label="Главная" className="selectedTab" component={NavLink} to="/" />
+            <Tab
+              label="Главная"
+              className="selectedTab"
+              component={NavLink}
+              to="/"
+            />
             {user
               ? [
                   <Tab

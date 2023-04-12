@@ -1,9 +1,12 @@
 import { io } from 'socket.io-client';
 
 const URL = import.meta.env.VITE_API_URL;
-const socket = io(URL, {
+export const socket = io(URL, {
   autoConnect: false,
   reconnectionDelay: 1000,
 });
 
-export default socket;
+export const chatSocket = io(`${URL}/chat`, {
+  autoConnect: false,
+  reconnectionDelay: 10000,
+});

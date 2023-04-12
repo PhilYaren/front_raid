@@ -9,7 +9,7 @@ import Game from './components/Game/Game';
 import Auth from './components/Auth/Auth';
 import { useDispatch, useSelector } from 'react-redux';
 import { checkAuth } from './redux/actions/userActions';
-import socket from './socket';
+import { socket, chatSocket } from './socket';
 import { SocketContext } from './context/websoket/websoket-context';
 
 function App() {
@@ -29,7 +29,7 @@ function App() {
   if (user && first) {
     console.log('connect');
     socket.open();
-    handleSetSocket(socket);
+    chatSocket.open();
     setFirst(false);
   }
 
