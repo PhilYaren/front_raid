@@ -15,3 +15,9 @@ export declare interface Statistic {
   updatedAt: string;
   playerId: number;
 }
+
+export declare interface Message {
+  userName: string;
+  message: string;
+  time: string;
+}

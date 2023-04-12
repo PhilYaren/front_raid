@@ -1,15 +1,17 @@
 import React, { useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Container } from '@mui/material';
 import { chatSocket, socket } from '../../socket';
-import styles from './Home.module.css'
-
+import styles from './Home.module.css';
+import { Message } from '../../types';
+import { actionMessage } from '../../redux/actions/messageActions';
 
 function Home() {
   const [form, setForm] = React.useState({ message: '' });
-  const [messages, setMessages] = React.useState('');
+  const messages = useSelector((state: any) => state.messages.messages);
   const user = useSelector((state: any) => state.user.user);
+  const dispatch = useDispatch();
 
   const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, message: event.target.value });
@@ -17,50 +19,66 @@ function Home() {
 
   const sendMessage = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    chatSocket.emit('send_message', form.message);
+    const data = {
+      userName: user.userName,
+      message: form.message,
+      time: new Date().toLocaleTimeString('ru-RU'),
+    };
+    chatSocket.emit('send_message', data);
     setForm({ message: '' });
   };
 
   useEffect(() => {
-    chatSocket.on('receive_message', (message: string) => {
-      setMessages(message);
+    chatSocket.on('receive_message', (message: Message) => {
+      dispatch(actionMessage(message));
     });
   }, [chatSocket]);
 
   const userHomePage = () => {
     const activeGames = [
-      { id: 1, name: "Game 1" },
-      { id: 2, name: "Game 2" },
-      { id: 3, name: "Game 3" },
+      { id: 1, name: 'Game 1' },
+      { id: 2, name: 'Game 2' },
+      { id: 3, name: 'Game 3' },
     ];
 
     return (
-
       <div className={styles.activeGamesContainer}>
         <div className={styles.activeGames}>
-        <h2>Список активных игровых сессий</h2>
+          <h2>Список активных игровых сессий</h2>
           {activeGames.map((game) => (
             <div key={game.id} className="game">
               {game.name}
             </div>
           ))}
-        <button className="create-game-button">Создать игру</button>
+          <button className="create-game-button">Создать игру</button>
         </div>
         <div className={styles.chatContainer}>
           <>
-          <h3>Chat:</h3>
-          {messages}
-          <form onSubmit={sendMessage}>
-            <input
-              placeholder="Message..."
-              name="message"
-              value={form.message}
-              onChange={handleInput}
-              type="text"
-            />
-            <button type="submit">submit</button>
-          </form>
-        </>
+            <h3>Chat:</h3>
+            <div>
+              {messages?.map((message: Message, index: number) => {
+                return (
+                  <div key={index}>
+                    <p>{message.userName}</p>
+                    <p>{message.time}</p>
+                    <div>
+                      <p>{message.message}</p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+            <form onSubmit={sendMessage}>
+              <input
+                placeholder="Message..."
+                name="message"
+                value={form.message}
+                onChange={handleInput}
+                type="text"
+              />
+              <button type="submit">submit</button>
+            </form>
+          </>
         </div>
       </div>
     );
@@ -69,10 +87,7 @@ function Home() {
   return (
     <div className={styles.homeContainer}>
       {user ? (
-
-          <>
-          {userHomePage()}
-          </>
+        <>{userHomePage()}</>
       ) : (
         <div className="game-rules-container">
           <h2>Правила игры "Рэйд"</h2>
