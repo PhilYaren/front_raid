@@ -12,7 +12,6 @@ import { checkAuth } from './redux/actions/userActions';
 
 function App() {
   const dispatch = useDispatch();
-
   useEffect(() => {
     dispatch(checkAuth());
   }, []);

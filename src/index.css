@@ -1,4 +1,4 @@
-:root {
+/* :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -12,7 +12,24 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+} */
+
+/*mui tabs*/
+.css-1h9z7r5-MuiButtonBase-root-MuiTab-root.Mui-selected{
+  color: black !important;
 }
+.css-10ltm04-MuiToolbar-root {
+  justify-content:space-between
+}
+
+/* home*/
+.game-rules-container {
+  max-width: 800px;
+}
+.game-rules {
+  text-align: justify;
+}
+
 
 a {
   font-weight: 500;
@@ -50,10 +67,10 @@ button {
 button:hover {
   border-color: #646cff;
 }
-button:focus,
+/* button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
-}
+} */
 
 @media (prefers-color-scheme: light) {
   :root {

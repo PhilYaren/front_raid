@@ -28,27 +28,29 @@ function Navbar() {
   return (
     <AppBar position="fixed" color="primary">
       <Toolbar className="root" variant="dense">
-        <Typography variant="h6" color="inherit">
+        <Typography className='game-logo '  variant="h5" color="inherit">
           Raid
         </Typography>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
           <Tabs
             value={tabIndex}
-            indicatorColor="secondary"
+            indicatorColor="primary"
             onChange={handleTabChange}
           >
-            <Tab label="Главная" component={NavLink} to="/" />
+            <Tab label="Главная" className="selectedTab" component={NavLink} to="/" />
             {user
               ? [
                   <Tab
                     key="user"
                     label={user.userName}
+                    className="selectedTab"
                     component={NavLink}
                     to="/statistic"
                   />,
                   <Tab
                     key="logout"
                     label="Выйти"
+                    className="selectedTab"
                     onClick={(e) => handleLogout(e)}
                   />,
                 ]
