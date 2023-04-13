@@ -21,3 +21,5 @@ export declare interface Message {
   message: string;
   time: string;
 }
+
+export declare type Session = [string, number, number];

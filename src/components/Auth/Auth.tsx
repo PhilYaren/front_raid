@@ -4,8 +4,6 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { loginUser, signupUser } from '../../redux/actions/userActions';
 import { useDispatch } from 'react-redux';
 
-
-
 function Auth() {
   const endPoint = useLocation().pathname;
   const dispatch = useDispatch();
@@ -21,7 +19,8 @@ function Auth() {
         dispatch(loginUser(user));
       } else {
         dispatch(signupUser(user));
-      } navigate('/')
+      }
+      navigate('/');
     } catch (e) {
       console.log(e);
     }

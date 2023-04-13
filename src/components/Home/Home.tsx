@@ -1,18 +1,25 @@
 import React, { useEffect } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Container } from '@mui/material';
 import { chatSocket, socket, sessionSocket } from '../../socket';
 import styles from './Home.module.css';
-import { Message } from '../../types';
+import { Message, Session } from '../../types';
 import { actionMessage } from '../../redux/actions/messageActions';
+import { setSessions } from '../../redux/actions/sessionsAction';
+import { setRoomName } from '../../redux/actions/gameActions';
 
 function Home() {
   const [form, setForm] = React.useState({ message: '' });
   const messages = useSelector((state: any) => state.messages.messages);
   const user = useSelector((state: any) => state.user.user);
+  const sessions = useSelector((state: any) => state.sessions.sessions);
+  const [first, setFirst] = React.useState(true);
   const [create, setCreate] = React.useState(false);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  console.log(sessionSocket);
 
   const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, message: event.target.value });
@@ -36,46 +43,68 @@ function Home() {
   }, [chatSocket]);
 
   const userHomePage = () => {
-    const activeGames = [
-      { id: 1, name: 'Game 1', players: 0 },
-      { id: 2, name: 'Game 2', players: 0},
-      { id: 3, name: 'Game 3', players: 0 },
-    ];
-
     const handleButtonGame = () => {
       setCreate(true);
-    }
+    };
     const handleNewGame = (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-      sessionSocket.emit('create_room');
-      sessionSocket.emit('get_rooms');
+      const formData = new FormData(e.currentTarget);
+      let data = Object.fromEntries(formData.entries());
+      console.log(data);
 
-    }
+      sessionSocket.emit('create_room', data);
+      sessionSocket.on('join_room', ({ name }) => {
+        dispatch(setRoomName(name));
+        navigate(`/game/${user.id}`);
+      });
+      setCreate(false);
+    };
 
-    useEffect(() => {
-      sessionSocket.on('send_rooms', (listRoom: any) => {
-        console.log(listRoom);
-      })
-    }, [sessionSocket])
+    const handleJoin = (
+      e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+      path: number,
+      roomId: string
+    ) => {
+      e.preventDefault();
+      sessionSocket.emit('join_room', { name: roomId });
+      sessionSocket.on('join_room', ({ name }) => {
+        dispatch(setRoomName(name));
+        navigate(`/game/${path}`);
+      });
+    };
 
     return (
       <div className={styles.activeGamesContainer}>
         {!create ? (
           <div className={styles.activeGames}>
             <h2>Список активных игровых сессий</h2>
-            {activeGames.map((game) => (
-              <div key={game.id} className="game">
-                {game.name}
-                <p>Игроков в комнате: {game.players}</p>
-                <button>Присоединиться</button>
+            {sessions.map((game: Session) => (
+              <div key={game[0]} className="game">
+                {game[0]}
+                <p>Игроков в комнате: {game[1]}</p>
+                <button onClick={(e) => handleJoin(e, game[2], game[0])}>
+                  Присоединиться
+                </button>
               </div>
             ))}
-            <button className="create-game-button" onClick={handleButtonGame}>Создать игру</button>
+            <button className="create-game-button" onClick={handleButtonGame}>
+              Создать игру
+            </button>
           </div>
         ) : (
           <form onSubmit={handleNewGame}>
-            <input type="text" placeholder='Название комнаты'/>
-            <button type='submit'>DA</button>
+            <input type="text" placeholder="Название комнаты" name="name" />
+            <input
+              type="password"
+              placeholder="Пароль от сессии"
+              name="password"
+            />
+            <select name="size">
+              <option value="2">2 игрока</option>
+              <option value="3">3 игрока</option>
+            </select>
+
+            <button type="submit">DA</button>
           </form>
         )}
         <div className={styles.chatContainer}>

@@ -11,17 +11,23 @@ import { useDispatch, useSelector } from 'react-redux';
 import { checkAuth } from './redux/actions/userActions';
 import { socket, chatSocket, sessionSocket } from './socket';
 import { SocketContext } from './context/websoket/websoket-context';
+import { setSessions } from './redux/actions/sessionsAction';
 
 function App() {
   const dispatch = useDispatch();
   const user = useSelector((state: any) => state.user.user);
   const loaded = useSelector((state: any) => state.user.loaded);
-  const { handleSetSocket } = useContext(SocketContext);
   const [first, setFirst] = useState(true);
 
   useEffect(() => {
     dispatch(checkAuth());
   }, []);
+
+  useEffect(() => {
+    sessionSocket.on('send_rooms', (sessions: any) => {
+      dispatch(setSessions(sessions));
+    });
+  }, [sessionSocket]);
 
   if (!loaded) {
     return <div>Loading...</div>;
@@ -45,9 +51,8 @@ function App() {
           <Route path="registration" element={<Auth />} />
         </Route>
         <Route>
-          <Route index element={<Home />} />
           <Route path="statistic" element={<UserStat />} />
-          <Route path="game" element={<Game />} />
+          <Route path="game/:gameId" element={<Game />} />
         </Route>
       </Routes>
     </>
