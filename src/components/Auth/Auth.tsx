@@ -26,6 +26,9 @@ function Auth() {
       console.log(e);
     }
   };
+  const handlePassport = () => {
+    window.location.href = 'http://localhost:3000/login/federated/google';
+  }
 
   const form = () => {
     return (
@@ -47,6 +50,7 @@ function Auth() {
         <Button type="submit">
           {endPoint === '/login' ? 'Войти' : 'Регистрация'}
         </Button>
+        <Button onClick={handlePassport}>Войти через google</Button>
       </form>
     );
   };
