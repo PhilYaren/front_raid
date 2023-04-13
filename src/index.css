@@ -26,7 +26,10 @@ html, body {
 }
 /*mui tabs*/
 .css-1h9z7r5-MuiButtonBase-root-MuiTab-root.Mui-selected{
-  color: black !important;
+  color: #efeee9 !important;
+}
+.css-1h9z7r5-MuiButtonBase-root-MuiTab-root.Mui-selected:hover{
+  color: rgb(19,43,55) !important;
 }
 .css-10ltm04-MuiToolbar-root {
   justify-content:space-between
@@ -34,16 +37,29 @@ html, body {
 .css-11b3ww9-MuiPaper-root-MuiAppBar-root{
   margin-bottom: 0px;
 }
-
+._homeContainer_1d10d_22 {
+  margin-top: 0;
+}
 
 /* home*/
 .game-rules-container {
-  max-width: 800px;
+  max-width: 80vw;
+  max-height: 80vh;
 }
 .game-rules {
   text-align: justify;
 }
-
+._homeContainer_1nucq_17 {
+  background-image: url('./public/img/1642713765_46-adonius-club-p-kamennaya-stena-fon-51.jpg');
+  background-size: cover;
+  background-repeat: repeat-x;
+  margin-top: 0 !important;
+  height: 100% ;
+  position: fixed;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
 
 a {
   font-weight: 500;

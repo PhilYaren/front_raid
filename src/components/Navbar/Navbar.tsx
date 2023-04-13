@@ -7,6 +7,7 @@ import { StateFromReducersMapObject } from '@reduxjs/toolkit';
 import { logoutUserAsync } from '../../redux/actions/userActions';
 import { SocketContext } from '../../context/websoket/websoket-context';
 import { socket, chatSocket } from '../../socket';
+import './Navbar.css'
 
 function Navbar() {
   const [tabIndex, setTabIndex] = useState(0);
@@ -36,6 +37,7 @@ function Navbar() {
       <Toolbar className="root" variant="dense">
         <Typography className="game-logo " variant="h5" color="inherit">
           Raid
+          {/*<img src="../../../public/img/Untitled_logo_4_free-file-transformed.png" alt="logo"/>*/}
         </Typography>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
           <Tabs
@@ -69,11 +71,13 @@ function Navbar() {
               : [
                   <Tab
                     key="signup"
+                    className="selectedTab"
                     label="Зарегистрироваться"
                     component={NavLink}
                     to="/registration"
                   />,
                   <Tab
+                    className="selectedTab"
                     key="login"
                     label="Войти"
                     component={NavLink}

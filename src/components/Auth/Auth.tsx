@@ -3,6 +3,9 @@ import { FormControl, FormLabel, TextField, Button } from '@mui/material';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { loginUser, signupUser } from '../../redux/actions/userActions';
 import { useDispatch } from 'react-redux';
+import './auth.css'
+
+
 
 function Auth() {
   const endPoint = useLocation().pathname;
@@ -28,6 +31,7 @@ function Auth() {
 
   const form = () => {
     return (
+      <div className='form-container'>
       <form
         style={{ display: 'flex', flexDirection: 'column' }}
         onSubmit={handleSubmit}
@@ -36,17 +40,18 @@ function Auth() {
         {endPoint !== '/login' && (
           <>
             <FormLabel>Введите имя</FormLabel>
-            <TextField name="userName" />
+            <TextField required name="userName" />
           </>
         )}
         <FormLabel>Введите email</FormLabel>
-        <TextField name="email" />
+        <TextField type='email' name="email" required/>
         <FormLabel>Введите пароль</FormLabel>
-        <TextField name="password" />
-        <Button type="submit">
-          {endPoint === '/login' ? 'Войти' : 'Регистрация'}
+        <TextField required type='password' name="password" />
+        <Button type="submit" className="cssanimation btnAuth">
+          {endPoint === '/login' ? 'Войти' : 'Зарегистрироваться'}
         </Button>
       </form>
+      </div>
     );
   };
 

@@ -1,0 +1,89 @@
+@font-face {
+    font-family: 'Marutya';
+    src: url('../fonts/ofont.ru_Marutya.ttf');
+}
+@font-face {
+    font-family: 'Veles';
+    src: url('../fonts/ofont.ru_Veles.ttf');
+}
+
+@font-face {
+    font-family: 'Zhizn';
+    src: url('../fonts/ofont.ru_Zhizn.ttf');
+}
+
+.game-logo img {
+    width: 150px;
+}
+.game-logo {
+    color: #efeee9 !important;
+    text-shadow: 0 1px 0 #ccc, 0 2px 0 black, 0 3px 0 #bbb, 0 4px 0 black, 0 5px 0 #aaa, 0 6px 1px rgba(0, 0, 0, .1), 0 0 5px rgba(0, 0, 0, .1), 0 1px 3px rgba(0, 0, 0, .3), 0 3px 5px rgba(0, 0, 0, .2), 0 5px 10px rgba(0, 0, 0, .25), 0 10px 10px rgba(0, 0, 0, .2), 0 20px 20px rgba(0, 0, 0, .15);
+    font-family: Zhizn !important;
+    font-weight: bold !important;
+    letter-spacing: 10px !important;
+}
+.root {
+    height: 45px !important;
+    background: linear-gradient(rgb(33,19,13), rgb(76,61,54));
+}
+
+.selectedTab {
+    font-family: Zhizn !important;
+    color: #efeee9 !important;
+    font-size: 16px !important;
+    transition: 1s;
+    letter-spacing: 3px !important;
+}
+.css-1aquho2-MuiTabs-indicator {
+    background-color: #efeee9 !important;
+    transition: 1s;
+}
+
+.css-heg063-MuiTabs-flexContainer a:hover {
+    color: #efeee9 !important;
+    transform: scale(1.2);
+}
+._homeContainer_1bmhv_16 {
+    background-image: url('./public/img/1642713765_46-adonius-club-p-kamennaya-stena-fon-51.jpg');
+    background-size: cover;
+    background-repeat: repeat-x;
+    margin-top: 0 !important;
+    height: 100% ;
+    position: fixed;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+}
+
+.game-rules-container h2 {
+    margin-top: 5px;
+    text-shadow: 0 1px 0 #ccc, 0 2px 0 black, 0 3px 0 #bbb, 0 4px 0 black, 0 5px 0 #aaa, 0 6px 1px rgba(0, 0, 0, .1), 0 0 5px rgba(0, 0, 0, .1), 0 1px 3px rgba(0, 0, 0, .3), 0 3px 5px rgba(0, 0, 0, .2), 0 5px 10px rgba(0, 0, 0, .25), 0 10px 10px rgba(0, 0, 0, .2), 0 20px 20px rgba(0, 0, 0, .15);
+}
+.game-rules-cont {
+    display: flex;
+    background-image: url('./public/img/bbbb.jpg');
+    flex-direction: column;
+    border-radius: 20px;
+    height: 100%;
+    width: 100%;
+    min-height: 600px;
+    box-shadow: 0 30px 50px 50px rgba(0, 0, 0, 0.5);
+}
+
+.opacity-back {
+    border-radius: 20px;
+    background: rgba(0,0,0, 0.3);
+    width: 100%;
+    height: 100%;
+    font-size: 20px;
+    font-family: 'Zhizn';
+    color: #efeee9;
+}
+
+.opacity-back li {
+    margin: 5px 50px 5px 50px
+}
+
+
+
+
