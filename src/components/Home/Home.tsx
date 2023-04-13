@@ -116,8 +116,10 @@ function Home() {
         <>{userHomePage()}</>
       ) : (
         <div className="game-rules-container">
-          <h2>Правила игры "Рэйд"</h2>
-          <ul className="game-rules">
+          <div className='game-rules-cont'>
+            <div className='opacity-back'>
+              <h2>Правила игры "Рэйд"</h2>
+              <div className="game-rules">
             <li>
               {' '}
               Каждому игроку раздается по три карты. Игрок, который ходит первым
@@ -178,7 +180,9 @@ function Home() {
               неё. Если поединок выигран фишка попадает в замок, если нет -
               возвращается на нужное количество клеток.{' '}
             </li>
-          </ul>
+          </div>
+            </div>
+          </div>
         </div>
       )}
       <Outlet />

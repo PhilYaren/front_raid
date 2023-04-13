@@ -1,0 +1,9 @@
+@font-face {
+	font-family: 'Cabana';
+	src: url('../fonts/cabana.eot'); /* IE 9 Compatibility Mode */
+	src: url('../fonts/cabana.eot?#iefix') format('embedded-opentype'), /* IE < 9 */
+		url('../fonts/cabana.woff2') format('woff2'), /* Super Modern Browsers */
+		url('../fonts/cabana.woff') format('woff'), /* Firefox >= 3.6, any other modern browser */
+		url('../fonts/cabana.ttf') format('truetype'), /* Safari, Android, iOS */
+		url('../fonts/cabana.svg#cabana') format('svg'); /* Chrome < 4, Legacy iOS */
+}
