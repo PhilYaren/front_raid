@@ -1,5 +1,5 @@
 body {
-    background-image: url('./public/img/1642713765_46-adonius-club-p-kamennaya-stena-fon-51.jpg');
+    background-image: url('/img/1642713765_46-adonius-club-p-kamennaya-stena-fon-51.jpg');
     background-size: cover;
     height: 100vh;
 }
@@ -22,8 +22,9 @@ body {
     border: 2px solid black;
     width: 100%;
     margin: auto;
+    margin-right: 30px;
     height: 100%;
-    background-image: url('./public/img/bbbb.jpg');
+    background-image: url('/img/bbbb.jpg');
 }
 
 .homeContainer {
@@ -39,6 +40,6 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-background-image: url('./public/img/bbb2.jpg');
+background-image: url('/img/bbb2.jpg');
     border: 2px solid black;
 }

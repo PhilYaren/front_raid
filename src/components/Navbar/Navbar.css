@@ -44,7 +44,7 @@
     transform: scale(1.2);
 }
 ._homeContainer_1bmhv_16 {
-    background-image: url('./public/img/1642713765_46-adonius-club-p-kamennaya-stena-fon-51.jpg');
+    background-image: url('/img/1642713765_46-adonius-club-p-kamennaya-stena-fon-51.jpg');
     background-size: cover;
     background-repeat: repeat-x;
     margin-top: 0 !important;
@@ -61,7 +61,7 @@
 }
 .game-rules-cont {
     display: flex;
-    background-image: url('./public/img/bbbb.jpg');
+    background-image: url('/img/bbbb.jpg');
     flex-direction: column;
     border-radius: 20px;
     height: 100%;

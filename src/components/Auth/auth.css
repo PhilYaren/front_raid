@@ -8,7 +8,7 @@
 }
 
 .form-container {
-    background-image: url('./public/img/1642713765_46-adonius-club-p-kamennaya-stena-fon-51.jpg');
+    background-image: url('/img/1642713765_46-adonius-club-p-kamennaya-stena-fon-51.jpg');
     background-size: cover;
     height: 100vh ;
     display: flex;
@@ -17,7 +17,7 @@
 }
 
 .form-container form {
-    background-image: url('./public/img/bbbb.jpg');
+    background-image: url('/img/bbbb.jpg');
     height: 20%;
     width: 50%;
     min-height: 600px;

@@ -31,22 +31,22 @@ function Game() {
         {/*например (убрать позже)*/}
         <ul>
           <li>
-            <img src="../../../public/img/bonaparte.jpg" alt="" />
+            <img src="/img/bonaparte.jpg" alt="" />
           </li>
           <li>
-            <img src="../../../public/img/bonaparte.jpg" alt="" />
+            <img src="/img/bonaparte.jpg" alt="" />
           </li>
           <li>
-            <img src="../../../public/img/bonaparte.jpg" alt="" />
+            <img src="/img/bonaparte.jpg" alt="" />
           </li>
           <li>
-            <img src="../../../public/img/bonaparte.jpg" alt="" />
+            <img src="/img/bonaparte.jpg" alt="" />
           </li>
           <li>
-            <img src="../../../public/img/bonaparte.jpg" alt="" />
+            <img src="/img/bonaparte.jpg" alt="" />
           </li>
           <li>
-            <img src="../../../public/img/bonaparte.jpg" alt="" />
+            <img src="/img/bonaparte.jpg" alt="" />
           </li>
         </ul>
       </div>
