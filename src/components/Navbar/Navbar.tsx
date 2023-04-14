@@ -13,7 +13,7 @@ import Auth from '../Auth/Auth';
 
 function Navbar() {
   const [modalActive, setModalActive ] = useState(false);
-  const handlemodal = (action) => {
+  const handlemodal = (action:any) => {
     setModalActive(false);
     setModalActive(action);
     // console.log(action);

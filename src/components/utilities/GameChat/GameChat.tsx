@@ -30,10 +30,10 @@ function GameChat() {
 
   return (
     <div className="chat">
-      <div className="massageList">
+      <div className="massageList" >
         {messages.map((message: any) => {
           return (
-            <div className="massage">
+            <div className="massage" style={{backgroundColor: 'white', borderRadius:'12px',width: '90%', margin: '2% auto 3%'}}>
               <div className="massage__name">{message.user}</div>
               <div className="massage__time">{message.time}</div>
               <div className="massage__text">{message.message}</div>

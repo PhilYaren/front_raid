@@ -9,6 +9,7 @@ import { actionMessage } from '../../redux/actions/messageActions';
 import { setSessions } from '../../redux/actions/sessionsAction';
 import { setRoomName } from '../../redux/actions/gameActions';
 import Modal from '../Modal/Modal';
+import CreateAndJoinGame from '../CreateAndJoinGame/CreateAndJoinGame';
 
 function Home() {
   const [form, setForm] = React.useState({ message: '' });
@@ -76,7 +77,7 @@ function Home() {
 
     return (
       <div className={styles.activeGamesContainer}>
-        {!create ? (
+        
           <div className={styles.activeGames}>
             <h2>Список активных игровых сессий</h2>
             {sessions.map((game: Session) => (
@@ -92,9 +93,11 @@ function Home() {
               Создать игру
             </button>
           </div>
-        ) : (
-          <form onSubmit={handleNewGame}>
-            <input type="text" placeholder="Название комнаты" name="name" />
+              {create &&
+          <Modal active={create} setActive={setCreate}>
+            <CreateAndJoinGame handle={handleNewGame}/>
+          {/* <form onSubmit={handleNewGame}> */}
+            {/* <input type="text" placeholder="Название комнаты" name="name" />
             <input
               type="password"
               placeholder="Пароль от сессии"
@@ -105,9 +108,11 @@ function Home() {
               <option value="3">3 игрока</option>
             </select>
 
-            <button type="submit">DA</button>
-          </form>
-        )}
+            <button type="submit">DA</button> */}
+          {/* </form> */}
+          </Modal>
+  
+        }
         <div className={styles.chatContainer}>
           <>
             <h3>Chat:</h3>
