@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Container } from '@mui/material';
@@ -8,6 +8,7 @@ import { Message, Session } from '../../types';
 import { actionMessage } from '../../redux/actions/messageActions';
 import { setSessions } from '../../redux/actions/sessionsAction';
 import { setRoomName } from '../../redux/actions/gameActions';
+import Modal from '../Modal/Modal';
 
 function Home() {
   const [form, setForm] = React.useState({ message: '' });

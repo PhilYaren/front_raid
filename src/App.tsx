@@ -12,6 +12,7 @@ import { checkAuth } from './redux/actions/userActions';
 import { socket, chatSocket, sessionSocket } from './socket';
 import { SocketContext } from './context/websoket/websoket-context';
 import { setSessions } from './redux/actions/sessionsAction';
+import Modal from './components/Modal/Modal';
 
 function App() {
   const dispatch = useDispatch();
@@ -41,14 +42,15 @@ function App() {
     setFirst(false);
   }
 
+
   return (
     <>
       <Navbar />
       <Routes>
         <Route path="/">
           <Route index element={<Home />} />
-          <Route path="login" element={<Auth />} />
-          <Route path="registration" element={<Auth />} />
+          {/* <Route path="login" element={<Auth />} />
+          <Route path="registration" element={<Auth />} /> */}
         </Route>
         <Route>
           <Route path="statistic" element={<UserStat />} />
