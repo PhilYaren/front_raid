@@ -52,8 +52,8 @@
     position: absolute;
     left: 14%;
     top: 12%;
-    height: 60%;
-    width: 55%;
+    height: 25vw;
+    width: 55vw;
     border-radius: 20px;
     background-image: url('/img/bbbb.jpg');
     box-shadow: 0 10px 20px 20px rgba(0, 0, 0, 0.5);
