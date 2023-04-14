@@ -1,20 +1,26 @@
 import React, { useEffect } from 'react';
 import './game.css';
 import GameChat from '../utilities/GameChat/GameChat';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { sessionSocket } from '../../socket';
+import { setDeck, setPlayers } from '../../redux/actions/gameActions';
 import { currentRotation, randomDegrees, rotateWheel, getCurrentColor } from '../utilities/rotate-func/rotate';
 
 function Game() {
 
   const user = useSelector((state: any) => state.user.user);
   const players = useSelector((state: any) => state.game.players);
-
-  const player = players.find((player: any) => player.name === user.UserName);
+  const deck = useSelector((state: any) => state.game.deck);
+  const id = String(user.id);
+  const player = players?.id;
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    sessionSocket.on('set_players', (sessions: any) => {
-      console.log(sessions);
+    sessionSocket.on('update_state', (state: any) => {
+      console.log('players', state.players);
+      console.log('deck', state.deck);
+      dispatch(setPlayers(state.players));
+      dispatch(setDeck(state.deck));
     });
   }, [sessionSocket]);
 
