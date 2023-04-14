@@ -46,69 +46,109 @@
 
 .roulette {
     position: relative;
-    border-radius: 100%;
-    border: 1px solid white;
     top: 75%;
     left: 2%;
     width: 10vw;
     height: 10vw;
-    transition: 0.5s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
-.pivont-point {
-    position: fixed;
-    /*width: 100px;*/
-    font-size: 80px;
-    opacity: 110;
-    transform: translate(-50%, -25%);
-}
-
-.d10 {
-    left: 6vw;
-    width: 30px;
-    height: 10px;
-    margin: 5px 0;
-    background: #B74388;
-    position: fixed;
-    transform-origin: left top;
-}
-
-.d10:after {
-    content: "";
-    width: 0;
-    height: 0;
-    position: absolute;
-    top: -5px;
-    left: 100%;
-    border-width: 10px 0 10px 20px;
-    border-style: solid;
-    border-color: transparent #B74388;
-}
-
-.d15 {
-    width: 30px;
-    height: 10px;
-    margin: 5px 0;
-    background: #B74388;
+.wheel {
+    /*border-image-source: url('../../../public/img/fffffffffffffff.jpg');*/
+    /*border-image-width: 10px;*/
+    /*border-image-slice:40;*/
+    /*border-image-repeat: round;*/
+    /*border: 10px solid;*/
     position: relative;
-    animation: 3s linear infinite rotate;
-    transform-origin: left top;
-}
-.d15:after {
-    content: "";
-    width: 0;
-    height: 0;
-    position: absolute;
-    top: -5px;
-    left: 100%;
-    border-width: 10px 0 10px 20px;
-    border-style: solid;
-    border-color: transparent #B74388;
+    border-radius: 50%;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    background-image: conic-gradient(rgb(76,61,54) 16.67%, rgb(156,116,82) 0 33.33%, rgb(76,61,54) 0 50%, rgb(156,116,82) 0 66.67%, rgb(76,61,54) 0 83.33%, rgb(156,116,82) 0);
 }
 
+#num1 {
+    transform: rotate(0deg);
+    position: absolute;
+    left: 75%;
+    top: 35%;
+    font-size: 100%;
+    font-family: Zhizn;
+    font-weight: bold;
+}
+#num2 {
+    transform: rotate(-60deg);
+    position: absolute;
+    left: 60%;
+    top: 10%;
+    font-size: 100%;
+    font-family: Zhizn;
+    font-weight: bold;
+}
+#num3 {
+    transform: rotate(-120deg);
+    position: absolute;
+    left: 35%;
+    top: 10%;
+    font-size: 100%;
+    font-family: Zhizn;
+    font-weight: bold;
+}
+#num4 {
+    transform: rotate(180deg);
+    position: absolute;
+    left: 20%;
+    top: 35%;
+    font-size: 100%;
+    font-family: Zhizn;
+    font-weight: bold;
+}
+#num5 {
+    transform: rotate(120deg);
+    position: absolute;
+    left: 32%;
+    top: 60%;
+    font-size: 100%;
+    font-family: Zhizn;
+    font-weight: bold;
+}
+#num6 {
+    transform: rotate(70deg);
+    position: absolute;
+    left: 60%;
+    top: 60%;
+    font-size: 100%;
+    font-family: Zhizn;
+    font-weight: bold;
+}
+
+.arrow {
+    z-index: 100;
+    width: 5%;
+    height: 5%;
+    position: relative;
+    left: 95%;
+    top: 55%;
+    transform: rotate(-135deg);
+    border-top: 7px solid rgb(33,19,13);
+    border-right: 7px solid rgb(33,19,13);
+    margin-right: 60px;
+}
+
+.spin {
+    margin-top: 20px;
+}
+
+.result {
+    margin-top: 10px;
+    width: 20px;
+    height: 20px;
+    border: 1px solid black;
+}
+
+.rotating {
+    transition: all 3s;
+    transition-timing: ease-in-out;
+}
 
 .deck {
     position: absolute;

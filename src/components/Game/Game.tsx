@@ -3,8 +3,10 @@ import './game.css';
 import GameChat from '../utilities/GameChat/GameChat';
 import { useSelector } from 'react-redux';
 import { sessionSocket } from '../../socket';
+import { currentRotation, randomDegrees, rotateWheel, getCurrentColor } from '../utilities/rotate-func/rotate';
 
 function Game() {
+
   const user = useSelector((state: any) => state.user.user);
   const players = useSelector((state: any) => state.game.players);
 
@@ -16,12 +18,17 @@ function Game() {
     });
   }, [sessionSocket]);
 
-  const rouletteHandler = (e) => {
-    e.target.className = 'd15';
-    setTimeout(() => {
-      e.target.className = 'd10';
-    }, 1000 * 5);
-  };
+  const launchSpin = () => {
+    let currentRotation = 0;
+    currentRotation += randomDegrees();
+
+    rotateWheel(currentRotation)
+      .then(() => {
+        let winNumber = getCurrentColor(currentRotation);
+        console.log(winNumber);
+        //отправить результат winNumber
+      });
+  }
 
   return (
     <div className="gamefield">
@@ -52,8 +59,14 @@ function Game() {
       </div>
       <div className="field">игровое поле</div>
       <div className="roulette">
-        <div onClick={rouletteHandler} className="d10">
-          <div className="pivont-point">&bull;</div>
+        <div className="arrow"></div>
+        <div className="wheel rotating" onClick={launchSpin}>
+          <p id="num1">1</p>
+          <p id="num2">2</p>
+          <p id="num3">3</p>
+          <p id="num4">4</p>
+          <p id="num5">5</p>
+          <p id="num6">6</p>
         </div>
       </div>
       <div className="deck">колода и копочка сдаться</div>
