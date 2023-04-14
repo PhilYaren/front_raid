@@ -34,7 +34,21 @@ function Game() {
 
     rotateWheel(currentRotation).then(() => {
       let winNumber = getCurrentColor(currentRotation);
-      console.log(winNumber);
+const kek = setInterval(() => {
+          const winTd = document.getElementById(`${winNumber}`);
+          console.log(winNumber);
+          const playerTd = document.getElementById(`playerTd`);
+          const parent = playerTd.closest('td');
+          console.log(parent.id)
+          const newPod = document.getElementById(`${+parent.id + +1}`);
+          newPod.appendChild(playerTd);
+          if (winNumber !== parent.id) {
+            console.log('da')
+          }
+          else {
+            clearInterval(kek);
+          }
+        }, 1000);
       //отправить результат winNumber
     });
   };
