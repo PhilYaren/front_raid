@@ -7,7 +7,7 @@ import { StateFromReducersMapObject } from '@reduxjs/toolkit';
 import { logoutUserAsync } from '../../redux/actions/userActions';
 import { SocketContext } from '../../context/websoket/websoket-context';
 import { socket, chatSocket } from '../../socket';
-import './Navbar.css'
+import './Navbar.css';
 
 function Navbar() {
   const [tabIndex, setTabIndex] = useState(0);
@@ -30,7 +30,7 @@ function Navbar() {
     dispatch(logoutUserAsync());
   };
   const handleMessages = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    socket.emmit('message', 'hello');
+    socket.emit('message', 'hello');
   };
   return (
     <AppBar position="fixed" color="primary">

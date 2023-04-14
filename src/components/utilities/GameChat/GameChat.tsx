@@ -31,9 +31,9 @@ function GameChat() {
   return (
     <div className="chat">
       <div className="massageList">
-        {messages.map((message: any) => {
+        {messages.map((message: any, id: number) => {
           return (
-            <div className="massage">
+            <div className="massage" id={String(id)}>
               <div className="massage__name">{message.user}</div>
               <div className="massage__time">{message.time}</div>
               <div className="massage__text">{message.message}</div>

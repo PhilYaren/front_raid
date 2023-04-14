@@ -7,7 +7,7 @@ import {
 
 const initialState = {
   roomName: '',
-  players: [],
+  players: {},
   messages: [],
   deck: [],
 };
