@@ -31,7 +31,22 @@ function Game() {
     rotateWheel(currentRotation)
       .then(() => {
         let winNumber = getCurrentColor(currentRotation);
-        console.log(winNumber);
+
+        const kek = setInterval(() => {
+          const winTd = document.getElementById(`${winNumber}`);
+          console.log(winNumber);
+          const playerTd = document.getElementById(`playerTd`);
+          const parent = playerTd.closest('td');
+          console.log(parent.id)
+          const newPod = document.getElementById(`${+parent.id + +1}`);
+          newPod.appendChild(playerTd);
+          if (winNumber !== parent.id) {
+            console.log('da')
+          }
+          else {
+            clearInterval(kek);
+          }
+        }, 1000);
         //отправить результат winNumber
       });
   }
@@ -153,7 +168,9 @@ function Game() {
             <td  className='currTd redTd' id='24'></td>
           </tr>
           <tr>
-            <td  className='currTd start' id='1' colSpan={2} rowSpan={2}>Start</td>
+            <td  className='currTd start' id='1' colSpan={2} rowSpan={2}>Start
+              <span id='playerTd'>⚪️</span>
+            </td>
             <td></td>
             <td  className='currTd blueTd' id='42'></td>
             <td  className='currTd whiteTd heartTd' id='43'><img src="/img/svg/heart-pictogram.svg" alt="heart"/></td>
