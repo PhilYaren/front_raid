@@ -1,0 +1,62 @@
+/* .game-board {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column-reverse;
+   
+    height: 400px;
+    border: 1px solid black;
+    padding: 10px;
+    box-sizing: border-box;
+  } */
+  
+  .game-cell {
+    flex: 1 0 calc(100% / 10);
+    height: calc(100% / 10);
+    border: 1px solid rgb(246, 245, 245);
+    box-sizing: border-box;
+    position: relative;
+    color: white;
+  }
+
+  .game-piece {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .player1 {
+    background-color: red;
+  }
+  
+  .player2 {
+    background-color: blue;
+  }
+
+
+
+  /**/
+.fields{
+    display: flex;
+    flex-direction: column;
+}
+.up{
+    display: flex;
+    flex-direction: row;
+}
+.center{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.center-left{
+    display: flex;
+    flex-direction: column-reverse;
+}
+.center-right{
+    display: flex;
+    flex-direction: column;
+}
