@@ -34,21 +34,20 @@ function Game() {
 
     rotateWheel(currentRotation).then(() => {
       let winNumber = getCurrentColor(currentRotation);
-const kek = setInterval(() => {
-          const winTd = document.getElementById(`${winNumber}`);
-          console.log(winNumber);
-          const playerTd = document.getElementById(`playerTd`);
-          const parent = playerTd.closest('td');
-          console.log(parent.id)
-          const newPod = document.getElementById(`${+parent.id + +1}`);
-          newPod.appendChild(playerTd);
-          if (winNumber !== parent.id) {
-            console.log('da')
-          }
-          else {
-            clearInterval(kek);
-          }
-        }, 1000);
+      const kek = setInterval(() => {
+        const winTd = document.getElementById(`${winNumber}`);
+        console.log(winNumber);
+        const playerTd = document.getElementById(`playerTd`);
+        const parent = playerTd.closest('td');
+        console.log(parent.id);
+        const newPod = document.getElementById(`${+parent.id + +1}`);
+        newPod.appendChild(playerTd);
+        if (winNumber !== parent.id) {
+          console.log('da');
+        } else {
+          clearInterval(kek);
+        }
+      }, 1000);
       //отправить результат winNumber
     });
   };
@@ -57,9 +56,9 @@ const kek = setInterval(() => {
     sessionSocket.emit('start_game', session);
   };
 
-  // if (!player) {
-  //   return <div>...loading</div>;
-  // }
+  if (!Object.keys(players).find((key: any) => key === id)) {
+    return <div>...loading</div>;
+  }
 
   return (
     <div className="gamefield">

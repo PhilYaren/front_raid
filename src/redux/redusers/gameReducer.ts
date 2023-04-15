@@ -31,7 +31,10 @@ const gameReducer = (state = initialState, action: any) => {
     case SET_ROOM_NAME:
       return { ...state, roomName: payload };
     case SET_PLAYERS:
-      return { ...state, players: payload };
+      if (payload) {
+        return { ...state, players: payload };
+      }
+      return state;
     case SET_GAME_MESSAGES:
       return { ...state, messages: [...state.messages, payload] };
     case SET_DECK:
