@@ -13,6 +13,7 @@ import { socket, chatSocket, sessionSocket } from './socket';
 import { SocketContext } from './context/websoket/websoket-context';
 import { setSessions } from './redux/actions/sessionsAction';
 import Modal from './components/Modal/Modal';
+import dndCardsTest from './components/dnd/Handles';
 
 function App() {
   const dispatch = useDispatch();
@@ -47,6 +48,7 @@ function App() {
     <>
       <Navbar />
       <Routes>
+        {/* <Route path='/dndtest' Component={dndCardsTest}/> */}
         <Route path="/">
           <Route index element={<Home />} />
           {/* <Route path="login" element={<Auth />} />
