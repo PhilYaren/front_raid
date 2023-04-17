@@ -74,24 +74,24 @@ function Game() {
               </li>
             );
           })}
-          <li>
-            <img src="/img/bonaparte.jpg" alt="" />
-          </li>
-          <li>
-            <img src="/img/bonaparte.jpg" alt="" />
-          </li>
-          <li>
-            <img src="/img/bonaparte.jpg" alt="" />
-          </li>
-          <li>
-            <img src="/img/bonaparte.jpg" alt="" />
-          </li>
-          <li>
-            <img src="/img/bonaparte.jpg" alt="" />
-          </li>
-          <li>
-            <img src="/img/bonaparte.jpg" alt="" />
-          </li>
+          {/*<li>*/}
+          {/*  <img src="/img/bonaparte.jpg" alt="" />*/}
+          {/*</li>*/}
+          {/*<li>*/}
+          {/*  <img src="/img/bonaparte.jpg" alt="" />*/}
+          {/*</li>*/}
+          {/*<li>*/}
+          {/*  <img src="/img/bonaparte.jpg" alt="" />*/}
+          {/*</li>*/}
+          {/*<li>*/}
+          {/*  <img src="/img/bonaparte.jpg" alt="" />*/}
+          {/*</li>*/}
+          {/*<li>*/}
+          {/*  <img src="/img/bonaparte.jpg" alt="" />*/}
+          {/*</li>*/}
+          {/*<li>*/}
+          {/*  <img src="/img/bonaparte.jpg" alt="" />*/}
+          {/*</li>*/}
         </ul>
       </div>
       <div className="field">
