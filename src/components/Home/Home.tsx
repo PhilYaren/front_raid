@@ -8,7 +8,8 @@ import { Message, Session } from '../../types';
 import { actionMessage } from '../../redux/actions/messageActions';
 import { setSessions } from '../../redux/actions/sessionsAction';
 import {
-  setDeck,
+  setCurrent,
+  setDeck, setOrder,
   setPlayers,
   setRoomName,
 } from '../../redux/actions/gameActions';
@@ -72,6 +73,8 @@ function Home() {
         dispatch(setRoomName(name));
         dispatch(setDeck(state.deck));
         dispatch(setPlayers(state.players));
+        dispatch(setOrder(state.order));
+        dispatch(setCurrent(state.current));
         navigate(`/game/${user.id}`);
       });
       setCreate(false);
@@ -88,6 +91,8 @@ function Home() {
         dispatch(setRoomName(name));
         dispatch(setDeck(state.deck));
         dispatch(setPlayers(state.players));
+        dispatch(setOrder(state.order));
+        dispatch(setCurrent(state.current));
         navigate(`/game/${path}`);
       });
     };
