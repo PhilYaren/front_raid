@@ -18,7 +18,7 @@ function App() {
   const dispatch = useDispatch();
   const user = useSelector((state: any) => state.user.user);
   const loaded = useSelector((state: any) => state.user.loaded);
-  const [first, setFirst] = useState(true);
+  const [first, setFirst] = useState<boolean>(true);
 
   useEffect(() => {
     dispatch(checkAuth());
@@ -41,7 +41,6 @@ function App() {
     sessionSocket.open();
     setFirst(false);
   }
-
 
   return (
     <>

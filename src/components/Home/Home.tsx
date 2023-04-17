@@ -84,34 +84,35 @@ function Home() {
     ) => {
       e.preventDefault();
       sessionSocket.emit('join_room', { name: roomId });
-      sessionSocket.on('join_room', ({ name }) => {
+      sessionSocket.on('join_room', ({ name, state }) => {
         dispatch(setRoomName(name));
+        dispatch(setDeck(state.deck));
+        dispatch(setPlayers(state.players));
         navigate(`/game/${path}`);
       });
     };
 
     return (
       <div className={styles.activeGamesContainer}>
-
-          <div className={styles.activeGames}>
-            <h2>Список активных игровых сессий</h2>
-            {sessions.map((game: Session) => (
-              <div key={game[0]} className="game">
-                {game[0]}
-                <p>Игроков в комнате: {game[1]}</p>
-                <button onClick={(e) => handleJoin(e, game[2], game[0])}>
-                  Присоединиться
-                </button>
-              </div>
-            ))}
-            <button className="create-game-button" onClick={handleButtonGame}>
-              Создать игру
-            </button>
-          </div>
-              {create &&
+        <div className={styles.activeGames}>
+          <h2>Список активных игровых сессий</h2>
+          {sessions.map((game: Session) => (
+            <div key={game[0]} className="game">
+              {game[0]}
+              <p>Игроков в комнате: {game[1]}</p>
+              <button onClick={(e) => handleJoin(e, game[2], game[0])}>
+                Присоединиться
+              </button>
+            </div>
+          ))}
+          <button className="create-game-button" onClick={handleButtonGame}>
+            Создать игру
+          </button>
+        </div>
+        {create && (
           <Modal active={create} setActive={setCreate}>
-            <CreateAndJoinGame handle={handleNewGame}/>
-          {/* <form onSubmit={handleNewGame}> */}
+            <CreateAndJoinGame handle={handleNewGame} />
+            {/* <form onSubmit={handleNewGame}> */}
             {/* <input type="text" placeholder="Название комнаты" name="name" />
             <input
               type="password"
@@ -124,10 +125,9 @@ function Home() {
             </select>
 
             <button type="submit">DA</button> */}
-          {/* </form> */}
+            {/* </form> */}
           </Modal>
-
-        }
+        )}
         <div className={styles.chatContainer}>
           <>
             <h3>Chat:</h3>
