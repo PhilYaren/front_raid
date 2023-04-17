@@ -3,7 +3,12 @@ import './game.css';
 import GameChat from '../utilities/GameChat/GameChat';
 import { useDispatch, useSelector } from 'react-redux';
 import { sessionSocket } from '../../socket';
-import {setCurrent, setDeck, setOrder, setPlayers} from '../../redux/actions/gameActions';
+import {
+  setCurrent,
+  setDeck,
+  setOrder,
+  setPlayers,
+} from '../../redux/actions/gameActions';
 import {
   currentRotation,
   randomDegrees,
@@ -20,7 +25,7 @@ function Game() {
   const current = useSelector((state: any) => state.game.current);
   const id = String(user.id);
   const dispatch = useDispatch();
-  console.log('order', order)
+  console.log('order', order);
 
   useEffect(() => {
     sessionSocket.on('update_state', (state: any) => {
@@ -36,13 +41,11 @@ function Game() {
 
   useEffect(() => {
     order.forEach((p: string) => {
-    const playerTd: any = document.getElementById(`${p}player`);
-      console.log(p, playerTd, players?.player?.position)
-    const newPos = document.getElementById(`${players?.player?.position}`);
-    newPos?.appendChild(playerTd);
-    })
-  }, [players])
-
+      const playerTd: any = document.getElementById(`${p}player`);
+      const newPos = document.getElementById(`${players[p].position}`);
+      newPos?.appendChild(playerTd);
+    });
+  }, [players]);
 
   const launchSpin = () => {
     currentRotation += randomDegrees();
@@ -51,8 +54,11 @@ function Game() {
       let position = players[order[current]].position;
       const finalPosition = position + Number(winNumber);
       const kek = setInterval(() => {
-        if ((position + 1) <= finalPosition) {
-          sessionSocket.emit('move_player', {room: session, data: { id: id, position: 1}});
+        if (position + 1 <= finalPosition) {
+          sessionSocket.emit('move_player', {
+            room: session,
+            data: { id: id, position: 1 },
+          });
           console.log(`position ${position}`);
           position += 1;
           console.log('da');
@@ -75,30 +81,32 @@ function Game() {
     <div className="gamefield">
       <div className="playerField p1">
         <ul>
-          {order.filter((player :any) => player !== id)[0] ?
-            players[order.filter((player :any) => player!== id)[0]].hand.map((card: any) => {
-              return (
-                <li key={card.id}>
-                  <img src='/img/cover.jpg' alt="" />
-                </li>
-              )})
-           :
-            null
-          }
+          {order && order.filter((player: any) => player !== id)[0]
+            ? players[order.filter((player: any) => player !== id)[0]].hand.map(
+                (card: any) => {
+                  return (
+                    <li key={card.id}>
+                      <img src="/img/cover.jpg" alt="" />
+                    </li>
+                  );
+                }
+              )
+            : null}
         </ul>
       </div>
       <div className="playerField p2">
         <ul>
-          {order.filter((player :any) => player !== id)[1] ?
-            players[order.filter((player :any) => player!== id)[1]].hand.map((card: any) => {
-              return (
-                <li key={card.id}>
-                  <img src='/img/cover.jpg' alt="" />
-                </li>
-              )})
-            :
-            null
-          }
+          {order && order.filter((player: any) => player !== id)[1]
+            ? players[order.filter((player: any) => player !== id)[1]].hand.map(
+                (card: any) => {
+                  return (
+                    <li key={card.id}>
+                      <img src="/img/cover.jpg" alt="" />
+                    </li>
+                  );
+                }
+              )
+            : null}
         </ul>
       </div>
       <div className="playerField p3">
@@ -116,28 +124,50 @@ function Game() {
         <table>
           <tbody>
             <tr>
-              <td className="currTd blueTd" id="7"></td>
-              <td className="currTd greenTd" id="8"></td>
-              <td className="currTd yellowTd" id="9"></td>
-              <td className="currTd whiteTd" id="10"></td>
-              <td className="currTd blackTd" id="11"></td>
-              <td className="currTd redTd flowerTd" id="12">
+              <td className="currTd blueTd" id="7" data-color="blue">
+                {' '}
+              </td>
+              <td className="currTd greenTd" id="8" data-color="green"></td>
+              <td className="currTd yellowTd" id="9" data-color="yellow"></td>
+              <td className="currTd whiteTd" id="10" data-color="white"></td>
+              <td className="currTd blackTd" id="11" data-color="black"></td>
+              <td
+                className="currTd redTd flowerTd"
+                id="12"
+                data-effect="flower"
+                data-color="red"
+              >
                 <img src="/img/svg/minimalist_flower_01.svg" alt="flower" />
               </td>
-              <td className="currTd violetTd" id="13"></td>
-              <td className="currTd greenTd heartTd" id="14">
+              <td className="currTd violetTd" id="13" data-color="violet"></td>
+              <td
+                className="currTd greenTd heartTd"
+                id="14"
+                data-color="green"
+                data-effect="heart"
+              >
                 <img src="/img/svg/heart-pictogram.svg" alt="heart" />
               </td>
-              <td className="currTd whiteTd" id="15"></td>
-              <td className="currTd blueTd" id="16"></td>
-              <td className="currTd yellowTd" id="17"></td>
-              <td className="currTd redTd heartTd" id="18">
+              <td className="currTd whiteTd" id="15" data-color="white"></td>
+              <td className="currTd blueTd" id="16" data-color="blue"></td>
+              <td className="currTd yellowTd" id="17" data-color="yellow"></td>
+              <td
+                className="currTd redTd heartTd"
+                id="18"
+                data-color="red"
+                data-effect="heart"
+              >
                 <img src="/img/svg/heart-pictogram.svg" alt="heart" />
               </td>
-              <td className="currTd violetTd" id="19"></td>
+              <td className="currTd violetTd" id="19" data-color="violet"></td>
             </tr>
             <tr>
-              <td className="currTd yellowTd heartTd" id="6">
+              <td
+                className="currTd yellowTd heartTd"
+                id="6"
+                data-color="yellow"
+                data-effect="heart"
+              >
                 <img src="/img/svg/heart-pictogram.svg" alt="heart" />
               </td>
               <td></td>
@@ -151,24 +181,39 @@ function Game() {
               <td></td>
               <td></td>
               <td></td>
-              <td className="currTd blueTd heartTd" id="20">
+              <td
+                className="currTd blueTd heartTd"
+                id="20"
+                data-color="blue"
+                data-effect="heart"
+              >
                 <img src="/img/svg/heart-pictogram.svg" alt="heart" />
               </td>
             </tr>
             <tr>
-              <td className="currTd violetTd" id="5"></td>
+              <td className="currTd violetTd" id="5" data-color="violet"></td>
               <td></td>
               <td></td>
-              <td className="currTd violetTd" id="38"></td>
-              <td className="currTd blueTd" id="37"></td>
-              <td className="currTd yellowTd" id="36"></td>
-              <td className="currTd blueTd heartTd" id="35">
+              <td className="currTd violetTd" id="38" data-color="violet"></td>
+              <td className="currTd blueTd" id="37" data-color="blue"></td>
+              <td className="currTd yellowTd" id="36" data-color="yellow"></td>
+              <td
+                className="currTd blueTd heartTd"
+                id="35"
+                data-color="blue"
+                data-effect="heart"
+              >
                 <img src="/img/svg/heart-pictogram.svg" alt="heart" />
               </td>
-              <td className="currTd greenTd flowerTd" id="34">
+              <td
+                className="currTd greenTd flowerTd"
+                id="34"
+                data-color="green"
+                data-effect="flower"
+              >
                 <img src="/img/svg/minimalist_flower_01.svg" alt="flower" />
               </td>
-              <td className="currTd whiteTd" id="33"></td>
+              <td className="currTd whiteTd" id="33" data-color="white"></td>
               <td className="currTd redTd heartTd" id="32">
                 <img src="/img/svg/heart-pictogram.svg" alt="heart" />
               </td>
@@ -242,8 +287,14 @@ function Game() {
                 <p>Start</p>
                 {order?.map((player: string) => {
                   return (
-                    <span key={player} className='playerSpan' id={`${player}player`}>тчк</span>
-                  )
+                    <span
+                      key={player}
+                      className="playerSpan"
+                      id={`${player}player`}
+                    >
+                      тчк
+                    </span>
+                  );
                 })}
               </td>
               <td></td>
