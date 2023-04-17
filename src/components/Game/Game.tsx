@@ -163,13 +163,13 @@ function Game() {
       <div className="playerField p3">
         <Container id=" playerHand" items={items. playerHand} />
 
-          {players[id].hand?.map((card: any) => {
+          {/* {players[id].hand?.map((card: any) => {
             return (
               <li key={card.id}>
                 <img src={card.image} alt="" />
               </li>
             );
-          })}
+          })} */}
         
       </div>
       {/* <DragOverlay>{activeId ? <Item id={activeId} /> : null}</DragOverlay> */}
