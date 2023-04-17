@@ -286,31 +286,46 @@ function Game() {
                 {' '}
                 finish
               </td>
-              <td className="currTd redTd" id="50"></td>
-              <td className="currTd blueTd flowerTd" id="49">
+              <td className="currTd redTd" id="50" data-color="red"></td>
+              <td
+                className="currTd blueTd flowerTd"
+                id="49"
+                data-color="blue"
+                data-effect="flower"
+              >
                 <img src="/img/svg/minimalist_flower_01.svg" alt="flower" />
               </td>
               <td></td>
-              <td className="currTd redTd" id="29"></td>
+              <td className="currTd redTd" id="29" data-color="red"></td>
               <td></td>
-              <td className="currTd yellowTd heartTd" id="23">
+              <td
+                className="currTd yellowTd heartTd"
+                id="23"
+                data-color="yellow"
+                data-effect="heart"
+              >
                 <img src="/img/svg/heart-pictogram.svg" alt="heart" />
               </td>
             </tr>
             <tr>
-              <td className="currTd blueTd" id="2"></td>
+              <td className="currTd blueTd" id="2" data-color="blue"></td>
               <td></td>
               <td></td>
-              <td className="currTd blackTd" id="41"></td>
+              <td className="currTd blackTd" id="41" data-color="black"></td>
               <td></td>
               <td></td>
-              <td className="currTd blackTd" id="48"></td>
+              <td className="currTd blackTd" id="48" data-color="black"></td>
               <td></td>
-              <td className="currTd greenTd heartTd" id="28">
+              <td
+                className="currTd greenTd heartTd"
+                id="28"
+                data-color="green"
+                data-effect="heart"
+              >
                 <img src="/img/svg/heart-pictogram.svg" alt="heart" />
               </td>
               <td></td>
-              <td className="currTd redTd" id="24"></td>
+              <td className="currTd redTd" id="24" data-color="red"></td>
             </tr>
             <tr>
               <td className="currTd start" id="1" colSpan={2} rowSpan={2}>
@@ -332,22 +347,37 @@ function Game() {
                 })}
               </td>
               <td></td>
-              <td className="currTd blueTd" id="42"></td>
-              <td className="currTd whiteTd heartTd" id="43">
+              <td className="currTd blueTd" id="42" data-color="blue"></td>
+              <td
+                className="currTd whiteTd heartTd"
+                id="43"
+                data-color="white"
+                data-effect="heart"
+              >
                 <img src="/img/svg/heart-pictogram.svg" alt="heart" />
               </td>
-              <td className="currTd yellowTd heartTd" id="44">
+              <td
+                className="currTd yellowTd heartTd"
+                id="44"
+                data-color="yellow"
+                data-effect="heart"
+              >
                 <img src="/img/svg/heart-pictogram.svg" alt="heart" />
               </td>
-              <td className="currTd redTd flowerTd" id="45">
+              <td
+                className="currTd redTd flowerTd"
+                id="45"
+                data-color="red"
+                data-effect="flower"
+              >
                 <img src="/img/svg/minimalist_flower_01.svg" alt="flower" />
               </td>
-              <td className="currTd blackTd" id="46"></td>
-              <td className="currTd greenTd" id="47"></td>
+              <td className="currTd blackTd" id="46" data-color="black"></td>
+              <td className="currTd greenTd" id="47" data-color="green"></td>
               <td></td>
-              <td className="currTd blackTd" id="27"></td>
-              <td className="currTd blueTd" id="26"></td>
-              <td className="currTd whiteTd" id="25"></td>
+              <td className="currTd blackTd" id="27" data-color="black"></td>
+              <td className="currTd blueTd" id="26" data-color="blue"></td>
+              <td className="currTd whiteTd" id="25" data-color="white"></td>
             </tr>
             <tr>
               <td></td>
