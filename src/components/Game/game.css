@@ -320,8 +320,8 @@ ul:hover>li {
 }
 
 .field table td {
-    width: 7.7%;
-    height: 10%;
+    width: 6%;
+    height: 12%;
     border: 1px solid rgba(256, 256, 256, 0);
     font-size: 35px;
     padding: 0;
@@ -329,8 +329,10 @@ ul:hover>li {
 }
 
 .field table td img {
-    position: relative;
+    /*position: relative;*/
     width: 70%;
+    position: absolute;
+    transform: translate(-50%, -50%);
     /*height: 90%;*/
     margin: 0 auto;
 }
@@ -340,7 +342,7 @@ ul:hover>li {
 }
 
 .start {
-    background-image: url("../../../public/img/123.png");
+    background-image: url("/img/123.png");
     opacity: 0.8;
     background-position: center;
     background-size: cover;

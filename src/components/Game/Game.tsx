@@ -48,25 +48,43 @@ function Game() {
   }, [players]);
 
   const launchSpin = () => {
-    currentRotation += randomDegrees();
-    rotateWheel(currentRotation).then(() => {
-      let winNumber = getCurrentColor(currentRotation);
-      let position = players[order[current]].position;
-      const finalPosition = position + Number(winNumber);
-      const kek = setInterval(() => {
-        if (position + 1 <= finalPosition) {
-          sessionSocket.emit('move_player', {
-            room: session,
-            data: { id: id, position: 1 },
-          });
-          console.log(`position ${position}`);
-          position += 1;
-          console.log('da');
-        } else {
-          clearInterval(kek);
-        }
-      }, 500);
-    });
+    if (String(id) === order[current]) {
+      currentRotation += randomDegrees();
+      rotateWheel(currentRotation).then(() => {
+        let winNumber = getCurrentColor(currentRotation);
+        let position = players[order[current]].position;
+        const finalPosition = position + Number(winNumber);
+        const kek = setInterval(() => {
+          if (position + 1 <= finalPosition) {
+            if (position + 1 === finalPosition) {
+              sessionSocket.emit('move_player', {
+                room: session,
+                data: { id: id, position: 1 },
+                last: true,
+              });
+            } else if (position + 1 === 51) {
+              sessionSocket.emit('move_player', {
+                room: session,
+                data: { id: id, position: 1 },
+                final: true,
+              });
+              clearInterval(kek);
+            } else {
+              sessionSocket.emit('move_player', {
+                room: session,
+                data: { id: id, position: 1 },
+              });
+            }
+
+            console.log(`position ${position}`);
+            position += 1;
+            console.log('da');
+          } else {
+            clearInterval(kek);
+          }
+        }, 500);
+      });
+    }
   };
 
   const handleStart = () => {
@@ -330,11 +348,22 @@ function Game() {
             <tr>
               <td className="currTd start" id="1" colSpan={2} rowSpan={2}>
                 <p>Start</p>
-                {order?.map((player: string, i: number) => {
+                {order?.map((player: string, i: number, ord: any) => {
                   const arr = ['red', 'blue', 'yellow'];
+                  // tranform: translate(-50%, -50%);
+                  const pos = -(100 / (ord.length + 1)); // 1: 50, 2: 25, 3: 16.6
+                  console.log(pos);
                   return (
-                    <span key={player} style={{backgroundColor: arr[i], left: (i + 1) * 15, bottom: (i + 1) * 5}} className='playerSpan' id={`${player}player`}></span>
-                  )
+                    <span
+                      key={player}
+                      style={{
+                        backgroundColor: arr[i],
+                        transform: `translate(${pos * (i + 1)}%, -50%)`,
+                      }}
+                      className="playerSpan"
+                      id={`${player}player`}
+                    ></span>
+                  );
                 })}
               </td>
               <td></td>
@@ -399,7 +428,9 @@ function Game() {
       </div>
       <div className="deck" style={{ color: 'whitesmoke' }}>
         <div>Карт в колоде {deck?.length}</div>
-        <button onClick={handleStart}>Старт</button>
+        {order[0] === String(id) && (
+          <button onClick={handleStart}>Старт</button>
+        )}
         <button>Сдаться</button>
       </div>
       <GameChat />
