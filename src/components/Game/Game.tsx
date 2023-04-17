@@ -214,20 +214,35 @@ function Game() {
                 <img src="/img/svg/minimalist_flower_01.svg" alt="flower" />
               </td>
               <td className="currTd whiteTd" id="33" data-color="white"></td>
-              <td className="currTd redTd heartTd" id="32">
+              <td
+                className="currTd redTd heartTd"
+                id="32"
+                data-color="red"
+                data-effect="heart"
+              >
                 <img src="/img/svg/heart-pictogram.svg" alt="heart" />
               </td>
-              <td className="currTd blackTd" id="31"></td>
+              <td className="currTd blackTd" id="31" data-color="black"></td>
               <td></td>
-              <td className="currTd blackTd" id="21"></td>
+              <td className="currTd blackTd" id="21" data-color="black"></td>
             </tr>
             <tr>
-              <td className="currTd greenTd flowerTd" id="4">
+              <td
+                className="currTd greenTd flowerTd"
+                id="4"
+                data-color="green"
+                data-effect="flower"
+              >
                 <img src="/img/svg/minimalist_flower_01.svg" alt="flower" />
               </td>
               <td></td>
               <td></td>
-              <td className="currTd redTd heartTd" id="39">
+              <td
+                className="currTd redTd heartTd"
+                id="39"
+                data-color="red"
+                data-effect="heart"
+              >
                 <img src="/img/svg/heart-pictogram.svg" alt="heart" />
               </td>
               <td></td>
@@ -236,19 +251,34 @@ function Game() {
               <td></td>
               <td></td>
               <td></td>
-              <td className="currTd yellowTd flowerTd" id="30">
+              <td
+                className="currTd yellowTd flowerTd"
+                id="30"
+                data-color="yellow"
+                data-effect="flower"
+              >
                 <img src="/img/svg/minimalist_flower_01.svg" alt="flower" />
               </td>
               <td></td>
-              <td className="currTd greenTd flowerTd" id="22">
+              <td
+                className="currTd greenTd flowerTd"
+                id="22"
+                data-color="green"
+                data-effect="flower"
+              >
                 <img src="/img/svg/minimalist_flower_01.svg" alt="flower" />
               </td>
             </tr>
             <tr>
-              <td className="currTd redTd" id="3"></td>
+              <td className="currTd redTd" id="3" data-color="red"></td>
               <td></td>
               <td></td>
-              <td className="currTd greenTd flowerTd" id="40">
+              <td
+                className="currTd greenTd flowerTd"
+                id="40"
+                data-color="green"
+                data-effect="flower"
+              >
                 <img src="/img/svg/minimalist_flower_01.svg" alt="flower" />
               </td>
               <td></td>
@@ -286,10 +316,19 @@ function Game() {
               <td className="currTd start" id="1" colSpan={2} rowSpan={2}>
                 <p>Start</p>
                 {order?.map((player: string, i: number) => {
-                  const arr = ['red', 'blue', 'yellow']
+                  const arr = ['red', 'blue', 'yellow'];
                   return (
-                    <span key={player} style={{backgroundColor: arr[i], left: (i + 1) * 20, bottom: (i + 1)}} className='playerSpan' id={`${player}player`}></span>
-                  )
+                    <span
+                      key={player}
+                      style={{
+                        backgroundColor: arr[i],
+                        left: (i + 1) * 20,
+                        bottom: i + 1,
+                      }}
+                      className="playerSpan"
+                      id={`${player}player`}
+                    ></span>
+                  );
                 })}
               </td>
               <td></td>
