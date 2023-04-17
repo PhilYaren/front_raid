@@ -110,8 +110,18 @@ function Game() {
   const [items, setItems] = useState({
     battleModalplayer1: [],
     battleModalplayer2: [],
-    playerHand: ['/img/bonaparte.jpg', "/img/Professor.jpg", "/img/dwarf.jpg",],
+    // playerHand: ['/img/bonaparte.jpg', "/img/Professor.jpg", "/img/dwarf.jpg",],
+    playerHand: players[user.id]?.hand
   });
+  useEffect(() => {
+    setItems((prevItems) => {
+      return {
+        ...prevItems,
+        playerHand: players[user.id]?.hand || prevItems.playerHand,
+      };
+    });
+  }, [players, user.id]);
+  
 
   const [activeId, setActiveId] = useState();
 

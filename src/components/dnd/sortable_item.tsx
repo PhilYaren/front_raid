@@ -18,7 +18,7 @@ export function Item(props) {
   };
 
   return <div style={style}>
-  <img style={{'width': '100px'}} src={id}/>
+  <img style={{'width': '100px'}} src={id.image}/>
   </div>;
 }
 
