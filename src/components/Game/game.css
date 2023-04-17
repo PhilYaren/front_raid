@@ -312,6 +312,13 @@ ul:hover>li {
     /*//стилитаблицы*/
 }
 
+.playerSpan {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    position: absolute;
+}
+
 .field table td {
     width: 7.7%;
     height: 10%;
