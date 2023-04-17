@@ -325,6 +325,7 @@ ul:hover>li {
     border: 1px solid rgba(256, 256, 256, 0);
     font-size: 35px;
     padding: 0;
+    position: relative;
 }
 
 .field table td img {
