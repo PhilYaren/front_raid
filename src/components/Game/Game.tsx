@@ -333,17 +333,8 @@ function Game() {
                 {order?.map((player: string, i: number) => {
                   const arr = ['red', 'blue', 'yellow'];
                   return (
-                    <span
-                      key={player}
-                      style={{
-                        backgroundColor: arr[i],
-                        left: (i + 1) * 20,
-                        bottom: i + 1,
-                      }}
-                      className="playerSpan"
-                      id={`${player}player`}
-                    ></span>
-                  );
+                    <span key={player} style={{backgroundColor: arr[i], left: (i + 1) * 15, bottom: (i + 1) * 5}} className='playerSpan' id={`${player}player`}></span>
+                  )
                 })}
               </td>
               <td></td>
