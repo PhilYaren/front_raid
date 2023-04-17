@@ -1,6 +1,8 @@
 import {
+  SET_CURRENT,
   SET_DECK,
   SET_GAME_MESSAGES,
+  SET_ORDER,
   SET_PLAYERS,
   SET_ROOM_NAME,
 } from '../types';
@@ -10,6 +12,8 @@ const initialState = {
   players: {},
   messages: [],
   deck: [],
+  current: 0,
+  order: [],
 };
 
 /*
@@ -38,7 +42,18 @@ const gameReducer = (state = initialState, action: any) => {
     case SET_GAME_MESSAGES:
       return { ...state, messages: [...state.messages, payload] };
     case SET_DECK:
-      return { ...state, deck: payload };
+      if (payload) {
+        return { ...state, deck: payload };
+      }
+    case SET_ORDER:
+      if (payload) {
+        return { ...state, order: payload };
+      }
+    case SET_CURRENT:
+      if (payload) {
+        return { ...state, current: payload };
+      }
+      return state;
     default:
       return state;
   }

@@ -3,7 +3,12 @@ import './game.css';
 import GameChat from '../utilities/GameChat/GameChat';
 import { useDispatch, useSelector } from 'react-redux';
 import { sessionSocket } from '../../socket';
-import { setDeck, setPlayers } from '../../redux/actions/gameActions';
+import {
+  setCurrent,
+  setDeck,
+  setOrder,
+  setPlayers,
+} from '../../redux/actions/gameActions';
 import {
   currentRotation,
   randomDegrees,
@@ -25,8 +30,11 @@ function Game() {
   const players = useSelector((state: any) => state.game.players);
   const deck = useSelector((state: any) => state.game.deck);
   const session = useSelector((state: any) => state.game.roomName);
+  const order = useSelector((state: any) => state.game.order);
+  const current = useSelector((state: any) => state.game.current);
   const id = String(user.id);
   const dispatch = useDispatch();
+  console.log('order', order);
 
   useEffect(() => {
     sessionSocket.on('update_state', (state: any) => {
@@ -36,31 +44,58 @@ function Game() {
       console.log('deck', state.deck);
       dispatch(setPlayers(state.players));
       dispatch(setDeck(state.deck));
+      dispatch(setOrder(state.order));
+      dispatch(setCurrent(state.current));
     });
   }, [sessionSocket]);
+  let currentRotation = 0;
+
+  useEffect(() => {
+    order.forEach((p: string) => {
+      const playerTd: any = document.getElementById(`${p}player`);
+      const newPos = document.getElementById(`${players[p].position}`);
+      newPos?.appendChild(playerTd);
+    });
+  }, [players]);
 
   const launchSpin = () => {
-    let currentRotation = 0;
-    currentRotation += randomDegrees();
+    if (String(id) === order[current]) {
+      currentRotation += randomDegrees();
+      rotateWheel(currentRotation).then(() => {
+        let winNumber = getCurrentColor(currentRotation);
+        let position = players[order[current]].position;
+        const finalPosition = position + Number(winNumber);
+        const kek = setInterval(() => {
+          if (position + 1 <= finalPosition) {
+            if (position + 1 === finalPosition) {
+              sessionSocket.emit('move_player', {
+                room: session,
+                data: { id: id, position: 1 },
+                last: true,
+              });
+            } else if (position + 1 === 51) {
+              sessionSocket.emit('move_player', {
+                room: session,
+                data: { id: id, position: 1 },
+                final: true,
+              });
+              clearInterval(kek);
+            } else {
+              sessionSocket.emit('move_player', {
+                room: session,
+                data: { id: id, position: 1 },
+              });
+            }
 
-    rotateWheel(currentRotation).then(() => {
-      let winNumber = getCurrentColor(currentRotation);
-      const kek = setInterval(() => {
-        const winTd = document.getElementById(`${winNumber}`);
-        console.log(winNumber);
-        const playerTd = document.getElementById(`playerTd`);
-        const parent = playerTd.closest('td');
-        console.log(parent.id);
-        const newPod = document.getElementById(`${+parent.id + +1}`);
-        newPod.appendChild(playerTd);
-        if (winNumber !== parent.id) {
-          console.log('da');
-        } else {
-          clearInterval(kek);
-        }
-      }, 1000);
-      //отправить результат winNumber
-    });
+            console.log(`position ${position}`);
+            position += 1;
+            console.log('da');
+          } else {
+            clearInterval(kek);
+          }
+        }, 500);
+      });
+    }
   };
 
   const handleStart = () => {
@@ -133,28 +168,50 @@ function Game() {
         <table>
           <tbody>
             <tr>
-              <td className="currTd blueTd" id="7"></td>
-              <td className="currTd greenTd" id="8"></td>
-              <td className="currTd yellowTd" id="9"></td>
-              <td className="currTd whiteTd" id="10"></td>
-              <td className="currTd blackTd" id="11"></td>
-              <td className="currTd redTd flowerTd" id="12">
+              <td className="currTd blueTd" id="7" data-color="blue">
+                {' '}
+              </td>
+              <td className="currTd greenTd" id="8" data-color="green"></td>
+              <td className="currTd yellowTd" id="9" data-color="yellow"></td>
+              <td className="currTd whiteTd" id="10" data-color="white"></td>
+              <td className="currTd blackTd" id="11" data-color="black"></td>
+              <td
+                className="currTd redTd flowerTd"
+                id="12"
+                data-effect="flower"
+                data-color="red"
+              >
                 <img src="/img/svg/minimalist_flower_01.svg" alt="flower" />
               </td>
-              <td className="currTd violetTd" id="13"></td>
-              <td className="currTd greenTd heartTd" id="14">
+              <td className="currTd violetTd" id="13" data-color="violet"></td>
+              <td
+                className="currTd greenTd heartTd"
+                id="14"
+                data-color="green"
+                data-effect="heart"
+              >
                 <img src="/img/svg/heart-pictogram.svg" alt="heart" />
               </td>
-              <td className="currTd whiteTd" id="15"></td>
-              <td className="currTd blueTd" id="16"></td>
-              <td className="currTd yellowTd" id="17"></td>
-              <td className="currTd redTd heartTd" id="18">
+              <td className="currTd whiteTd" id="15" data-color="white"></td>
+              <td className="currTd blueTd" id="16" data-color="blue"></td>
+              <td className="currTd yellowTd" id="17" data-color="yellow"></td>
+              <td
+                className="currTd redTd heartTd"
+                id="18"
+                data-color="red"
+                data-effect="heart"
+              >
                 <img src="/img/svg/heart-pictogram.svg" alt="heart" />
               </td>
-              <td className="currTd violetTd" id="19"></td>
+              <td className="currTd violetTd" id="19" data-color="violet"></td>
             </tr>
             <tr>
-              <td className="currTd yellowTd heartTd" id="6">
+              <td
+                className="currTd yellowTd heartTd"
+                id="6"
+                data-color="yellow"
+                data-effect="heart"
+              >
                 <img src="/img/svg/heart-pictogram.svg" alt="heart" />
               </td>
               <td></td>
@@ -168,59 +225,104 @@ function Game() {
               <td></td>
               <td></td>
               <td></td>
-              <td className="currTd blueTd heartTd" id="20">
+              <td
+                className="currTd blueTd heartTd"
+                id="20"
+                data-color="blue"
+                data-effect="heart"
+              >
                 <img src="/img/svg/heart-pictogram.svg" alt="heart" />
-              </td>
-            </tr>
-            <tr>
-              <td className="currTd violetTd" id="5"></td>
-              <td></td>
-              <td></td>
-              <td className="currTd violetTd" id="38"></td>
-              <td className="currTd blueTd" id="37"></td>
-              <td className="currTd yellowTd" id="36"></td>
-              <td className="currTd blueTd heartTd" id="35">
-                <img src="/img/svg/heart-pictogram.svg" alt="heart" />
-              </td>
-              <td className="currTd greenTd flowerTd" id="34">
-                <img src="/img/svg/minimalist_flower_01.svg" alt="flower" />
-              </td>
-              <td className="currTd whiteTd" id="33"></td>
-              <td className="currTd redTd heartTd" id="32">
-                <img src="/img/svg/heart-pictogram.svg" alt="heart" />
-              </td>
-              <td className="currTd blackTd" id="31"></td>
-              <td></td>
-              <td className="currTd blackTd" id="21"></td>
-            </tr>
-            <tr>
-              <td className="currTd greenTd flowerTd" id="4">
-                <img src="/img/svg/minimalist_flower_01.svg" alt="flower" />
-              </td>
-              <td></td>
-              <td></td>
-              <td className="currTd redTd heartTd" id="39">
-                <img src="/img/svg/heart-pictogram.svg" alt="heart" />
-              </td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td className="currTd yellowTd flowerTd" id="30">
-                <img src="/img/svg/minimalist_flower_01.svg" alt="flower" />
-              </td>
-              <td></td>
-              <td className="currTd greenTd flowerTd" id="22">
-                <img src="/img/svg/minimalist_flower_01.svg" alt="flower" />
               </td>
             </tr>
             <tr>
-              <td className="currTd redTd" id="3"></td>
+              <td className="currTd violetTd" id="5" data-color="violet"></td>
               <td></td>
               <td></td>
-              <td className="currTd greenTd flowerTd" id="40">
+              <td className="currTd violetTd" id="38" data-color="violet"></td>
+              <td className="currTd blueTd" id="37" data-color="blue"></td>
+              <td className="currTd yellowTd" id="36" data-color="yellow"></td>
+              <td
+                className="currTd blueTd heartTd"
+                id="35"
+                data-color="blue"
+                data-effect="heart"
+              >
+                <img src="/img/svg/heart-pictogram.svg" alt="heart" />
+              </td>
+              <td
+                className="currTd greenTd flowerTd"
+                id="34"
+                data-color="green"
+                data-effect="flower"
+              >
+                <img src="/img/svg/minimalist_flower_01.svg" alt="flower" />
+              </td>
+              <td className="currTd whiteTd" id="33" data-color="white"></td>
+              <td
+                className="currTd redTd heartTd"
+                id="32"
+                data-color="red"
+                data-effect="heart"
+              >
+                <img src="/img/svg/heart-pictogram.svg" alt="heart" />
+              </td>
+              <td className="currTd blackTd" id="31" data-color="black"></td>
+              <td></td>
+              <td className="currTd blackTd" id="21" data-color="black"></td>
+            </tr>
+            <tr>
+              <td
+                className="currTd greenTd flowerTd"
+                id="4"
+                data-color="green"
+                data-effect="flower"
+              >
+                <img src="/img/svg/minimalist_flower_01.svg" alt="flower" />
+              </td>
+              <td></td>
+              <td></td>
+              <td
+                className="currTd redTd heartTd"
+                id="39"
+                data-color="red"
+                data-effect="heart"
+              >
+                <img src="/img/svg/heart-pictogram.svg" alt="heart" />
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td
+                className="currTd yellowTd flowerTd"
+                id="30"
+                data-color="yellow"
+                data-effect="flower"
+              >
+                <img src="/img/svg/minimalist_flower_01.svg" alt="flower" />
+              </td>
+              <td></td>
+              <td
+                className="currTd greenTd flowerTd"
+                id="22"
+                data-color="green"
+                data-effect="flower"
+              >
+                <img src="/img/svg/minimalist_flower_01.svg" alt="flower" />
+              </td>
+            </tr>
+            <tr>
+              <td className="currTd redTd" id="3" data-color="red"></td>
+              <td></td>
+              <td></td>
+              <td
+                className="currTd greenTd flowerTd"
+                id="40"
+                data-color="green"
+                data-effect="flower"
+              >
                 <img src="/img/svg/minimalist_flower_01.svg" alt="flower" />
               </td>
               <td></td>
@@ -228,53 +330,100 @@ function Game() {
                 {' '}
                 finish
               </td>
-              <td className="currTd redTd" id="50"></td>
-              <td className="currTd blueTd flowerTd" id="49">
+              <td className="currTd redTd" id="50" data-color="red"></td>
+              <td
+                className="currTd blueTd flowerTd"
+                id="49"
+                data-color="blue"
+                data-effect="flower"
+              >
                 <img src="/img/svg/minimalist_flower_01.svg" alt="flower" />
               </td>
               <td></td>
-              <td className="currTd redTd" id="29"></td>
+              <td className="currTd redTd" id="29" data-color="red"></td>
               <td></td>
-              <td className="currTd yellowTd heartTd" id="23">
+              <td
+                className="currTd yellowTd heartTd"
+                id="23"
+                data-color="yellow"
+                data-effect="heart"
+              >
                 <img src="/img/svg/heart-pictogram.svg" alt="heart" />
               </td>
             </tr>
             <tr>
-              <td className="currTd blueTd" id="2"></td>
+              <td className="currTd blueTd" id="2" data-color="blue"></td>
               <td></td>
               <td></td>
-              <td className="currTd blackTd" id="41"></td>
+              <td className="currTd blackTd" id="41" data-color="black"></td>
               <td></td>
               <td></td>
-              <td className="currTd blackTd" id="48"></td>
+              <td className="currTd blackTd" id="48" data-color="black"></td>
               <td></td>
-              <td className="currTd greenTd heartTd" id="28">
+              <td
+                className="currTd greenTd heartTd"
+                id="28"
+                data-color="green"
+                data-effect="heart"
+              >
                 <img src="/img/svg/heart-pictogram.svg" alt="heart" />
               </td>
               <td></td>
-              <td className="currTd redTd" id="24"></td>
+              <td className="currTd redTd" id="24" data-color="red"></td>
             </tr>
             <tr>
               <td className="currTd start" id="1" colSpan={2} rowSpan={2}>
-                Start
+                <p>Start</p>
+                {order?.map((player: string, i: number, ord: any) => {
+                  const arr = ['red', 'blue', 'yellow'];
+                  // tranform: translate(-50%, -50%);
+                  const pos = -(100 / (ord.length + 1)); // 1: 50, 2: 25, 3: 16.6
+                  console.log(pos);
+                  return (
+                    <span
+                      key={player}
+                      style={{
+                        backgroundColor: arr[i],
+                        transform: `translate(${pos * (i + 1)}%, -50%)`,
+                      }}
+                      className="playerSpan"
+                      id={`${player}player`}
+                    ></span>
+                  );
+                })}
               </td>
               <td></td>
-              <td className="currTd blueTd" id="42"></td>
-              <td className="currTd whiteTd heartTd" id="43">
+              <td className="currTd blueTd" id="42" data-color="blue"></td>
+              <td
+                className="currTd whiteTd heartTd"
+                id="43"
+                data-color="white"
+                data-effect="heart"
+              >
                 <img src="/img/svg/heart-pictogram.svg" alt="heart" />
               </td>
-              <td className="currTd yellowTd heartTd" id="44">
+              <td
+                className="currTd yellowTd heartTd"
+                id="44"
+                data-color="yellow"
+                data-effect="heart"
+              >
                 <img src="/img/svg/heart-pictogram.svg" alt="heart" />
               </td>
-              <td className="currTd redTd flowerTd" id="45">
+              <td
+                className="currTd redTd flowerTd"
+                id="45"
+                data-color="red"
+                data-effect="flower"
+              >
                 <img src="/img/svg/minimalist_flower_01.svg" alt="flower" />
               </td>
-              <td className="currTd blackTd" id="46"></td>
-              <td className="currTd greenTd" id="47"></td>
+              <td className="currTd blackTd" id="46" data-color="black"></td>
+              <td className="currTd greenTd" id="47" data-color="green"></td>
               <td></td>
-              <td className="currTd blackTd" id="27"></td>
-              <td className="currTd blueTd" id="26"></td>
-              <td className="currTd whiteTd" id="25"></td>
+              <td className="currTd blackTd" id="27" data-color="black"></td>
+              <td className="currTd blueTd" id="26" data-color="blue"></td>
+              <td className="currTd whiteTd" id="25" data-color="white"></td>
             </tr>
             <tr>
               <td></td>
@@ -305,7 +454,9 @@ function Game() {
       </div>
       <div className="deck" style={{ color: 'whitesmoke' }}>
         <div>Карт в колоде {deck?.length}</div>
-        <button onClick={handleStart}>Старт</button>
+        {order[0] === String(id) && (
+          <button onClick={handleStart}>Старт</button>
+        )}
         <button>Сдаться</button>
         <button onClick={(e) => {modalActive? setModalActive(false):setModalActive(true)}}>modal</button>
       </div>

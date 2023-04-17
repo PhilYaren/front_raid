@@ -1,6 +1,7 @@
 import {
+  SET_CURRENT,
   SET_DECK,
-  SET_GAME_MESSAGES,
+  SET_GAME_MESSAGES, SET_ORDER,
   SET_PLAYERS,
   SET_ROOM_NAME,
 } from '../types';
@@ -23,3 +24,13 @@ export const setDeck = (deck: any) => ({
   type: SET_DECK,
   payload: deck,
 });
+
+export const setOrder = (order: any) => ({
+  type: SET_ORDER,
+  payload: order,
+})
+
+export const setCurrent = (current: number) => ({
+  type: SET_CURRENT,
+  payload: current,
+})

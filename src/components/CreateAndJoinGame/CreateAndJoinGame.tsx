@@ -1,9 +1,19 @@
-import { Button, FormControlLabel, FormLabel, MenuItem, Radio, RadioGroup, Select, TextField } from '@mui/material'
-import React from 'react'
+import {
+  Button,
+  FormControlLabel,
+  FormLabel,
+  MenuItem,
+  Radio,
+  RadioGroup,
+  Select,
+  TextField,
+} from '@mui/material';
+import React from 'react';
 
-function CreateAndJoinGame({handle}:any) {
+function CreateAndJoinGame({ handle }: any) {
   return (
-    <div><h3>Создание комнаты</h3>
+    <div>
+      <h3>Создание комнаты</h3>
       <form
         style={{ display: 'flex', flexDirection: 'column' }}
         onSubmit={handle}
@@ -20,7 +30,7 @@ function CreateAndJoinGame({handle}:any) {
 
       </form>
     </div>
-  )
+  );
 }
 
-export default CreateAndJoinGame
+export default CreateAndJoinGame;
