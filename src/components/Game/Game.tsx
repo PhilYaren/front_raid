@@ -100,7 +100,7 @@ function Game() {
               };
               const opponent =
                 order.length === current + 1 ? order[0] : order[current + 1];
-              const battlers = [order[current], opponent];
+              const battlers = { current: order[current], opponent };
               sessionSocket.emit('action', session, data, battlers);
             } else if (position + 1 === 51) {
               sessionSocket.emit('move_player', {
@@ -185,17 +185,22 @@ function Game() {
                   id="battleModalplayer1"
                   items={items.battleModalplayer1}
                 />
-                <div className='opponent' style={{padding: '10',
-                margin: '0 20px',
-                flex: '1',
-                display: 'flex',
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                border: '1px solid red',
-                minWidth: '104px',
-                minHeight: '140px',
-                position: 'relative',
-                overflow: 'wrap'}}>
+                <div
+                  className="opponent"
+                  style={{
+                    padding: '10',
+                    margin: '0 20px',
+                    flex: '1',
+                    display: 'flex',
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    border: '1px solid red',
+                    minWidth: '104px',
+                    minHeight: '140px',
+                    position: 'relative',
+                    overflow: 'wrap',
+                  }}
+                >
                   игрок 2
                 </div>
               </div>
