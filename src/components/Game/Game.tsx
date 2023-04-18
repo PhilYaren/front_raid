@@ -15,10 +15,8 @@ import {
   rotateWheel,
   getCurrentColor,
 } from '../utilities/rotate-func/rotate';
-import Modal from '../Modal/Modal';
 import {
   DndContext,
-  DragOverlay,
   KeyboardSensor,
   PointerSensor,
   closestCorners,
@@ -29,7 +27,6 @@ import BattleModal from '../Modal/BattleModal/BattleModal';
 import { sortableKeyboardCoordinates } from '@dnd-kit/sortable';
 import { handleDragEnd, handleDragOver, handleDragStart } from '../dnd/Handles';
 import Container from '../dnd/Container';
-import { Item } from '../dnd/sortable_item';
 import { Button } from '@mui/material';
 
 function Game() {
@@ -81,6 +78,9 @@ function Game() {
                 data: { id: id, position: 1 },
                 last: true,
               });
+              const element = document.getElementById(`${position + 1}`);
+              const data = element?.dataset;
+              const { color, effect } = data;
             } else if (position + 1 === 51) {
               sessionSocket.emit('move_player', {
                 room: session,
@@ -147,15 +147,12 @@ function Game() {
         sensors={sensors}
         collisionDetection={closestCorners}
         onDragStart={(e) => {
-          console.log(e, '<===start');
           handleDragStart(e, setActiveId);
         }}
         onDragOver={(e) => {
-          console.log(e, '<=== over');
           handleDragOver(e, items, setItems);
         }}
         onDragEnd={(e) => {
-          console.log(e, '<=== dnd end');
           handleDragEnd(e, items, setItems, setActiveId);
         }}
       >

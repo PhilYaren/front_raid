@@ -9,7 +9,8 @@ import { actionMessage } from '../../redux/actions/messageActions';
 import { setSessions } from '../../redux/actions/sessionsAction';
 import {
   setCurrent,
-  setDeck, setOrder,
+  setDeck,
+  setOrder,
   setPlayers,
   setRoomName,
 } from '../../redux/actions/gameActions';
@@ -101,18 +102,24 @@ function Home() {
       <div className={styles.activeGamesContainer}>
         <div className={styles.activeGames}>
           <div className={styles.boardGames}>
-          <h2>Список активных игровых сессий</h2>
-          {sessions.map((game: Session) => (
-            <div key={game[0]} className={styles.oneGame}>
-              {game[0]}
-              <p>Игроков в комнате: {game[1]}</p>
-              <button onClick={(e) => handleJoin(e, game[2], game[0])} className={styles.btnGo}>
-                Присоединиться
-              </button>
-            </div>
-          ))}
+            <h2>Список активных игровых сессий</h2>
+            {sessions.map((game: Session) => (
+              <div key={game[0]} className={styles.oneGame}>
+                {game[0]}
+                <p>Игроков в комнате: {game[1]}</p>
+                <button
+                  onClick={(e) => handleJoin(e, game[2], game[0])}
+                  className={styles.btnGo}
+                >
+                  Присоединиться
+                </button>
+              </div>
+            ))}
           </div>
-          <button className={styles.createGameButton} onClick={handleButtonGame}>
+          <button
+            className={styles.createGameButton}
+            onClick={handleButtonGame}
+          >
             Создать игру
           </button>
         </div>
@@ -153,7 +160,6 @@ function Home() {
             </div>
             <form onSubmit={sendMessage}>
               <textarea
-                contentEditable="true"
                 placeholder="Message..."
                 name="message"
                 value={form.message}
