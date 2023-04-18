@@ -81,6 +81,12 @@ function Game() {
               const element = document.getElementById(`${position + 1}`);
               const data = element?.dataset;
               const { color, effect } = data;
+              const arrayPlayers = [order[current], order[current + 1]]
+              sessionSocket.emit('action', {
+                room: session,
+                data,
+                arrayPlayers,
+              })
             } else if (position + 1 === 51) {
               sessionSocket.emit('move_player', {
                 room: session,
