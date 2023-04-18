@@ -41,6 +41,7 @@ function Game() {
   const order = useSelector((state: any) => state.game.order);
   const current = useSelector((state: any) => state.game.current);
   const modalActive = useSelector((state: any) => state.game.modal);
+  const [modalSubmited, setModalSubmited] = useState(false);
   const id = String(user.id);
   const dispatch = useDispatch();
   console.log('order', order);
@@ -142,6 +143,8 @@ function Game() {
     // playerHand: ['/img/bonaparte.jpg', "/img/Professor.jpg", "/img/dwarf.jpg",],
     playerHand: players[user.id]?.hand,
   });
+  console.log(items.battleModalplayer1,'<=====');
+  
   useEffect(() => {
     setItems((prevItems) => {
       return {
@@ -163,7 +166,8 @@ function Game() {
   //battle
   function handleSubmit(e:React.MouseEvent<HTMLButtonElement, MouseEvent>){
     if(items.battleModalplayer1.length){
-      sessionSocket.emit('battle', session, items.battleModalplayer1[0], id)
+      sessionSocket.emit('battle', session, items.battleModalplayer1[0], id);
+      setModalSubmited(true);
     }
   }
 
@@ -188,10 +192,31 @@ function Game() {
           <BattleModal active={modalActive}>
             <div>
               <div style={{ display: 'flex', flexDirection: 'row' }}>
-                <Container
+                {!modalSubmited ? <Container
                   id="battleModalplayer1"
                   items={items.battleModalplayer1}
-                />
+                /> : <div className='currentPlayer' style={{
+                  padding: '10',
+                  margin: '0 20px',
+                  flex: '1',
+                  display: 'flex',
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  border: '1px solid red',
+                  minWidth: '100px',
+                  minHeight: '140px',
+                  position: 'relative',
+                  overflow: 'wrap',
+                  zIndex: '100'
+                }}>
+                  <img src={items.battleModalplayer1[0]?.image}
+                  style={{
+                    width: '100px',
+                    height: '166px',
+                    zIndex: '100'
+                  }}
+                  ></img>
+                  </div>}
                 <div
                   className="opponent"
                   style={{
@@ -202,7 +227,7 @@ function Game() {
                     flexDirection: 'row',
                     justifyContent: 'space-between',
                     border: '1px solid red',
-                    minWidth: '104px',
+                    minWidth: '100px',
                     minHeight: '140px',
                     position: 'relative',
                     overflow: 'wrap',
@@ -217,16 +242,7 @@ function Game() {
         )}
         <div className="playerField p3">
           <Container id="playerHand" items={items.playerHand} />
-
-          {/* {players[id].hand?.map((card: any) => {
-            return (
-              <li key={card.id}>
-                <img src={card.image} alt="" />
-              </li>
-            );
-          })} */}
         </div>
-        {/* <DragOverlay>{activeId ? <Item id={activeId} /> : null}</DragOverlay> */}
       </DndContext>
       <div className="field">
         <table>
