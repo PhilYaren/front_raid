@@ -15,8 +15,8 @@ const containerStyle = {
   flexDirection: 'row',
   justifyContent: 'space-between',
   border: '1px solid red',
-  minWidth: '102px',
-  minHeight: '10px',
+  minWidth: '104px',
+  minHeight: '140px',
   position: 'relative',
   zIndex: '20',
 };

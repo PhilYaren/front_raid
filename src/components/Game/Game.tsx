@@ -185,10 +185,19 @@ function Game() {
                   id="battleModalplayer1"
                   items={items.battleModalplayer1}
                 />
-                <Container
-                  id="battleModalplayer2"
-                  items={items.battleModalplayer2}
-                />
+                <div className='opponent' style={{padding: '10',
+                margin: '0 20px',
+                flex: '1',
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                border: '1px solid red',
+                minWidth: '104px',
+                minHeight: '140px',
+                position: 'relative',
+                overflow: 'wrap'}}>
+                  игрок 2
+                </div>
               </div>
               <Button>battle</Button>
             </div>
