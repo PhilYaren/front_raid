@@ -1,30 +1,156 @@
+body {
+    background-image: url('/img/1642713765_46-adonius-club-p-kamennaya-stena-fon-51.jpg');
+    background-size: cover;
+    height: 100vh;
+}
+
 .activeGamesContainer {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    margin: 0 auto;
+    align-items: center;
+    justify-content: center;
+    max-height: 800px;
+    min-height: 800px;
+    margin-top: 60px;
     width: 90%;
-    height: 90%;
+    height: 50vw;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+.createGameButton {
+    margin-bottom: 10px;
+    transition: 0.5s;
+    border: none;
+}
+
+.createGameButton:hover {
+    border: none;
+    transform: scale(1.2);
 }
 
 .activeGames {
-    border: 2px solid red;
+    border: 2px solid black;
     width: 100%;
-    margin: 0 ;
-}
-
-.homeContainer {
-    width: 100%;
-    height: 100%;
-
     margin: auto;
-    margin-top: 5%;
-}
-
-.chatContainer {
+    margin-right: 30px;
+    height: 100%;
+    background-image: url('/img/bbbb.jpg');
+    font-family: Zhizn;
+    color: #efeee9;
+    font-size: 16px;
+    transition: 1s;
+    letter-spacing: 3px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    align-items: center;
+}
 
-    border: 2px solid red;
+.btnGo {
+    background: rgba(0,0,0, 0.3);
+    border: none;
+    border-radius: 4px;
+    color: #efeee9;
+    font-family: Zhizn;
+    font-size: 15px;
+    outline: none !important;
+    margin-bottom: 10px;
+    transition: 0.4s;
+}
+
+.btnGo:hover {
+    background-color: #f9f9f9;
+    color: black;
+}
+
+.oneGame {
+    color: #efeee9;
+    border-radius: 20px;
+    background: rgba(0,0,0, 0.3);
+    padding: 10px;
+}
+
+.oneMessage {
+    color: #efeee9;
+    border-radius: 20px;
+    background: rgba(0,0,0, 0.3);
+    padding: 10px;
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.oneMessage p {
+    word-wrap: break-word;
+}
+
+.dataMessage {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    font-family: Zhizn;
+    color: rgba(239, 238, 233, 0.85);
+}
+
+.chatContainer {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-image: url('/img/bbb2.jpg');
+    border: 2px solid black;
+    color: #efeee9;
+    font-family: Zhizn;
+    font-size: 15px;
+    max-width: 25%;
+}
+
+.chatScroll {
+    overflow-y: scroll;
+}
+
+.chatScroll::-webkit-scrollbar {
+    width: 10px;
+    background-color: rgba(0,0,0, 0.3);
+}
+
+.chatScroll::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: rgba(239, 238, 233, 0.46);
+}
+
+.chatScroll::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.2);
+    border-radius: 10px;
+    background-color: rgba(0,0,0, 0.3);
+}
+
+.chatContainer form {
+    flex-direction: column;
+}
+
+.chatContainer form button {
+    font-size: 14px;
+    height: 40px;
+    margin-top: 5px;
+    background: rgba(0,0,0, 0.3);
+    color: white;
+}
+
+.chatContainer form textarea {
+    background: rgba(0,0,0, 0.3);
+    border: none;
+    border-radius: 4px;
+    color: #efeee9;
+    font-family: 'Zhizn';
+    outline: none !important;
+    width: 80%;
+    display: inline-block;
+    height: 80px;
+    white-space: normal;
+    word-wrap: break-word;
+    padding: 10px;
 }

@@ -1,12 +1,15 @@
+
 .gamefield {
-    background-color: #213547;
+    background-image: url('/img/1642713765_46-adonius-club-p-kamennaya-stena-fon-51.jpg');
+    background-size: cover;
+    background-repeat: repeat-x;
     width: 100%;
     height: 100%;
     position: relative;
 }
 
 .playerField {
-    border: 1px solid white;
+    border: 1px solid black;
 }
 
 .p1 {
@@ -15,6 +18,9 @@
     top: 12%;
     height: 50%;
     width: 10%;
+    border-radius: 20px;
+    background-image: url('/img/bbbb.jpg');
+    box-shadow: 0 30px 50px 50px rgba(0, 0, 0, 0.5);
 }
 
 .p2 {
@@ -23,6 +29,13 @@
     top: 12%;
     height: 50%;
     width: 10%;
+    border-radius: 20px;
+    background-image: url('/img/bbbb.jpg');
+    box-shadow: 0 30px 50px 50px rgba(0, 0, 0, 0.5);
+}
+
+#playerTd {
+    transition: 1s;
 }
 
 .p3 {
@@ -31,97 +44,145 @@
     top: 75%;
     height: 20%;
     width: 51%;
-    --card-height: 100px;
-    --card-width: 70px;
+    --card-height: 140px;
+    --card-width: 90px;
+    border-radius: 20px;
+    background-image: url('/img/bbbb.jpg');
+    box-shadow: 0 30px 50px 50px rgba(0, 0, 0, 0.5);
 }
 
 .field {
-    border: 1px solid white;
-    position: absolute;
+    border: 1px solid black;
+    position:fixed;
     left: 14%;
     top: 12%;
-    height: 60%;
-    width: 55%;
+    height: 25vw;
+    width: 55vw;
+    border-radius: 20px;
+    background-image: url('/img/bbbb.jpg');
+    box-shadow: 0 10px 20px 20px rgba(0, 0, 0, 0.5);
 }
 
 .roulette {
     position: relative;
-    border-radius: 100%;
-    border: 1px solid white;
-    top: 70%;
+    top: 75%;
     left: 2%;
+    min-width: 130px;
+    min-height: 130px;
     width: 10vw;
     height: 10vw;
-    transition: 0.5s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+
 }
 
-.pivont-point {
-    position: fixed;
-    /*width: 100px;*/
-    font-size: 80px;
-    opacity: 110;
-    transform: translate(-50%, -25%);
-}
-
-.d10 {
-    left: 6vw;
-    width: 30px;
-    height: 10px;
-    margin: 5px 0;
-    background: #B74388;
-    position: fixed;
-    transform-origin: left top;
-}
-
-.d10:after {
-    content: "";
-    width: 0;
-    height: 0;
-    position: absolute;
-    top: -5px;
-    left: 100%;
-    border-width: 10px 0 10px 20px;
-    border-style: solid;
-    border-color: transparent #B74388;
-}
-
-.d15 {
-    width: 30px;
-    height: 10px;
-    margin: 5px 0;
-    background: #B74388;
+.wheel {
+    border: 5px solid rgb(33,19,13);
     position: relative;
-    animation: 3s linear infinite rotate;
-    transform-origin: left top;
-}
-.d15:after {
-    content: "";
-    width: 0;
-    height: 0;
-    position: absolute;
-    top: -5px;
-    left: 100%;
-    border-width: 10px 0 10px 20px;
-    border-style: solid;
-    border-color: transparent #B74388;
+    border-radius: 50%;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    box-shadow: 0 30px 50px 50px rgba(0, 0, 0, 0.5);
+    background-image: conic-gradient(rgb(76,61,54) 16.67%, rgb(156,116,82) 0 33.33%, rgb(76,61,54) 0 50%, rgb(156,116,82) 0 66.67%, rgb(76,61,54) 0 83.33%, rgb(156,116,82) 0);
 }
 
+#num1 {
+    transform: rotate(0deg);
+    position: absolute;
+    left: 75%;
+    top: 35%;
+    font-size: 100%;
+    font-family: Zhizn;
+    font-weight: bold;
+}
+#num2 {
+    transform: rotate(-60deg);
+    position: absolute;
+    left: 60%;
+    top: 10%;
+    font-size: 100%;
+    font-family: Zhizn;
+    font-weight: bold;
+}
+#num3 {
+    transform: rotate(-120deg);
+    position: absolute;
+    left: 35%;
+    top: 10%;
+    font-size: 100%;
+    font-family: Zhizn;
+    font-weight: bold;
+}
+#num4 {
+    transform: rotate(180deg);
+    position: absolute;
+    left: 20%;
+    top: 35%;
+    font-size: 100%;
+    font-family: Zhizn;
+    font-weight: bold;
+}
+#num5 {
+    transform: rotate(120deg);
+    position: absolute;
+    left: 32%;
+    top: 60%;
+    font-size: 100%;
+    font-family: Zhizn;
+    font-weight: bold;
+}
+#num6 {
+    transform: rotate(70deg);
+    position: absolute;
+    left: 60%;
+    top: 60%;
+    font-size: 100%;
+    font-family: Zhizn;
+    font-weight: bold;
+}
+
+.arrow {
+    z-index: 100;
+    width: 5%;
+    height: 5%;
+    position: relative;
+    left: 98%;
+    top: 56%;
+    transform: rotate(-135deg);
+    border-top: 5px solid rgb(33,19,13);
+    border-right: 5px solid rgb(33,19,13);
+    margin-right: 60px;
+}
+
+.spin {
+    margin-top: 20px;
+}
+
+.result {
+    margin-top: 10px;
+    width: 20px;
+    height: 20px;
+    border: 1px solid black;
+}
+
+.rotating {
+    transition: all 3s;
+    transition-timing: ease-in-out;
+}
 
 .deck {
     position: absolute;
-    border: 1px solid white;
+    border: 1px solid black;
     border-radius: 5%;
     top: 70%;
     left: 71%;
     width: 10%;
     height: 25%;
+    background-image: url('/img/bbbb.jpg');
 }
 
 .chat {
-    border: 1px solid white;
+    border: 1px solid black;
+    box-shadow: 0 10px 10px 20px rgba(0, 0, 0, 0.5);
     position: absolute;
     left: 83%;
     top: 12%;
@@ -130,6 +191,8 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    border-radius: 20px;
+    background-image: url('/img/bbb2.jpg');
 }
 
 form {
@@ -153,15 +216,16 @@ ul {
     display: flex;
     list-style: none;
     margin: 0;
-    position: absolute;
-    left: 0%;
-    bottom: 10%;
-    width: 80%;
+    justify-content: center;
+    /*position: absolute;*/
+    /*left: 10%;*/
+    /*bottom: 20%;*/
+    width: 100%;
 }
 
 li img {
-    height: 100px;
-    width: 70px;
+    height: 115%;
+    width: 115%;
     border-radius: 4px;
     transition: 0.5s;
 }
@@ -169,7 +233,7 @@ li img {
 li {
     height: var(--card-height);
     width: var(--card-width);
-    margin: 5px;
+    margin: 25px;
     border-radius: 4px;
     background-repeat: no-repeat;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
@@ -178,41 +242,169 @@ li {
 }
 
 li img:hover {
-    transform: scale(1.3);
+    transform: scale(1.5);
 }
 
 li:nth-child(1) {
-    transform: translateX(calc(var(--card-width) * 3 - 160%)) translateY(-1%) rotateZ(-25deg);
+    transform: translateX(calc(var(--card-width) * 3 - 160%))
+    /*translateY(-21%)*/
+    /*rotateZ(-25deg)*/
+;
     transition-delay: 0s;
 }
 
 li:nth-child(2) {
     transition-delay: 0.02s;
-    transform: translateX(calc(var(--card-width) * 2 - 110%)) translateY(-4%) rotateZ(-15deg);
+    transform: translateX(calc(var(--card-width) * 2 - 110%))
+    /*translateY(-24%)*/
+    /*rotateZ(-15deg)*/
+;
 }
 
 li:nth-child(3) {
     transition-delay: 0.04s;
-    transform: translateX(calc(var(--card-width) * 1 - 60%)) translateY(-5%) rotateZ(-5deg);
+    transform: translateX(calc(var(--card-width) * 1 - 60%))
+    /*translateY(-25%)*/
+    /*rotateZ(-5deg)*/
+;
 }
 
 li:nth-child(4) {
     transition-delay: 0.06s;
-    transform: translateX(calc(var(--card-width) * -1 + 80%)) translateY(-5%) rotateZ(5deg);
+    transform: translateX(calc(var(--card-width) * -1 + 80%))
+    /*translateY(-25%)*/
+    /*rotateZ(5deg)*/
+;
 }
 
 li:nth-child(5) {
     transition-delay: 0.08s;
-    transform: translateX(calc(var(--card-width) * -2 + 110%)) translateY(-5%) rotateZ(25deg);
+    transform: translateX(calc(var(--card-width) * -2 + 110%))
+    /*translateY(-25%)*/
+    /*rotateZ(25deg)*/
+;
 }
 
 li:nth-child(6) {
     transition-delay: 0.1s;
-    transform: translateX(calc(var(--card-width) * -3 + 160%)) translateY(-1%) rotateZ(25deg);
+    transform: translateX(calc(var(--card-width) * -3 + 160%))
+    /*translateY(-21%)*/
+    /*rotateZ(25deg)*/
+;
 }
 
 ul:hover>li {
-    transform: translateX(0) translateY(0) rotateZ(0);
+    transform: translateX(0)
+    /*translateY(0)*/
+    /*rotateZ(0)*/
+;
 }
 
+.field table {
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    background-image: url('/img/bbbb.jpg');
+    border-radius: 20px;
+    flex-direction: column;
+    padding: 10px;
+    box-shadow: 0 30px 50px 20px rgba(0, 0, 0, 0.5);
+    /*//стилитаблицы*/
+}
+
+.playerSpan {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    position: absolute;
+}
+
+.field table td {
+    width: 6%;
+    height: 12%;
+    border: 1px solid rgba(256, 256, 256, 0);
+    font-size: 35px;
+    padding: 0;
+    position: relative;
+}
+
+.field table td img {
+    /*position: relative;*/
+    width: 70%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    /*height: 90%;*/
+    margin: 0 auto;
+}
+
+.field table .currTd {
+    border: 1px solid black;
+}
+
+.start {
+    background-image: url("/img/123.png");
+    opacity: 0.8;
+    background-position: center;
+    background-size: cover;
+    color: white;
+    font-family: Zhizn;
+    text-align: center;
+    vertical-align: bottom;
+    font-weight: bold;
+    font-size: 18px !important;
+}
+.finish {
+    background-image: url("../../../public/img/321.png");
+    opacity: 0.8;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    top: -30px;
+    color: black;
+    text-align: center;
+    vertical-align: bottom;
+    font-family: Zhizn;
+    font-weight: bold;
+    font-size: 18px !important;
+}
+
+.blueTd {
+    background-color: darkblue;
+    box-shadow: inset 0 20px 20px 5px rgba(0, 0, 0, 0.5);
+}
+.redTd {
+    background-color: red;
+    box-shadow: inset 0 10px 20px 2px rgba(0, 0, 0, 0.5);
+}
+.greenTd {
+    background-color: green;
+    box-shadow: inset 0 10px 20px 2px rgba(0, 0, 0, 0.5);
+}
+.yellowTd {
+    background-color: yellow;
+    box-shadow: inset 0 10px 20px 2px rgba(0, 0, 0, 0.5);
+}
+.violetTd {
+    background-color: violet;
+    box-shadow: inset 0 10px 20px 2px rgba(0, 0, 0, 0.5);
+}
+.blackTd {
+    background-color: black;
+    box-shadow: inset 0 10px 20px 2px rgba(0, 0, 0, 0.5);
+}
+.whiteTd {
+    background-color: white;
+    box-shadow: inset 0 10px 20px 2px rgba(0, 0, 0, 0.5);
+}
+
+/*dnd*/
+.Card {
+    width: 200px;
+    height: 200px;
+    z-index: 10;
+}
+.drop{
+    display: flex;
+    flex-direction: row !important;
+}
 

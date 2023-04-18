@@ -7,8 +7,18 @@ import { StateFromReducersMapObject } from '@reduxjs/toolkit';
 import { logoutUserAsync } from '../../redux/actions/userActions';
 import { SocketContext } from '../../context/websoket/websoket-context';
 import { socket, chatSocket } from '../../socket';
+import './Navbar.css'
+import Modal from '../Modal/Modal';
+import Auth from '../Auth/Auth';
 
 function Navbar() {
+  const [modalActive, setModalActive ] = useState(false);
+  const handlemodal = (action:any) => {
+    setModalActive(false);
+    setModalActive(action);
+    // console.log(action);
+
+  }
   const [tabIndex, setTabIndex] = useState(0);
   const user = useSelector((state: any) => state.user.user);
   const dispatch = useDispatch();
@@ -29,13 +39,15 @@ function Navbar() {
     dispatch(logoutUserAsync());
   };
   const handleMessages = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    socket.emmit('message', 'hello');
+    socket.emit('message', 'hello');
   };
   return (
+    <>
     <AppBar position="fixed" color="primary">
       <Toolbar className="root" variant="dense">
         <Typography className="game-logo " variant="h5" color="inherit">
           Raid
+          {/*<img src="../../../public/img/Untitled_logo_4_free-file-transformed.png" alt="logo"/>*/}
         </Typography>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
           <Tabs
@@ -69,21 +81,29 @@ function Navbar() {
               : [
                   <Tab
                     key="signup"
+                    className="selectedTab"
                     label="Зарегистрироваться"
-                    component={NavLink}
-                    to="/registration"
+                    onClick={()=>handlemodal('registration')}
+                    // component={NavLink}
+                    // to="/registration"
                   />,
                   <Tab
+                    className="selectedTab"
                     key="login"
                     label="Войти"
-                    component={NavLink}
-                    to="/login"
+                    onClick={()=>handlemodal('login')}
+                    // component={NavLink}
+                    // to="/login"
                   />,
                 ]}
           </Tabs>
         </Box>
       </Toolbar>
     </AppBar>
+      <Modal active={modalActive} setActive={setModalActive}>
+                <Auth action={modalActive}/>
+        </Modal>
+      </>
   );
 }
 
