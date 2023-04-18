@@ -24,6 +24,8 @@
 }
 .root {
     height: 45px !important;
+    display: flex;
+    align-items: center;
     background: linear-gradient(rgb(33,19,13), rgb(76,61,54));
 }
 
@@ -67,6 +69,7 @@
     height: 100%;
     width: 100%;
     min-height: 600px;
+    margin-left: 10%;
     box-shadow: 0 30px 50px 50px rgba(0, 0, 0, 0.5);
 }
 

@@ -32,7 +32,7 @@ function Home() {
     setFirst(false);
   }
 
-  const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInput = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setForm({ ...form, message: event.target.value });
   };
 
@@ -100,17 +100,19 @@ function Home() {
     return (
       <div className={styles.activeGamesContainer}>
         <div className={styles.activeGames}>
+          <div className={styles.boardGames}>
           <h2>Список активных игровых сессий</h2>
           {sessions.map((game: Session) => (
-            <div key={game[0]} className="game">
+            <div key={game[0]} className={styles.oneGame}>
               {game[0]}
               <p>Игроков в комнате: {game[1]}</p>
-              <button onClick={(e) => handleJoin(e, game[2], game[0])}>
+              <button onClick={(e) => handleJoin(e, game[2], game[0])} className={styles.btnGo}>
                 Присоединиться
               </button>
             </div>
           ))}
-          <button className="create-game-button" onClick={handleButtonGame}>
+          </div>
+          <button className={styles.createGameButton} onClick={handleButtonGame}>
             Создать игру
           </button>
         </div>
@@ -135,27 +137,27 @@ function Home() {
         )}
         <div className={styles.chatContainer}>
           <>
-            <h3>Chat:</h3>
-            <div>
+            <h3>Игровой чат</h3>
+            <div className={styles.chatScroll}>
               {messages?.map((message: Message, index: number) => {
                 return (
-                  <div key={index}>
-                    <p>{message.userName}</p>
-                    <p>{message.time}</p>
-                    <div>
-                      <p>{message.message}</p>
+                  <div key={index} className={styles.oneMessage}>
+                    <div className={styles.dataMessage}>
+                      <p>{message.userName}</p>
+                      <p>{message.time}</p>
                     </div>
+                    <p>{message.message}</p>
                   </div>
                 );
               })}
             </div>
             <form onSubmit={sendMessage}>
-              <input
+              <textarea
+                contentEditable="true"
                 placeholder="Message..."
                 name="message"
                 value={form.message}
                 onChange={handleInput}
-                type="text"
               />
               <button type="submit">submit</button>
             </form>
