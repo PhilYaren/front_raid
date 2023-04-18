@@ -2,10 +2,13 @@ import React, { useEffect, useState } from 'react';
 import './game.css';
 import GameChat from '../utilities/GameChat/GameChat';
 import { useDispatch, useSelector } from 'react-redux';
-import { sessionSocket } from '../../socket';
+import { sessionSocket, socket } from '../../socket';
 import {
+  setColor,
   setCurrent,
   setDeck,
+  setModal,
+  setOpponents,
   setOrder,
   setPlayers,
 } from '../../redux/actions/gameActions';
@@ -30,13 +33,14 @@ import Container from '../dnd/Container';
 import { Button } from '@mui/material';
 
 function Game() {
-  const [modalActive, setModalActive] = useState(false);
+  // const [modalActive, setModalActive] = useState(false);
   const user = useSelector((state: any) => state.user.user);
   const players = useSelector((state: any) => state.game.players);
   const deck = useSelector((state: any) => state.game.deck);
   const session = useSelector((state: any) => state.game.roomName);
   const order = useSelector((state: any) => state.game.order);
   const current = useSelector((state: any) => state.game.current);
+  const modalActive = useSelector((state: any) => state.game.modal);
   const id = String(user.id);
   const dispatch = useDispatch();
   console.log('order', order);
@@ -51,6 +55,15 @@ function Game() {
       dispatch(setDeck(state.deck));
       dispatch(setOrder(state.order));
       dispatch(setCurrent(state.current));
+    });
+    sessionSocket.on('set_modal', (modal) => {
+      dispatch(setModal(modal));
+    });
+    sessionSocket.on('set_color', (color) => {
+      dispatch(setColor(color));
+    });
+    sessionSocket.on('set_opponents', (opponents) => {
+      dispatch(setOpponents(opponents));
     });
   }, [sessionSocket]);
   let currentRotation = 0;
@@ -79,8 +92,16 @@ function Game() {
                 last: true,
               });
               const element = document.getElementById(`${position + 1}`);
-              const data = element?.dataset;
-              const { color, effect } = data;
+              const el = element?.dataset;
+              const { color, effect } = el;
+              const data = {
+                color,
+                effect: effect || null,
+              };
+              const opponent =
+                order.length === current + 1 ? order[0] : order[current + 1];
+              const battlers = [order[current], opponent];
+              sessionSocket.emit('action', session, data, battlers);
             } else if (position + 1 === 51) {
               sessionSocket.emit('move_player', {
                 room: session,
@@ -157,7 +178,7 @@ function Game() {
         }}
       >
         {modalActive && (
-          <BattleModal active={modalActive} setActive={setModalActive}>
+          <BattleModal active={modalActive}>
             <div>
               <div style={{ display: 'flex', flexDirection: 'row' }}>
                 <Container
@@ -480,13 +501,13 @@ function Game() {
           <button onClick={handleStart}>Старт</button>
         )}
         <button>Сдаться</button>
-        <button
-          onClick={(e) => {
-            modalActive ? setModalActive(false) : setModalActive(true);
-          }}
-        >
-          modal
-        </button>
+        {/*<button*/}
+        {/*  onClick={(e) => {*/}
+        {/*    modalActive ? setModalActive(false) : setModalActive(true);*/}
+        {/*  }}*/}
+        {/*>*/}
+        {/*  modal*/}
+        {/*</button>*/}
       </div>
       <GameChat />
     </div>

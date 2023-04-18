@@ -1,7 +1,10 @@
 import {
+  SET_COLOR,
   SET_CURRENT,
   SET_DECK,
   SET_GAME_MESSAGES,
+  SET_MODAL,
+  SET_OPPONENTS,
   SET_ORDER,
   SET_PLAYERS,
   SET_ROOM_NAME,
@@ -14,6 +17,9 @@ const initialState = {
   deck: [],
   current: 0,
   order: [],
+  modal: false,
+  color: '',
+  opponents: {},
 };
 
 /*
@@ -45,15 +51,23 @@ const gameReducer = (state = initialState, action: any) => {
       if (payload) {
         return { ...state, deck: payload };
       }
+      return state;
     case SET_ORDER:
       if (payload) {
         return { ...state, order: payload };
       }
+      return state;
     case SET_CURRENT:
       if (payload) {
         return { ...state, current: payload };
       }
       return state;
+    case SET_MODAL:
+      return { ...state, modal: payload };
+    case SET_COLOR:
+      return { ...state, color: payload };
+    case SET_OPPONENTS:
+      return { ...state, opponents: payload };
     default:
       return state;
   }

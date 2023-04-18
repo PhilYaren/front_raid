@@ -1,12 +1,12 @@
-import React from 'react'
-import './BattleModal.css'
+import React from 'react';
+import './BattleModal.css';
 
-function BattleModal({active, setActive, children}) {
+function BattleModal({ active, children }) {
   return (
-    <div className={active? 'battle-modal-content active' : 'battle-modal' } >
-        {children}
+    <div className={active ? 'battle-modal-content active' : 'battle-modal'}>
+      {children}
     </div>
-  )
+  );
 }
 
-export default BattleModal
+export default BattleModal;

@@ -1,7 +1,11 @@
 import {
+  SET_COLOR,
   SET_CURRENT,
   SET_DECK,
-  SET_GAME_MESSAGES, SET_ORDER,
+  SET_GAME_MESSAGES,
+  SET_MODAL,
+  SET_OPPONENTS,
+  SET_ORDER,
   SET_PLAYERS,
   SET_ROOM_NAME,
 } from '../types';
@@ -28,9 +32,24 @@ export const setDeck = (deck: any) => ({
 export const setOrder = (order: any) => ({
   type: SET_ORDER,
   payload: order,
-})
+});
 
 export const setCurrent = (current: number) => ({
   type: SET_CURRENT,
   payload: current,
-})
+});
+
+export const setOpponents = (opponents: any) => ({
+  type: SET_OPPONENTS,
+  payload: opponents,
+});
+
+export const setModal = (modal: boolean) => ({
+  type: SET_MODAL,
+  payload: modal,
+});
+
+export const setColor = (color: string) => ({
+  type: SET_COLOR,
+  payload: color,
+});
