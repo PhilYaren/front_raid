@@ -16,7 +16,15 @@ import {
   getCurrentColor,
 } from '../utilities/rotate-func/rotate';
 import Modal from '../Modal/Modal';
-import { DndContext, DragOverlay, KeyboardSensor, PointerSensor, closestCorners, useSensor, useSensors } from '@dnd-kit/core';
+import {
+  DndContext,
+  DragOverlay,
+  KeyboardSensor,
+  PointerSensor,
+  closestCorners,
+  useSensor,
+  useSensors,
+} from '@dnd-kit/core';
 import BattleModal from '../Modal/BattleModal/BattleModal';
 import { sortableKeyboardCoordinates } from '@dnd-kit/sortable';
 import { handleDragEnd, handleDragOver, handleDragStart } from '../dnd/Handles';
@@ -25,7 +33,7 @@ import { Item } from '../dnd/sortable_item';
 import { Button } from '@mui/material';
 
 function Game() {
-  const [modalActive, setModalActive ] = useState(false);
+  const [modalActive, setModalActive] = useState(false);
   const user = useSelector((state: any) => state.user.user);
   const players = useSelector((state: any) => state.game.players);
   const deck = useSelector((state: any) => state.game.deck);
@@ -40,7 +48,7 @@ function Game() {
     sessionSocket.on('update_state', (state: any) => {
       console.log('players', state.players);
       console.log('user', user);
-      
+
       console.log('deck', state.deck);
       dispatch(setPlayers(state.players));
       dispatch(setDeck(state.deck));
@@ -111,7 +119,7 @@ function Game() {
     battleModalplayer1: [],
     battleModalplayer2: [],
     // playerHand: ['/img/bonaparte.jpg', "/img/Professor.jpg", "/img/dwarf.jpg",],
-    playerHand: players[user.id]?.hand
+    playerHand: players[user.id]?.hand,
   });
   useEffect(() => {
     setItems((prevItems) => {
@@ -121,14 +129,13 @@ function Game() {
       };
     });
   }, [players, user.id]);
-  
 
   const [activeId, setActiveId] = useState();
 
   const sensors = useSensors(
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, {
-      coordinateGetter: sortableKeyboardCoordinates
+      coordinateGetter: sortableKeyboardCoordinates,
     })
   );
 
@@ -136,32 +143,41 @@ function Game() {
     <div className="gamefield">
       <div className="playerField p1">поле игрока 1</div>
       <div className="playerField p2">поле игрока 2</div>
-        <DndContext
+      <DndContext
         sensors={sensors}
         collisionDetection={closestCorners}
         onDragStart={(e) => {
           console.log(e, '<===start');
-          
-          handleDragStart(e, setActiveId)
+          handleDragStart(e, setActiveId);
         }}
         onDragOver={(e) => {
           console.log(e, '<=== over');
-          handleDragOver(e, items, setItems)}}
+          handleDragOver(e, items, setItems);
+        }}
         onDragEnd={(e) => {
           console.log(e, '<=== dnd end');
-          handleDragEnd(e, items, setItems, setActiveId)}}
+          handleDragEnd(e, items, setItems, setActiveId);
+        }}
       >
-        {modalActive && <BattleModal active={modalActive} setActive={setModalActive}> 
-        <div>
-          <div style={{'display':'flex', 'flexDirection':'row'}}>
-        <Container id="battleModalplayer1" items={items.battleModalplayer1} />
-        <Container id="battleModalplayer2" items={items.battleModalplayer2} />
-        </div>
-        <Button>battle</Button>
-        </div>
-        </BattleModal>}
-      <div className="playerField p3">
-        <Container id=" playerHand" items={items. playerHand} />
+        {modalActive && (
+          <BattleModal active={modalActive} setActive={setModalActive}>
+            <div>
+              <div style={{ display: 'flex', flexDirection: 'row' }}>
+                <Container
+                  id="battleModalplayer1"
+                  items={items.battleModalplayer1}
+                />
+                <Container
+                  id="battleModalplayer2"
+                  items={items.battleModalplayer2}
+                />
+              </div>
+              <Button>battle</Button>
+            </div>
+          </BattleModal>
+        )}
+        <div className="playerField p3">
+          <Container id="playerHand" items={items.playerHand} />
 
           {/* {players[id].hand?.map((card: any) => {
             return (
@@ -170,10 +186,9 @@ function Game() {
               </li>
             );
           })} */}
-        
-      </div>
-      {/* <DragOverlay>{activeId ? <Item id={activeId} /> : null}</DragOverlay> */}
-        </DndContext>
+        </div>
+        {/* <DragOverlay>{activeId ? <Item id={activeId} /> : null}</DragOverlay> */}
+      </DndContext>
       <div className="field">
         <table>
           <tbody>
@@ -468,7 +483,13 @@ function Game() {
           <button onClick={handleStart}>Старт</button>
         )}
         <button>Сдаться</button>
-        <button onClick={(e) => {modalActive? setModalActive(false):setModalActive(true)}}>modal</button>
+        <button
+          onClick={(e) => {
+            modalActive ? setModalActive(false) : setModalActive(true);
+          }}
+        >
+          modal
+        </button>
       </div>
       <GameChat />
     </div>

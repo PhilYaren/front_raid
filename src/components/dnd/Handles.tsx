@@ -1,19 +1,25 @@
-import React, { useState } from "react";
-import { arrayMove, sortableKeyboardCoordinates } from "@dnd-kit/sortable";
-
-
+import React, { useState } from 'react';
+import { arrayMove, sortableKeyboardCoordinates } from '@dnd-kit/sortable';
 
 const wrapperStyle = {
-  display: "flex",
-  flexDirection: "row"
+  display: 'flex',
+  flexDirection: 'row',
 };
 
-export function findContainer(id:any, items:any) {
+export function findContainer(id: any, items: any) {
   if (id in items) {
     return id;
   }
 
-  return Object.keys(items).find((key) => items[key].includes(id));
+  let desiredContainer: string = '';
+  for (const itemsKey in items) {
+    if (items[itemsKey].find((card: any) => card.id === id)) {
+      desiredContainer = itemsKey;
+    }
+  }
+  console.log('desiredContainer =====>', desiredContainer);
+
+  return desiredContainer;
 }
 
 export function handleDragStart(event, setActiveId) {
@@ -23,21 +29,17 @@ export function handleDragStart(event, setActiveId) {
   setActiveId(id);
 }
 
-
 export function handleDragOver(event, items, setItems) {
   const { active, over, draggingRect } = event;
-  const { id } = active;
+  const { id, data } = active;
   const { id: overId } = over;
 
   // Find the containers
   const activeContainer = findContainer(id, items);
   const overContainer = findContainer(overId, items);
 
-  if (
-    !activeContainer ||
-    !overContainer ||
-    activeContainer === overContainer
-  ) {
+  if (!activeContainer || !overContainer || activeContainer === overContainer) {
+    // console.log('returning =====>');
     return;
   }
 
@@ -46,8 +48,8 @@ export function handleDragOver(event, items, setItems) {
     const overItems = prev[overContainer];
 
     // Find the indexes for the items
-    const activeIndex = activeItems.indexOf(id);
-    const overIndex = overItems.indexOf(overId);
+    const activeIndex = activeItems.findIndex((card: any) => card.id === id);
+    const overIndex = overItems.findIndex((card: any) => card.id === overId);
 
     let newIndex;
     if (overId in prev) {
@@ -68,9 +70,9 @@ export function handleDragOver(event, items, setItems) {
     const newOverItems = [...overItems];
     let removedItem = null;
     if (newOverItems.length >= 1) {
-      removedItem = newOverItems.splice(0, 1, id)[0];
+      removedItem = newOverItems.splice(0, 1, data.current)[0];
     } else {
-      newOverItems.splice(newIndex, 0, id);
+      newOverItems.splice(newIndex, 0, data.current);
     }
 
     // Move the removed item back to the source container
@@ -87,7 +89,7 @@ export function handleDragOver(event, items, setItems) {
     return {
       ...prev,
       [activeContainer]: [
-        ...prev[activeContainer].filter((item) => item !== active.id),
+        ...prev[activeContainer].filter((item) => item.id !== active.id),
       ],
       [overContainer]: newOverItems,
     };
@@ -102,11 +104,7 @@ export function handleDragEnd(event, items, setItems, setActiveId) {
   const activeContainer = findContainer(id, items);
   const overContainer = findContainer(overId, items);
 
-  if (
-    !activeContainer ||
-    !overContainer ||
-    activeContainer !== overContainer
-  ) {
+  if (!activeContainer || !overContainer || activeContainer !== overContainer) {
     return;
   }
 
@@ -116,76 +114,9 @@ export function handleDragEnd(event, items, setItems, setActiveId) {
   if (activeIndex !== overIndex) {
     setItems((items) => ({
       ...items,
-      [overContainer]: arrayMove(items[overContainer], activeIndex, overIndex)
+      [overContainer]: arrayMove(items[overContainer], activeIndex, overIndex),
     }));
   }
 
   setActiveId(null);
 }
-
-// export function dndCardsTest() {
-//   const [items, setItems] = useState({
-//     root: ["1", "2", "3"],
-//     container1: ["4", "5", "6"],
-//     container2: ["7", "8", "9"],
-//     container3: []
-//   });
-//   const [activeId, setActiveId] = useState();
-
-//   const sensors = useSensors(
-//     useSensor(PointerSensor),
-//     useSensor(KeyboardSensor, {
-//       coordinateGetter: sortableKeyboardCoordinates
-//     })
-//   );
-
-//   return (
-//     <div style={wrapperStyle}>
-//       <DndContext
-//         announcements={defaultAnnouncements}
-//         sensors={sensors}
-//         collisionDetection={closestCorners}
-//         onDragStart={handleDragStart}
-//         onDragOver={handleDragOver}
-//         onDragEnd={handleDragEnd}
-//       >
-//         <Container id="root" items={items.root} />
-//         <Container id="container1" items={items.container1} />
-//         <Container id="container2" items={items.container2} />
-//         <Container id="container3" items={items.container3} />
-//         <DragOverlay>{activeId ? <Item id={activeId} /> : null}</DragOverlay>
-//       </DndContext>
-//     </div>
-//   );
-  
-// }
-
-
-// const defaultAnnouncements = {
-//   onDragStart(id:any) {
-//     console.log(`Picked up draggable item ${id}.`);
-//   },
-//   onDragOver(id:any, overId:any) {
-//     if (overId) {
-//       console.log(
-//         `Draggable item ${id} was moved over droppable area ${overId}.`
-//       );
-//       return;
-//     }
-
-//     console.log(`Draggable item ${id} is no longer over a droppable area.`);
-//   },
-//   onDragEnd(id:any, overId:any) {
-//     if (overId) {
-//       console.log(
-//         `Draggable item ${id} was dropped over droppable area ${overId}`
-//       );
-//       return;
-//     }
-
-//     console.log(`Draggable item ${id} was dropped.`);
-//   },
-//   onDragCancel(id:any) {
-//     console.log(`Dragging was cancelled. Draggable item ${id} was dropped.`);
-//   }
-// };

@@ -1,16 +1,16 @@
-import React from "react";
-import { useDroppable } from "@dnd-kit/core";
+import React from 'react';
+import { useDroppable } from '@dnd-kit/core';
 import {
   SortableContext,
-  verticalListSortingStrategy
-} from "@dnd-kit/sortable";
+  verticalListSortingStrategy,
+} from '@dnd-kit/sortable';
 
-import SortableItem from "./sortable_item";
+import SortableItem from './sortable_item';
 
 const containerStyle = {
-  padding: 10,
+  padding: '10',
   margin: '0 20px',
-  flex: 1,
+  flex: '1',
   display: 'flex',
   flexDirection: 'row',
   justifyContent: 'space-between',
@@ -19,28 +19,32 @@ const containerStyle = {
   minHeight: '10px',
   position: 'relative',
   zIndex: '20',
-}
+};
 
-export default function Container(props:any) {
+export default function Container(props: any) {
   const { id, items } = props;
 
   const { setNodeRef } = useDroppable({
-    id
+    id,
   });
 
   return (
     <div className="container">
-    <SortableContext
-      id={id}
-      items={items}
-      strategy={verticalListSortingStrategy}
-    >
-      <div className="sortableItemContainer" ref={setNodeRef} style={containerStyle}>
-        {items.map((id:any) => (
-          <SortableItem key={id} id={id} />
-        ))}
-      </div>
-    </SortableContext>
+      <SortableContext
+        id={id}
+        items={items}
+        strategy={verticalListSortingStrategy}
+      >
+        <div
+          className="sortableItemContainer"
+          ref={setNodeRef}
+          style={{ ...containerStyle }}
+        >
+          {items.map((card: any) => (
+            <SortableItem key={card.id} id={card.id} card={card} />
+          ))}
+        </div>
+      </SortableContext>
     </div>
   );
 }
