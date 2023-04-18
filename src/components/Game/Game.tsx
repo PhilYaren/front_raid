@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './game.css';
 import GameChat from '../utilities/GameChat/GameChat';
 import { useDispatch, useSelector } from 'react-redux';
-import { sessionSocket, socket } from '../../socket';
+import { sessionSocket } from '../../socket';
 import {
   setColor,
   setCurrent,
