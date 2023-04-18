@@ -138,7 +138,7 @@ function Game() {
   // dnd kit
   const [items, setItems] = useState({
     battleModalplayer1: [],
-    battleModalplayer2: [],
+    // battleModalplayer2: [],
     // playerHand: ['/img/bonaparte.jpg', "/img/Professor.jpg", "/img/dwarf.jpg",],
     playerHand: players[user.id]?.hand,
   });
@@ -159,6 +159,13 @@ function Game() {
       coordinateGetter: sortableKeyboardCoordinates,
     })
   );
+
+  //battle
+  function handleSubmit(e:React.MouseEvent<HTMLButtonElement, MouseEvent>){
+    if(items.battleModalplayer1.length){
+      sessionSocket.emit('battle', session, items.battleModalplayer1[0], id)
+    }
+  }
 
   return (
     <div className="gamefield">
@@ -204,7 +211,7 @@ function Game() {
                   игрок 2
                 </div>
               </div>
-              <Button>battle</Button>
+              <Button onClick={(e)=> handleSubmit(e)}>battle</Button>
             </div>
           </BattleModal>
         )}
