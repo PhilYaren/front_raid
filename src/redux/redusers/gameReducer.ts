@@ -8,6 +8,7 @@ import {
   SET_ORDER,
   SET_PLAYERS,
   SET_ROOM_NAME,
+  SET_STARTED,
 } from '../types';
 
 const initialState = {
@@ -20,6 +21,7 @@ const initialState = {
   modal: false,
   color: '',
   opponents: {},
+  started: false,
 };
 
 /*
@@ -58,7 +60,7 @@ const gameReducer = (state = initialState, action: any) => {
       }
       return state;
     case SET_CURRENT:
-      if (payload) {
+      if (typeof payload === 'number') {
         return { ...state, current: payload };
       }
       return state;
@@ -68,6 +70,8 @@ const gameReducer = (state = initialState, action: any) => {
       return { ...state, color: payload };
     case SET_OPPONENTS:
       return { ...state, opponents: payload };
+    case SET_STARTED:
+      return { ...state, started: payload };
     default:
       return state;
   }

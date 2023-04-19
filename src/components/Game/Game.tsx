@@ -12,6 +12,7 @@ import {
   setOpponents,
   setOrder,
   setPlayers,
+  setStarted,
 } from '../../redux/actions/gameActions';
 import {
   currentRotation,
@@ -39,6 +40,7 @@ import { light } from '@mui/material/styles/createPalette';
 
 function Game() {
   // const [modalActive, setModalActive] = useState(false);
+  const started = useSelector((state: any) => state.game.started);
   const user = useSelector((state: any) => state.user.user);
   const players = useSelector((state: any) => state.game.players);
   const deck = useSelector((state: any) => state.game.deck);
@@ -74,7 +76,10 @@ function Game() {
     sessionSocket.on('set_opponents', (opponents) => {
       dispatch(setOpponents(opponents));
     });
-    sessionSocket.on('outcome', (outcome, move) => {
+    sessionSocket.on('current', (cur) => {
+      dispatch(setCurrent(cur));
+    });
+    sessionSocket.on('outcome', (outcome, move, state) => {
       const success: string = 'Ведущий игрок продвигается вперед!!!';
       const fail: string = 'Ведущий игрок отступает!!!';
       const draw: string = 'В этом бою вы оба выдохлись.';
@@ -84,15 +89,27 @@ function Game() {
           sessionSocket.emit('reset_battle', session);
           setItems((prev) => ({ ...prev, battleModalplayer1: [] }));
           dispatch(setBattleMessage(''));
+          setTimeout(() => {
+            sessionSocket.emit('change_current', session);
+          }, 100);
         }, 3500);
       } else {
         if (outcome === success) {
           dispatch(setBattleMessage(success));
-          if (order[current] === id) {
+          if (state.order[state.current] === id) {
             setTimeout(() => {
               sessionSocket.emit('reset_battle', session);
               setItems((prev) => ({ ...prev, battleModalplayer1: [] }));
-              movement(order, current, session, id, players, move);
+              setTimeout(() => {
+                movement(
+                  state.order,
+                  state.current,
+                  session,
+                  id,
+                  state.players,
+                  move
+                );
+              }, 100);
               dispatch(setBattleMessage(''));
             }, 3500);
           } else {
@@ -104,14 +121,27 @@ function Game() {
           }
         } else {
           dispatch(setBattleMessage(fail));
-          if (order[current] === id) {
+          if (state.order[state.current] === id) {
             setTimeout(() => {
               sessionSocket.emit('reset_battle', session);
-              moveBack(order, current, session, id, players, move);
+              setTimeout(() => {
+                moveBack(
+                  state.order,
+                  state.current,
+                  session,
+                  id,
+                  state.players,
+                  move
+                );
+                setItems((prev) => ({ ...prev, battleModalplayer1: [] }));
+                dispatch(setBattleMessage(''));
+              }, 100);
             }, 3500);
           } else {
             setTimeout(() => {
               sessionSocket.emit('reset_battle', session);
+              setItems((prev) => ({ ...prev, battleModalplayer1: [] }));
+              dispatch(setBattleMessage(''));
             }, 3500);
           }
         }
@@ -130,10 +160,12 @@ function Game() {
   }, [players]);
 
   const launchSpin = () => {
-    if (String(id) === order[current]) {
+    const spin = order[0] !== id ? true : started;
+    if (String(id) === order[current] && !modalActive && spin) {
       currentRotation += randomDegrees();
       rotateWheel(currentRotation).then(() => {
-        let winNumber = getCurrentColor(currentRotation);
+        // let winNumber = getCurrentColor(currentRotation);
+        let winNumber = 3;
         let position = players[order[current]].position;
         const finalPosition = position + Number(winNumber);
         const kek = setInterval(() => {
@@ -154,7 +186,9 @@ function Game() {
               const opponent =
                 order.length === current + 1 ? order[0] : order[current + 1];
               const battlers = { current: order[current], opponent };
-              sessionSocket.emit('action', session, data, battlers);
+              setTimeout(() => {
+                sessionSocket.emit('action', session, data, battlers);
+              }, 200);
             } else if (position + 1 === 51) {
               sessionSocket.emit('move_player', {
                 room: session,
@@ -178,7 +212,10 @@ function Game() {
   };
 
   const handleStart = () => {
-    sessionSocket.emit('start_game', session);
+    if (order.length > 1) {
+      dispatch(setStarted(true));
+      sessionSocket.emit('start_game', session);
+    }
   };
 
   if (!Object.keys(players).find((key: any) => key === id)) {
@@ -283,6 +320,7 @@ function Game() {
                     <StaticContainer
                       opponents={opponents}
                       current={order[current]}
+                      secret
                     />
                   </>
                 ) : null}
@@ -313,6 +351,7 @@ function Game() {
                       opponents={opponents}
                       first
                       current={order[current]}
+                      secret
                     />
                     <Container
                       id="battleModalplayer1"
@@ -638,7 +677,7 @@ function Game() {
       </div>
       <div className="deck" style={{ color: 'whitesmoke' }}>
         <div>Карт в колоде {deck?.length}</div>
-        {order[0] === String(id) && (
+        {order[0] === String(id) && !started && (
           <button onClick={handleStart}>Старт</button>
         )}
         <button>Сдаться</button>

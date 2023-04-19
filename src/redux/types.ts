@@ -29,3 +29,5 @@ export const SET_COLOR = 'SET_COLOR';
 export const SET_OPPONENTS = 'SET_OPPONENTS';
 
 export const SET_BATTLE_MESSAGE = 'SET_BATTLE_MESSAGE';
+
+export const SET_STARTED = 'SET_STARTED';

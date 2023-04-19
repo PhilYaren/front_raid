@@ -8,6 +8,7 @@ import {
   SET_ORDER,
   SET_PLAYERS,
   SET_ROOM_NAME,
+  SET_STARTED,
 } from '../types';
 
 export const setRoomName = (name: any) => ({
@@ -52,4 +53,9 @@ export const setModal = (modal: boolean) => ({
 export const setColor = (color: string) => ({
   type: SET_COLOR,
   payload: color,
+});
+
+export const setStarted = (started: boolean) => ({
+  type: SET_STARTED,
+  payload: started,
 });

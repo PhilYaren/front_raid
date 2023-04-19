@@ -20,12 +20,18 @@ export function movement(
           data: { id: id, position: 1 },
           last: true,
         });
+        setTimeout(() => {
+          sessionSocket.emit('change_current', session);
+        }, 100);
       } else if (position + 1 === 51) {
         sessionSocket.emit('move_player', {
           room: session,
           data: { id: id, position: 1 },
           final: true,
         });
+        setTimeout(() => {
+          sessionSocket.emit('change_current', session);
+        }, 100);
         clearInterval(kek);
       } else {
         sessionSocket.emit('move_player', {
@@ -40,7 +46,7 @@ export function movement(
   }, 250);
 }
 
-export function moveBack (
+export function moveBack(
   order: any,
   current: number,
   session: string,
@@ -59,12 +65,18 @@ export function moveBack (
           data: { id: id, position: -1 },
           last: true,
         });
+        setTimeout(() => {
+          sessionSocket.emit('change_current', session);
+        }, 100);
       } else if (position - 1 === 1) {
         sessionSocket.emit('move_player', {
           room: session,
           data: { id: id, position: -1 },
           last: true,
         });
+        setTimeout(() => {
+          sessionSocket.emit('change_current', session);
+        }, 100);
         clearInterval(moveInterval);
       } else {
         sessionSocket.emit('move_player', {

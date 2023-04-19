@@ -5,11 +5,14 @@ function StaticContainer({
   opponents,
   first,
   current,
+  secret,
 }: {
   opponents: any;
   current: string;
   first: boolean;
+  secret: boolean;
 }): JSX.Element {
+  console.log('secret', secret);
   return (
     <div
       className="opponent"
@@ -34,7 +37,7 @@ function StaticContainer({
                 <img
                   key={data[1][0].id}
                   style={{ width: '100px' }}
-                  src={data[1][0].image}
+                  src={secret ? '/img/cover.jpg' : data[1][0].image}
                   alt="Карточка"
                 />
               );
@@ -46,7 +49,7 @@ function StaticContainer({
                 <img
                   key={data[1][0].id}
                   style={{ width: '100px' }}
-                  src={data[1][0].image}
+                  src={secret ? '/img/cover.jpg' : data[1][0].image}
                   alt="Карточка"
                 />
               );
