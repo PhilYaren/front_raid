@@ -38,6 +38,7 @@ import { moveBack, movement } from '../utilities/Movement/Movement';
 import useSound from 'use-sound';
 import submitDrumSound from '../../assets/submitCardDrum.wav'
 import spinnerSound from '../../assets/spinnerSoundShort3s.mp3'
+import clickSound from '../../assets/mouseClick.wav'
 
 function Game() {
   // const [modalActive, setModalActive] = useState(false);
@@ -181,7 +182,9 @@ function Game() {
     };
   };
 
+  const [clickSoundPlay] = useSound(clickSound);
   const handleStart = () => {
+    clickSoundPlay();
     sessionSocket.emit('start_game', session);
   };
 

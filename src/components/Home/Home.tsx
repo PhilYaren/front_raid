@@ -16,10 +16,13 @@ import {
 } from '../../redux/actions/gameActions';
 import Modal from '../Modal/Modal';
 import CreateAndJoinGame from '../CreateAndJoinGame/CreateAndJoinGame';
-
-
+import useSound from 'use-sound';
+import clickSound from '../../assets/mouseClick.wav'
+import msgSound from '../../assets/icqmsg1.mp3'
 
 function Home() {
+  const [msgSoundPlay] = useSound(msgSound, {volume: 0.5});
+  const [clickSoundPlay] = useSound(clickSound);
   const [form, setForm] = React.useState({ message: '' });
   const messages = useSelector((state: any) => state.messages.messages);
   const user = useSelector((state: any) => state.user.user);
@@ -47,6 +50,7 @@ function Home() {
 
   const sendMessage = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    clickSoundPlay();
     const data = {
       userName: user.userName,
       message: form.message,
@@ -59,15 +63,28 @@ function Home() {
   useEffect(() => {
     chatSocket.on('receive_message', (message: Message) => {
       dispatch(actionMessage(message));
+      
+      console.log(user.userName, '<===message userName');
+      console.log(message.userName, '<===message userName');
+      
     });
   }, [chatSocket]);
 
+  useEffect(() => {
+    const lastSender = messages?.at(-1)?.userName;
+    if(user.userName != lastSender) {
+      msgSoundPlay();
+    };
+  }, [messages])
+
   const userHomePage = () => {
     const handleButtonGame = () => {
+      clickSoundPlay();
       setCreate(true);
     };
     const handleNewGame = (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
+      clickSoundPlay();
       const formData = new FormData(e.currentTarget);
       let data = Object.fromEntries(formData.entries());
 
@@ -89,6 +106,7 @@ function Home() {
       roomId: string
     ) => {
       e.preventDefault();
+      clickSoundPlay();
       sessionSocket.emit('join_room', { name: roomId });
       sessionSocket.on('join_room', ({ name, state }) => {
         dispatch(setRoomName(name));
