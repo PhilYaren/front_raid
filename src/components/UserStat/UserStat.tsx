@@ -12,27 +12,31 @@ export default function UserStat() {
     dispatch(setStatisticAsync());
   }, [dispatch]);
 
+
   return (
-    <div>
-      <h3>Статистика игрока</h3>
+    <div className="field">
+      <h1>Статистика игрока</h1>
       <table className={styles.table}>
         <thead>
-          <tr>
-            <th>Всего игр</th>
-            <th>Побед</th>
-            <th>Поражений</th>
+         <tr>
+            <td>Всего игр</td>
+            <td>Побед</td>
+            <td>Поражений</td>
           </tr>
         </thead>
         <tbody>
-          {statistic && statistic.map((user) => (
-            <tr key={user.id}>
-              <td>{user.allGames}</td>
-              <td>{user.gamesWin}</td>
-              <td>
-                {user.gamesLost}
-              </td>
+          {/* {statistic && statistic.map((userStat: any) => (
+            <tr key={userStat.id}>
+              <td>{userStat.reduce((acc: any, current: any) => acc + current.result ? 1 : 1, 0)}</td>
+              <td>{userStat.reduce((acc: any, current: any) => acc + current.result ? 1 : 0, 0)}</td>
+              <td>{userStat.reduce((acc: any, current: any) => acc + current.result ? 0 : 1, 0)}</td>
             </tr>
-          ))}
+          ))} */}
+            <tr>
+              <td>12</td>
+              <td>8</td>
+              <td>4</td>
+            </tr>
         </tbody>
       </table>
     </div>
