@@ -34,7 +34,7 @@ import Container from '../dnd/Container';
 import { Button } from '@mui/material';
 import StaticContainer from '../dnd/StaticContainer';
 import { setBattleMessage } from '../../redux/actions/battleMessageActions';
-import {moveBack, movement} from '../utilities/Movement/Movement';
+import { moveBack, movement } from '../utilities/Movement/Movement';
 
 function Game() {
   // const [modalActive, setModalActive] = useState(false);
@@ -223,7 +223,7 @@ function Game() {
 
   return (
     <div className="gamefield">
-      <div className="playerField p1">поле игрока 1</div>
+      <div className="playerField p1"></div>
       <div className="playerField p2">поле игрока 2</div>
       <DndContext
         sensors={sensors}
@@ -317,16 +317,7 @@ function Game() {
         )}
         <div className="playerField p3">
           <Container id="playerHand" items={items.playerHand} />
-
-          {/* {players[id].hand?.map((card: any) => {
-            return (
-              <li key={card.id}>
-                <img src={card.image} alt="" />
-              </li>
-            );
-          })} */}
         </div>
-        {/* <DragOverlay>{activeId ? <Item id={activeId} /> : null}</DragOverlay> */}
       </DndContext>
       <div className="field">
         <table>
