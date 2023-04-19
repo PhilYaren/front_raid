@@ -6,7 +6,7 @@ import { Statistic } from '../../types';
 export const setStatistic = (payload: Statistic) => ({ type: SET_STATISTIC, payload });
 
 export const setStatisticAsync = () => (dispatch: Dispatch) => {
-  axios.get('/statistic')
+  axios.get('/user/statistic')
     .then((res) => {
       dispatch(setStatistic(res.data));
     })
