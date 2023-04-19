@@ -7,6 +7,7 @@ import {
   setColor,
   setCurrent,
   setDeck,
+  setGameMessages,
   setModal,
   setOpponents,
   setOrder,
@@ -31,6 +32,9 @@ import { sortableKeyboardCoordinates } from '@dnd-kit/sortable';
 import { handleDragEnd, handleDragOver, handleDragStart } from '../dnd/Handles';
 import Container from '../dnd/Container';
 import { Button } from '@mui/material';
+import StaticContainer from '../dnd/StaticContainer';
+import { setBattleMessage } from '../../redux/actions/battleMessageActions';
+import { movement } from '../utilities/Movement/Movement';
 
 function Game() {
   // const [modalActive, setModalActive] = useState(false);
@@ -41,9 +45,17 @@ function Game() {
   const order = useSelector((state: any) => state.game.order);
   const current = useSelector((state: any) => state.game.current);
   const modalActive = useSelector((state: any) => state.game.modal);
+  const battleColor = useSelector((state: any) => state.game.color);
+  const opponents = useSelector((state: any) => state.game.opponents);
+  const message = useSelector((state: any) => state.battleMessage.message);
   const id = String(user.id);
   const dispatch = useDispatch();
-  console.log('order', order);
+  const [items, setItems] = useState({
+    battleModalplayer1: [],
+    // battleModalplayer2: [],
+    // playerHand: ['/img/bonaparte.jpg', "/img/Professor.jpg", "/img/dwarf.jpg",],
+    playerHand: players[user.id]?.hand,
+  });
 
   useEffect(() => {
     sessionSocket.on('update_state', (state: any) => {
@@ -65,6 +77,48 @@ function Game() {
     sessionSocket.on('set_opponents', (opponents) => {
       dispatch(setOpponents(opponents));
     });
+    sessionSocket.on('outcome', (outcome, move) => {
+      const success: string = 'Ведущий игрок продвигается вперед!!!';
+      const fail: string = 'Ведущий игрок отступает!!!';
+      const draw: string = 'В этом бою вы оба выдохлись.';
+      if (outcome === draw) {
+        dispatch(setBattleMessage(draw));
+        setTimeout(() => {
+          sessionSocket.emit('reset_battle', session);
+          setItems((prev) => ({ ...prev, battleModalplayer1: [] }));
+          dispatch(setBattleMessage(''));
+        }, 3500);
+      } else {
+        if (outcome === success) {
+          dispatch(setBattleMessage(success));
+          if (order[current] === id) {
+            setTimeout(() => {
+              sessionSocket.emit('reset_battle', session);
+              setItems((prev) => ({ ...prev, battleModalplayer1: [] }));
+              movement(order, current, session, id, players, move);
+              dispatch(setBattleMessage(''));
+            }, 3500);
+          } else {
+            setTimeout(() => {
+              sessionSocket.emit('reset_battle', session);
+              setItems((prev) => ({ ...prev, battleModalplayer1: [] }));
+              dispatch(setBattleMessage(''));
+            }, 3500);
+          }
+        } else {
+          dispatch(setBattleMessage(fail));
+          if (order[current] === id) {
+            setTimeout(() => {
+              sessionSocket.emit('reset_battle', session);
+            }, 3500);
+          } else {
+            setTimeout(() => {
+              sessionSocket.emit('reset_battle', session);
+            }, 3500);
+          }
+        }
+      }
+    });
   }, [sessionSocket]);
   let currentRotation = 0;
 
@@ -74,6 +128,7 @@ function Game() {
       const newPos = document.getElementById(`${players[p].position}`);
       newPos?.appendChild(playerTd);
     });
+    setItems((prev) => ({ ...prev, playerHand: players[user.id]?.hand }));
   }, [players]);
 
   const launchSpin = () => {
@@ -136,12 +191,7 @@ function Game() {
   }
 
   // dnd kit
-  const [items, setItems] = useState({
-    battleModalplayer1: [],
-    // battleModalplayer2: [],
-    // playerHand: ['/img/bonaparte.jpg', "/img/Professor.jpg", "/img/dwarf.jpg",],
-    playerHand: players[user.id]?.hand,
-  });
+
   useEffect(() => {
     setItems((prevItems) => {
       return {
@@ -161,9 +211,19 @@ function Game() {
   );
 
   //battle
-  function handleSubmit(e:React.MouseEvent<HTMLButtonElement, MouseEvent>){
-    if(items.battleModalplayer1.length){
-      sessionSocket.emit('battle', session, items.battleModalplayer1[0], id)
+  function handleSubmit(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+    if (items.battleModalplayer1.length) {
+      const crd: any = items.battleModalplayer1[0];
+      delete crd.sortable;
+      const currentPlayer = order[current];
+      sessionSocket.emit(
+        'battle',
+        session,
+        crd,
+        id,
+        battleColor,
+        currentPlayer
+      );
     }
   }
 
@@ -188,30 +248,76 @@ function Game() {
           <BattleModal active={modalActive}>
             <div>
               <div style={{ display: 'flex', flexDirection: 'row' }}>
-                <Container
-                  id="battleModalplayer1"
-                  items={items.battleModalplayer1}
-                />
-                <div
-                  className="opponent"
-                  style={{
-                    padding: '10',
-                    margin: '0 20px',
-                    flex: '1',
-                    display: 'flex',
-                    flexDirection: 'row',
-                    justifyContent: 'space-between',
-                    border: '1px solid red',
-                    minWidth: '104px',
-                    minHeight: '140px',
-                    position: 'relative',
-                    overflow: 'wrap',
-                  }}
-                >
-                  игрок 2
-                </div>
+                {opponents &&
+                order[current] === id &&
+                Object.entries(opponents).length &&
+                !opponents[id].length ? (
+                  <>
+                    <Container
+                      id="battleModalplayer1"
+                      items={items.battleModalplayer1}
+                    />
+                    <StaticContainer
+                      opponents={opponents}
+                      current={order[current]}
+                    />
+                  </>
+                ) : null}
+                {(opponents &&
+                  order[current] === id &&
+                  Object.entries(opponents).length &&
+                  opponents[id].length) ||
+                !(id in opponents) ? (
+                  <>
+                    <StaticContainer
+                      opponents={opponents}
+                      first
+                      current={order[current]}
+                    />
+                    <StaticContainer
+                      opponents={opponents}
+                      current={order[current]}
+                    />
+                  </>
+                ) : null}
+                {opponents &&
+                order[current] !== id &&
+                id in opponents &&
+                Object.entries(opponents).length &&
+                !opponents[id].length ? (
+                  <>
+                    <StaticContainer
+                      opponents={opponents}
+                      first
+                      current={order[current]}
+                    />
+                    <Container
+                      id="battleModalplayer1"
+                      items={items.battleModalplayer1}
+                    />
+                  </>
+                ) : null}
+                {order[current] !== id &&
+                id in opponents &&
+                Object.entries(opponents).length &&
+                opponents[id].length ? (
+                  <>
+                    <StaticContainer
+                      opponents={opponents}
+                      first
+                      current={order[current]}
+                    />
+                    <StaticContainer
+                      opponents={opponents}
+                      current={order[current]}
+                    />
+                  </>
+                ) : null}
               </div>
-              <Button onClick={(e)=> handleSubmit(e)}>battle</Button>
+              {message && <div className="gameMessage">{message}</div>}
+              {id in opponents && !opponents[id].length && (
+                <Button onClick={(e) => handleSubmit(e)}>battle</Button>
+              )}
             </div>
           </BattleModal>
         )}
@@ -522,13 +628,6 @@ function Game() {
           <button onClick={handleStart}>Старт</button>
         )}
         <button>Сдаться</button>
-        {/*<button*/}
-        {/*  onClick={(e) => {*/}
-        {/*    modalActive ? setModalActive(false) : setModalActive(true);*/}
-        {/*  }}*/}
-        {/*>*/}
-        {/*  modal*/}
-        {/*</button>*/}
       </div>
       <GameChat />
     </div>
