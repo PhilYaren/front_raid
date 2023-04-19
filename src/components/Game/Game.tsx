@@ -35,6 +35,9 @@ import { Button } from '@mui/material';
 import StaticContainer from '../dnd/StaticContainer';
 import { setBattleMessage } from '../../redux/actions/battleMessageActions';
 import { moveBack, movement } from '../utilities/Movement/Movement';
+import useSound from 'use-sound';
+import submitDrumSound from '../../assets/submitCardDrum.wav'
+import spinnerSound from '../../assets/spinnerSoundShort3s.mp3'
 
 function Game() {
   // const [modalActive, setModalActive] = useState(false);
@@ -128,7 +131,9 @@ function Game() {
     setItems((prev) => ({ ...prev, playerHand: players[user.id]?.hand }));
   }, [players]);
 
+  const [spinnerSoundPlay, {pause}] = useSound(spinnerSound)
   const launchSpin = () => {
+    spinnerSoundPlay()
     if (String(id) === order[current]) {
       currentRotation += randomDegrees();
       rotateWheel(currentRotation).then(() => {
@@ -173,7 +178,7 @@ function Game() {
           }
         }, 500);
       });
-    }
+    };
   };
 
   const handleStart = () => {
@@ -194,9 +199,6 @@ function Game() {
       };
     });
   }, [players, user.id]);
-  
-  console.log(player2Hand, '<=====player2hand');
-  
 
   const [activeId, setActiveId] = useState();
 
@@ -208,6 +210,7 @@ function Game() {
   );
 
   //battle
+  const [submitPlay] = useSound(submitDrumSound)
   function handleSubmit(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     if (items.battleModalplayer1.length) {
       const crd: any = items.battleModalplayer1[0];
@@ -221,8 +224,10 @@ function Game() {
         battleColor,
         currentPlayer
       );
+      submitPlay()
     }
   }
+  
 
   return (
     <div className="gamefield">

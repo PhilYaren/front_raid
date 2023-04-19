@@ -11,7 +11,7 @@ import './Navbar.css';
 import Modal from '../Modal/Modal';
 import Auth from '../Auth/Auth';
 
-function Navbar() {
+function Navbar(clickSound) {
   const [modalActive, setModalActive] = useState(false);
   const handlemodal = (action: any) => {
     setModalActive(false);
@@ -40,6 +40,7 @@ function Navbar() {
 
   const handleLogout = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.preventDefault();
+    clickSound();
     socket.close();
     chatSocket.close();
     dispatch(logoutUserAsync());
@@ -67,6 +68,7 @@ function Navbar() {
               <Tab
                 label="Главная"
                 className="selectedTab"
+                onClick={() => clickSound()}
                 component={NavLink}
                 to="/"
               />
@@ -92,7 +94,9 @@ function Navbar() {
                       key="signup"
                       className="selectedTab"
                       label="Зарегистрироваться"
-                      onClick={() => handlemodal('registration')}
+                      onClick={() => {
+                        clickSound();
+                        return handlemodal('registration')}}
                       // component={NavLink}
                       // to="/registration"
                     />,

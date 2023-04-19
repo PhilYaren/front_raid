@@ -15,15 +15,16 @@ import { setSessions } from './redux/actions/sessionsAction';
 import Modal from './components/Modal/Modal';
 import dndCardsTest from './components/dnd/Handles';
 import useSound from 'use-sound';
-import mainSound from './assets/mainSound.mp3'
+import mainSoundMP3 from './assets/mainSound.mp3'
+import clickSound from './assets/mouseClick.wav'
 
 function App() {
 
    // sounds
   //sounds
-  const [play, {pause}] = useSound(mainSound, { volume: 0.25, onend: () => play()});
-  const [sound,setSound] = useState(false);
-  
+  const [mainSoundPlay, {pause}] = useSound(mainSoundMP3, { volume: 0.1, onend: () => play()});
+  const [mainSound,setSound] = useState(false);
+  const [clickSoundPlay] = useSound(clickSound);
   //
 
   const dispatch = useDispatch();
@@ -56,13 +57,13 @@ function App() {
  
   return (
     <>
-      <Navbar />
-     {sound? 
+      <Navbar clickSound={clickSoundPlay}/>
+     {mainSound? 
             <button className='mainSound' onClick={()=>{
               pause()
               setSound(false)}}>stop</button>  :
             <button  className='mainSound' onClick={()=>{
-              play()
+              mainSoundPlay()
               setSound(true)}}>КАЧ</button> 
             } 
       <Routes>
