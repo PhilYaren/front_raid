@@ -34,7 +34,7 @@ import Container from '../dnd/Container';
 import { Button } from '@mui/material';
 import StaticContainer from '../dnd/StaticContainer';
 import { setBattleMessage } from '../../redux/actions/battleMessageActions';
-import { movement } from '../utilities/Movement/Movement';
+import {moveBack, movement} from '../utilities/Movement/Movement';
 
 function Game() {
   // const [modalActive, setModalActive] = useState(false);
@@ -59,10 +59,6 @@ function Game() {
 
   useEffect(() => {
     sessionSocket.on('update_state', (state: any) => {
-      console.log('players', state.players);
-      console.log('user', user);
-
-      console.log('deck', state.deck);
       dispatch(setPlayers(state.players));
       dispatch(setDeck(state.deck));
       dispatch(setOrder(state.order));
@@ -110,6 +106,7 @@ function Game() {
           if (order[current] === id) {
             setTimeout(() => {
               sessionSocket.emit('reset_battle', session);
+              moveBack(order, current, session, id, players, move);
             }, 3500);
           } else {
             setTimeout(() => {
@@ -170,10 +167,7 @@ function Game() {
                 data: { id: id, position: 1 },
               });
             }
-
-            console.log(`position ${position}`);
             position += 1;
-            console.log('da');
           } else {
             clearInterval(kek);
           }
