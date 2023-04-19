@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { sessionSocket } from '../../../socket';
 import { setGameMessages } from '../../../redux/actions/gameActions';
+import './gameChat.css';
+import styles from "../../Home/Home.module.css";
 
 function GameChat() {
   const room = useSelector((state: any) => state.game.roomName);
@@ -33,10 +35,12 @@ function GameChat() {
       <div className="massageList">
         {messages.map((message: any, id: number) => {
           return (
-            <div className="massage" key={id} style={{backgroundColor: 'white', borderRadius:'12px',width: '90%', margin: '2% auto 3%'}}>
-              <div className="massage__name">{message.user}</div>
-              <div className="massage__time">{message.time}</div>
-              <div className="massage__text">{message.message}</div>
+            <div className="oneMessage" key={id}>
+              <div className='dataMessage'>
+                <p className="massage__name">{message.user}</p>
+                <p className="massage__time">{message.time}</p>
+              </div>
+              <p className="massage__text">{message.message}</p>
             </div>
           );
         })}

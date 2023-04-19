@@ -35,6 +35,7 @@ import { Button } from '@mui/material';
 import StaticContainer from '../dnd/StaticContainer';
 import { setBattleMessage } from '../../redux/actions/battleMessageActions';
 import { moveBack, movement } from '../utilities/Movement/Movement';
+import {light} from "@mui/material/styles/createPalette";
 
 function Game() {
   // const [modalActive, setModalActive] = useState(false);
@@ -223,8 +224,40 @@ function Game() {
 
   return (
     <div className="gamefield">
-      <div className="playerField p1"></div>
-      <div className="playerField p2">поле игрока 2</div>
+      <div className="playerField p1">
+        <ul className = 'player1Hand'>
+          {/*<li><img src="/img/cover.jpg" alt="" /></li>*/}
+          {/*<li><img src="/img/cover.jpg" alt="" /></li>*/}
+          {/*<li><img src="/img/cover.jpg" alt="" /></li>*/}
+          {/*<li><img src="/img/cover.jpg" alt="" /></li>*/}
+          {order && order.filter((player: any) => player !== id)[0]
+            ? players[order.filter((player: any) => player !== id)[0]].hand.map(
+              (card: any) => {
+                return (
+                  <li key={card.id}>
+                    <img src="/img/cover.jpg" alt="" />
+                  </li>
+                );
+              }
+            )
+            : null}
+        </ul>
+      </div>
+      <div className="playerField p2">
+        <ul className = 'player2Hand'>
+          {order && order.filter((player: any) => player !== id)[1]
+            ? players[order.filter((player: any) => player !== id)[1]].hand.map(
+              (card: any) => {
+                return (
+                  <li key={card.id}>
+                    <img src="/img/cover.jpg" alt="" />
+                  </li>
+                );
+              }
+            )
+            : null}
+        </ul>
+      </div>
       <DndContext
         sensors={sensors}
         collisionDetection={closestCorners}

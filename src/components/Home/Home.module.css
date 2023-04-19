@@ -75,7 +75,7 @@ body {
 .oneMessage {
     color: #efeee9;
     border-radius: 20px;
-    background: rgba(0,0,0, 0.3);
+    background-color: rgba(0,0,0, 0.3) !important;
     padding: 10px;
     margin: 5px;
     display: flex;

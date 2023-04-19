@@ -1,0 +1,85 @@
+form {
+    display: flex;
+    padding: 5px;
+    align-items: center;
+    flex-direction: column;
+}
+form textarea{
+    background: rgba(0,0,0, 0.3);
+    border: none;
+    border-radius: 4px;
+    color: #efeee9;
+    font-family: 'Zhizn';
+    outline: none !important;
+    width: 80%;
+    display: inline-block;
+    height: 80px;
+    white-space: normal;
+    word-wrap: break-word;
+    padding: 10px;
+}
+form button{
+    font-size: 14px;
+    height: 40px;
+    margin-top: 5px;
+    background: rgba(0,0,0, 0.3);
+    color: white;
+}
+
+.chat {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 2px solid black;
+    color: #efeee9;
+    font-family: Zhizn;
+    font-size: 15px;
+    max-width: 25%;
+}
+
+.messageList {
+    overflow-y: scroll;
+}
+
+.chatScroll {
+    overflow-y: scroll;
+}
+
+.chatScroll::-webkit-scrollbar {
+    width: 10px;
+    background-color: rgba(0,0,0, 0.3);
+}
+
+.chatScroll::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: rgba(239, 238, 233, 0.46);
+}
+
+.chatScroll::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.2);
+    border-radius: 10px;
+    background-color: rgba(0,0,0, 0.3);
+}
+
+.oneMessage {
+    color: #efeee9;
+    border-radius: 20px;
+    background: rgba(0,0,0, 0.3);
+    padding: 10px;
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.oneMessage p {
+    word-wrap: break-word;
+}
+
+.dataMessage {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    font-family: Zhizn;
+    color: rgba(239, 238, 233, 0.85);
+}

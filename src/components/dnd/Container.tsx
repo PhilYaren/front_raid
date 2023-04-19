@@ -4,22 +4,21 @@ import {
   SortableContext,
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
+import './container.css'
 
 import SortableItem from './sortable_item';
 
-const containerStyle = {
-  padding: '10',
-  margin: '0 20px',
-  flex: '1',
-  display: 'flex',
-  flexDirection: 'row',
-  justifyContent: 'space-between',
-  border: '1px solid red',
-  minWidth: '104px',
-  minHeight: '140px',
-  position: 'relative',
-  zIndex: '20',
-};
+// const containerStyle = {
+//   margin: '0 20px',
+//   flex: '1',
+//   display: 'flex',
+//   flexDirection: 'row',
+//   minWidth: '104px',
+//   minHeight: '140px',
+//   position: 'relative',
+//   zIndex: '20',
+//   justifyContent: 'space-evenly'
+// };
 
 export default function Container(props: any) {
   const { id, items } = props;
@@ -38,7 +37,7 @@ export default function Container(props: any) {
         <div
           className="sortableItemContainer"
           ref={setNodeRef}
-          style={{ ...containerStyle }}
+          // style={{ ...containerStyle }}
         >
           {items.map((card: any) => (
             <SortableItem key={card.id} id={card.id} card={card} />
