@@ -1,9 +1,14 @@
 import React from 'react';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
+import useSound from 'use-sound';
+import cardFlipSound from '../../assets/Card-flip-sound-effect.mp3'
+
+
 
 export function Item(props) {
   const { card } = props;
+  const [play, { stop }] = useSound(cardFlipSound);
 
   const style = {
     display: 'flex',
@@ -15,9 +20,9 @@ export function Item(props) {
     background: 'white',
     zIndex: '20',
   };
-
+ 
   return (
-    <div style={style}>
+    <div style={style} onMouseEnter={()=> play()} onMouseLeave={()=>stop()}>
       <img style={{ width: '100px' }} src={card.image} alt="Карточка" />
     </div>
   );
@@ -34,7 +39,7 @@ export default function SortableItem(props) {
   };
 
   return (
-    <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
+    <div ref={setNodeRef} style={style} {...attributes} {...listeners}  >
       <Item id={id} card={card} />
     </div>
   );

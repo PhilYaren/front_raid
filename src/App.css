@@ -54,3 +54,9 @@
   text-align: center;
 }
 
+.mainSound {
+  z-index: 150 !important;
+  position: absolute;
+  top: 5% !important
+}
+

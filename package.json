@@ -23,7 +23,8 @@
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.10.0",
-    "socket.io-client": "^4.6.1"
+    "socket.io-client": "^4.6.1",
+    "use-sound": "^4.0.1"
   },
   "devDependencies": {
     "@types/node": "^18.15.11",

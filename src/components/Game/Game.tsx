@@ -153,6 +153,9 @@ function Game() {
       };
     });
   }, [players, user.id]);
+  
+  console.log(player2Hand, '<=====player2hand');
+  
 
   const [activeId, setActiveId] = useState();
 

@@ -14,8 +14,18 @@ import { SocketContext } from './context/websoket/websoket-context';
 import { setSessions } from './redux/actions/sessionsAction';
 import Modal from './components/Modal/Modal';
 import dndCardsTest from './components/dnd/Handles';
+import useSound from 'use-sound';
+import mainSound from './assets/mainSound.mp3'
 
 function App() {
+
+   // sounds
+  //sounds
+  const [play, {pause}] = useSound(mainSound, { volume: 0.25, onend: () => play()});
+  const [sound,setSound] = useState(false);
+  
+  //
+
   const dispatch = useDispatch();
   const user = useSelector((state: any) => state.user.user);
   const loaded = useSelector((state: any) => state.user.loaded);
@@ -43,9 +53,18 @@ function App() {
     setFirst(false);
   }
 
+ 
   return (
     <>
       <Navbar />
+     {sound? 
+            <button className='mainSound' onClick={()=>{
+              pause()
+              setSound(false)}}>stop</button>  :
+            <button  className='mainSound' onClick={()=>{
+              play()
+              setSound(true)}}>КАЧ</button> 
+            } 
       <Routes>
         {/* <Route path='/dndtest' Component={dndCardsTest}/> */}
         <Route path="/">
