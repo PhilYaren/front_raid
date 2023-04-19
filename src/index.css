@@ -2,41 +2,30 @@ html, body {
   height: 100%;
   width: 100%;
 }
-/* :root {
 
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
-} */
 #root {
   width: 100%;
   height: auto;
   margin: 0 auto;
 }
+
 /*mui tabs*/
 .css-1h9z7r5-MuiButtonBase-root-MuiTab-root.Mui-selected{
   color: #efeee9 !important;
 }
+
 .css-1h9z7r5-MuiButtonBase-root-MuiTab-root.Mui-selected:hover{
   color: rgb(19,43,55) !important;
 }
+
 .css-10ltm04-MuiToolbar-root {
   justify-content:space-between
 }
+
 .css-11b3ww9-MuiPaper-root-MuiAppBar-root{
   margin-bottom: 0px;
 }
+
 ._homeContainer_1d10d_22 {
   margin-top: 0;
 }
@@ -45,10 +34,13 @@ html, body {
 .game-rules-container {
   max-width: 80vw;
   max-height: 80vh;
+  margin-top: 80px;
 }
+
 .game-rules {
   text-align: justify;
 }
+
 ._homeContainer_1nucq_17 {
   background-image: url('/img/1642713765_46-adonius-club-p-kamennaya-stena-fon-51.jpg');
   background-size: cover;
@@ -66,6 +58,7 @@ a {
   color: #646cff;
   text-decoration: inherit;
 }
+
 a:hover {
   color: #535bf2;
 }
@@ -95,13 +88,10 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
+
 button:hover {
   border-color: #646cff;
 }
-/* button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-} */
 
 @media (prefers-color-scheme: light) {
   :root {

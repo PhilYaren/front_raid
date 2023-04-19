@@ -1,7 +1,8 @@
-.table {
-	width: 50%;
-	margin-bottom: 20px;
+h1 {
+	color: rgb(247, 251, 250);
+	font-family: 'Zhizn';
 }
+
 .table th {
 	font-weight: bold;
 	padding: 4px;
@@ -9,9 +10,15 @@
 	border: 1px solid #dddddd;
 	text-align: center;
 	margin: auto;
+	font-family: 'Zhizn';
 }
 .table td {
 	border: 1px solid #dddddd;
 	padding: 15px;
 	text-align: center
+}
+
+td {
+	color: rgb(247, 251, 250);
+	font-family: 'Zhizn';
 }

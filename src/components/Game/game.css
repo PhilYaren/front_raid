@@ -408,3 +408,7 @@ ul:hover>li {
     flex-direction: row !important;
 }
 
+.gameMessage {
+    font-family: 'Zhizn', Chalkboard, sans-serif;
+    margin-top: 20px;
+}

@@ -27,3 +27,5 @@ export const SET_MODAL = 'SET_MODAL';
 export const SET_COLOR = 'SET_COLOR';
 
 export const SET_OPPONENTS = 'SET_OPPONENTS';
+
+export const SET_BATTLE_MESSAGE = 'SET_BATTLE_MESSAGE';

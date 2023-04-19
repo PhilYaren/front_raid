@@ -4,6 +4,7 @@ import statisticReducer from './redusers/statisticReducer';
 import messageReducer from './redusers/messageReducer';
 import sessionsReducer from './redusers/sessionsReducer';
 import gameReducer from './redusers/gameReducer';
+import battleMessageReducer from './redusers/battleMessageReducer';
 
 export default configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export default configureStore({
     messages: messageReducer,
     sessions: sessionsReducer,
     game: gameReducer,
+    battleMessage: battleMessageReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
