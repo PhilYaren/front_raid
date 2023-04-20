@@ -314,6 +314,7 @@ form button{
     height: 15px;
     border-radius: 50%;
     position: absolute;
+    border: 1px solid white;
 }
 
 .field table td {
