@@ -23,7 +23,6 @@ function StaticContainer({
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
-        border: '1px solid red',
         minWidth: '104px',
         minHeight: '140px',
         position: 'relative',

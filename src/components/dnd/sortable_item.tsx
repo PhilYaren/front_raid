@@ -5,6 +5,7 @@ import useSound from 'use-sound';
 import cardFlipSound from '../../assets/Card-flip-sound-effect.mp3'
 
 
+import './sortableItem.css'
 
 export function Item(props) {
   const { card } = props;
@@ -20,9 +21,9 @@ export function Item(props) {
     background: 'white',
     zIndex: '20',
   };
- 
+
   return (
-    <div style={style} onMouseEnter={()=> play()} onMouseLeave={()=>stop()}>
+    <div style={style} className='cardItem cssanimation' onMouseEnter={()=> play()} onMouseLeave={()=>stop()}>
       <img style={{ width: '100px' }} src={card.image} alt="Карточка" />
     </div>
   );

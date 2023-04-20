@@ -19,7 +19,7 @@
 .modal.active {
     opacity: 1;
     pointer-events: all;
- 
+
 }
 
 .battle-modal-content {
@@ -29,10 +29,10 @@
 
     min-width: 50%;
     min-height: 40%;
-
+    box-shadow: 0 30px 50px 50px rgba(0, 0, 0, 0.8);
     padding: 20px;
     border-radius: 12px;
-    background-color: white;
+    background: rgba(0,0,0, 0.8);
     transform: scale(0.5);
     transition: 0.4s all;
     z-index: 10;
@@ -44,4 +44,10 @@
 
 .battle-modal-content.active {
     transform: scale(1);
+}
+
+.fadeIn { animation-name: fadeIn }
+@keyframes fadeIn {
+    from { opacity: 0 }
+    to { opacity: 1 }
 }

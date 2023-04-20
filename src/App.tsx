@@ -1,16 +1,13 @@
 import { useContext, useEffect, useState } from 'react';
-import reactLogo from './assets/react.svg';
 import './App.css';
 import Navbar from './components/Navbar/Navbar';
 import { Route, Routes } from 'react-router-dom';
 import Home from './components/Home/Home';
 import UserStat from './components/UserStat/UserStat';
 import Game from './components/Game/Game';
-import Auth from './components/Auth/Auth';
 import { useDispatch, useSelector } from 'react-redux';
 import { checkAuth } from './redux/actions/userActions';
 import { socket, chatSocket, sessionSocket } from './socket';
-import { SocketContext } from './context/websoket/websoket-context';
 import { setSessions } from './redux/actions/sessionsAction';
 import Modal from './components/Modal/Modal';
 import dndCardsTest from './components/dnd/Handles';
@@ -52,18 +49,18 @@ function App() {
     setFirst(false);
   }
 
- 
+
   return (
     <>
       <Navbar />
-     {mainSound? 
+     {mainSound?
             <button className='mainSound' onClick={()=>{
               pause()
               setSound(false)}}>stop</button>  :
             <button  className='mainSound' onClick={()=>{
               mainSoundPlay()
-              setSound(true)}}>КАЧ</button> 
-            } 
+              setSound(true)}}>КАЧ</button>
+            }
       <Routes>
         {/* <Route path='/dndtest' Component={dndCardsTest}/> */}
         <Route path="/">

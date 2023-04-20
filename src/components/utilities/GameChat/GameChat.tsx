@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { sessionSocket } from '../../../socket';
 import { setGameMessages } from '../../../redux/actions/gameActions';
 import './gameChat.css';
-import styles from "../../Home/Home.module.css";
 
 function GameChat() {
   const room = useSelector((state: any) => state.game.roomName);
