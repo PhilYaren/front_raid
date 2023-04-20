@@ -57,6 +57,10 @@
 .mainSound {
   z-index: 150 !important;
   position: absolute;
-  top: 5% !important
+  background: linear-gradient(rgb(76,61,54), rgb(33,19,13));
+  font-family: Zhizn;
+  color: white;
+  top: 5% !important;
+  left: 2% !important;
 }
 

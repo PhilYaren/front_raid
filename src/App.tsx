@@ -56,10 +56,10 @@ function App() {
      {mainSound?
             <button className='mainSound' onClick={()=>{
               pause()
-              setSound(false)}}>stop</button>  :
+              setSound(false)}}>🔊</button>  :
             <button  className='mainSound' onClick={()=>{
               mainSoundPlay()
-              setSound(true)}}>КАЧ</button>
+              setSound(true)}}>🔈</button>
             }
       <Routes>
         {/* <Route path='/dndtest' Component={dndCardsTest}/> */}
