@@ -3,12 +3,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { sessionSocket } from '../../../socket';
 import { setGameMessages } from '../../../redux/actions/gameActions';
 import './gameChat.css';
+import useSound from 'use-sound';
+import clickSound from '../../../assets/mouseClick.wav'
 
 function GameChat() {
   const room = useSelector((state: any) => state.game.roomName);
   const messages = useSelector((state: any) => state.game.messages);
   const dispatch = useDispatch();
   const user = useSelector((state: any) => state.user.user);
+  const [clickSoundPlay] = useSound(clickSound);
 
   useEffect(() => {
     sessionSocket.on('receive_message', (message: any) => {
@@ -18,6 +21,7 @@ function GameChat() {
 
   const handleSend = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    clickSoundPlay();
     const formData = new FormData(e.currentTarget);
     let data = Object.fromEntries(formData.entries());
     sessionSocket.emit('send_message', {
