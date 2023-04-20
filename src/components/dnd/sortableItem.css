@@ -1,0 +1,9 @@
+.cardItem {
+    transition: 0.5s;
+}
+
+.cardItem:hover {
+    transform: scale(1.5) translateY(-15%);
+}
+
+

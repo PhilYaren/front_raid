@@ -3,7 +3,7 @@ import './BattleModal.css';
 
 function BattleModal({ active, children }) {
   return (
-    <div className={active ? 'battle-modal-content active' : 'battle-modal'}>
+    <div className={active ? 'battle-modal-content active cssanimation fadeIn' : 'battle-modal'}>
       {children}
     </div>
   );

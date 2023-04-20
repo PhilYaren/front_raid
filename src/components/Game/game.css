@@ -281,94 +281,21 @@ form button{
     padding: 0;
 }
 
+.btnBattle {
+    font-size: 18px !important;
+    transition: 0.5s !important;
+}
 
-/*ul {*/
-/*    display: flex;*/
-/*    list-style: none;*/
-/*    margin: 0;*/
-/*    justify-content: center;*/
-/*    !*position: absolute;*!*/
-/*    !*left: 10%;*!*/
-/*    !*bottom: 20%;*!*/
-/*    width: 100%;*/
-/*}*/
+.gameMessage {
+    color: white;
+}
 
-/*li img {*/
-/*    height: 115%;*/
-/*    width: 115%;*/
-/*    border-radius: 4px;*/
-/*    transition: 0.5s;*/
-/*}*/
+.btnBattle:hover {
+    border: none;
+    background: none !important;
+    transform: scale(1.2);
+}
 
-/*li {*/
-/*    height: var(--card-height);*/
-/*    width: var(--card-width);*/
-/*    margin: 25px;*/
-/*    border-radius: 4px;*/
-/*    background-repeat: no-repeat;*/
-/*    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);*/
-/*    transition: 0.5s;*/
-/*    transform-origin: bottom;*/
-/*}*/
-
-/*li img:hover {*/
-/*    transform: scale(1.5);*/
-/*}*/
-
-/*li:nth-child(1) {*/
-/*    transform: translateX(calc(var(--card-width) * 3 - 160%))*/
-/*    !*translateY(-21%)*!*/
-/*    !*rotateZ(-25deg)*!*/
-/*;*/
-/*    transition-delay: 0s;*/
-/*}*/
-
-/*li:nth-child(2) {*/
-/*    transition-delay: 0.02s;*/
-/*    transform: translateX(calc(var(--card-width) * 2 - 110%))*/
-/*    !*translateY(-24%)*!*/
-/*    !*rotateZ(-15deg)*!*/
-/*;*/
-/*}*/
-
-/*li:nth-child(3) {*/
-/*    transition-delay: 0.04s;*/
-/*    transform: translateX(calc(var(--card-width) * 1 - 60%))*/
-/*    !*translateY(-25%)*!*/
-/*    !*rotateZ(-5deg)*!*/
-/*;*/
-/*}*/
-
-/*li:nth-child(4) {*/
-/*    transition-delay: 0.06s;*/
-/*    transform: translateX(calc(var(--card-width) * -1 + 80%))*/
-/*    !*translateY(-25%)*!*/
-/*    !*rotateZ(5deg)*!*/
-/*;*/
-/*}*/
-
-/*li:nth-child(5) {*/
-/*    transition-delay: 0.08s;*/
-/*    transform: translateX(calc(var(--card-width) * -2 + 110%))*/
-/*    !*translateY(-25%)*!*/
-/*    !*rotateZ(25deg)*!*/
-/*;*/
-/*}*/
-
-/*li:nth-child(6) {*/
-/*    transition-delay: 0.1s;*/
-/*    transform: translateX(calc(var(--card-width) * -3 + 160%))*/
-/*    !*translateY(-21%)*!*/
-/*    !*rotateZ(25deg)*!*/
-/*;*/
-/*}*/
-
-/*ul:hover>li {*/
-/*    transform: translateX(0)*/
-/*    !*translateY(0)*!*/
-/*    !*rotateZ(0)*!*/
-/*;*/
-/*}*/
 
 .field table {
     width: 100%;

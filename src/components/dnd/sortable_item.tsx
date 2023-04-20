@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
+import './sortableItem.css'
 
 export function Item(props) {
   const { card } = props;
@@ -17,7 +18,7 @@ export function Item(props) {
   };
 
   return (
-    <div style={style}>
+    <div style={style} className='cardItem cssanimation'>
       <img style={{ width: '100px' }} src={card.image} alt="Карточка" />
     </div>
   );
