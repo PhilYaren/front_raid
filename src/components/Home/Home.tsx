@@ -72,7 +72,7 @@ function Home() {
 
   useEffect(() => {
     const lastSender = messages?.at(-1)?.userName;
-    if(user.userName != lastSender) {
+    if(user?.userName != lastSender) {
       msgSoundPlay();
     };
   }, [messages])
