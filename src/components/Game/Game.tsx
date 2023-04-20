@@ -16,6 +16,7 @@ import {
 import {
   randomDegrees,
   rotateWheel,
+  getCurrentColor,
 } from '../utilities/rotate-func/rotate';
 import {
   DndContext,
@@ -37,8 +38,7 @@ import useSound from 'use-sound';
 import submitDrumSound from '../../assets/submitCardDrum.wav';
 import spinnerSound from '../../assets/spinnerSoundShort3s.mp3';
 import clickSound from '../../assets/mouseClick.wav';
-import cardFlipSound from '../../assets/Card-flip-sound-effect.mp3'
-
+import cardFlipSound from '../../assets/Card-flip-sound-effect.mp3';
 
 function Game() {
   // const [modalActive, setModalActive] = useState(false);
@@ -318,7 +318,15 @@ function Game() {
         {modalActive && (
           <BattleModal active={modalActive}>
             <div>
-              <h3  style={{ color: 'white', fontFamily: 'Zhizn', marginBottom: '30px' }}>Выбери бойца</h3>
+              <h3
+                style={{
+                  color: 'white',
+                  fontFamily: 'Zhizn',
+                  marginBottom: '30px',
+                }}
+              >
+                Выбери бойца
+              </h3>
               <div style={{ display: 'flex', flexDirection: 'row' }}>
                 {opponents &&
                 order[current] === id &&
@@ -390,7 +398,17 @@ function Game() {
               </div>
               {message && <div className="gameMessage">{message}</div>}
               {id in opponents && !opponents[id].length && (
-                <Button onClick={(e) => handleSubmit(e)} className='btnBattle cssanimation'  style={{ color: 'white', fontFamily: 'Zhizn', marginTop: '20px' }}>В бой</Button>
+                <Button
+                  onClick={(e) => handleSubmit(e)}
+                  className="btnBattle cssanimation"
+                  style={{
+                    color: 'white',
+                    fontFamily: 'Zhizn',
+                    marginTop: '20px',
+                  }}
+                >
+                  В бой
+                </Button>
               )}
             </div>
           </BattleModal>
