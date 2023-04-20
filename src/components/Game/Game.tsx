@@ -7,7 +7,6 @@ import {
   setColor,
   setCurrent,
   setDeck,
-  setGameMessages,
   setModal,
   setOpponents,
   setOrder,
@@ -15,10 +14,8 @@ import {
   setStarted,
 } from '../../redux/actions/gameActions';
 import {
-  currentRotation,
   randomDegrees,
   rotateWheel,
-  getCurrentColor,
 } from '../utilities/rotate-func/rotate';
 import {
   DndContext,
@@ -36,7 +33,6 @@ import { Button } from '@mui/material';
 import StaticContainer from '../dnd/StaticContainer';
 import { setBattleMessage } from '../../redux/actions/battleMessageActions';
 import { moveBack, movement } from '../utilities/Movement/Movement';
-import { light } from '@mui/material/styles/createPalette';
 
 function Game() {
   // const [modalActive, setModalActive] = useState(false);

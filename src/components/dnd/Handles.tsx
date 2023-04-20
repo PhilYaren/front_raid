@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { arrayMove, sortableKeyboardCoordinates } from '@dnd-kit/sortable';
+import React from 'react';
+import { arrayMove } from '@dnd-kit/sortable';
 
 const wrapperStyle = {
   display: 'flex',

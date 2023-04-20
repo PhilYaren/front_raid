@@ -2,10 +2,8 @@ import {
   Button,
   FormControlLabel,
   FormLabel,
-  MenuItem,
   Radio,
   RadioGroup,
-  Select,
   TextField,
 } from '@mui/material';
 import React from 'react';
@@ -17,7 +15,7 @@ function CreateAndJoinGame({ handle }: any) {
       <form
         style={{ display: 'flex', flexDirection: 'column' }}
         onSubmit={handle}
-      > 
+      >
        <FormLabel>Название комнаты</FormLabel>
             <TextField required name="name"  />
         <RadioGroup name='size'>

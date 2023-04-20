@@ -1,5 +1,4 @@
 import React, { useMemo, useReducer } from 'react';
-import { useContext } from 'react';
 import { SET_SOKET, UNSET_SOKET } from './soket.types';
 
 // @ts-ignore

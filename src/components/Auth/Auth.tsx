@@ -1,6 +1,6 @@
 import React from 'react';
-import { FormControl, FormLabel, TextField, Button } from '@mui/material';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { FormLabel, TextField, Button } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import { loginUser, signupUser } from '../../redux/actions/userActions';
 import { useDispatch } from 'react-redux';
 // import './auth.css'
