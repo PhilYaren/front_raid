@@ -24,6 +24,7 @@ form button{
     margin-top: 5px;
     background: rgba(0,0,0, 0.3);
     color: white;
+    width: 80%;
 }
 
 .chat {
@@ -35,27 +36,23 @@ form button{
     font-family: Zhizn;
     font-size: 15px;
     max-width: 25%;
+    overflow-y: scroll;
 }
 
 .messageList {
-    overflow-y: scroll;
 }
 
-.chatScroll {
-    overflow-y: scroll;
-}
-
-.chatScroll::-webkit-scrollbar {
+.chat::-webkit-scrollbar {
     width: 10px;
     background-color: rgba(0,0,0, 0.3);
 }
 
-.chatScroll::-webkit-scrollbar-thumb {
+.chat::-webkit-scrollbar-thumb {
     border-radius: 10px;
     background-color: rgba(239, 238, 233, 0.46);
 }
 
-.chatScroll::-webkit-scrollbar-track {
+.chat::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.2);
     border-radius: 10px;
     background-color: rgba(0,0,0, 0.3);

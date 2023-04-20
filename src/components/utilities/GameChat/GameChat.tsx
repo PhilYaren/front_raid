@@ -31,6 +31,10 @@ function GameChat() {
 
   return (
     <div className="chat">
+      <form onSubmit={handleSend}>
+        <textarea name="message" placeholder="Введите сообщение" />
+        <button type="submit">Отправить</button>
+      </form>
       <div className="massageList">
         {messages.map((message: any, id: number) => {
           return (
@@ -44,10 +48,6 @@ function GameChat() {
           );
         })}
       </div>
-      <form onSubmit={handleSend}>
-        <textarea name="message" placeholder="Введите сообщение" />
-        <button type="submit">👊</button>
-      </form>
     </div>
   );
 }
