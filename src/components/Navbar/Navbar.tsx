@@ -10,10 +10,15 @@ import { socket, chatSocket } from '../../socket';
 import './Navbar.css';
 import Modal from '../Modal/Modal';
 import Auth from '../Auth/Auth';
+import useSound from 'use-sound';
+import clickSound from '../../assets/mouseClick.wav'
 
 function Navbar() {
+  const [clickSoundPlay] = useSound(clickSound);
+
   const [modalActive, setModalActive] = useState(false);
   const handlemodal = (action: any) => {
+    clickSoundPlay();
     setModalActive(false);
     setModalActive(action);
     // console.log(action);
@@ -35,6 +40,7 @@ function Navbar() {
     event: React.ChangeEvent<{}>,
     newTabIndex: number
   ): void => {
+    clickSoundPlay();
     setTabIndex(newTabIndex);
   };
 
@@ -69,6 +75,7 @@ function Navbar() {
                 className="selectedTab"
                 component={NavLink}
                 to="/"
+                onClick={()=>clickSoundPlay()}
               />
               {user
                 ? [
@@ -92,7 +99,8 @@ function Navbar() {
                       key="signup"
                       className="selectedTab"
                       label="Зарегистрироваться"
-                      onClick={() => handlemodal('registration')}
+                      onClick={() => {
+                        return handlemodal('registration')}}
                       // component={NavLink}
                       // to="/registration"
                     />,

@@ -3,17 +3,20 @@ import { FormControl, FormLabel, TextField, Button } from '@mui/material';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { loginUser, signupUser } from '../../redux/actions/userActions';
 import { useDispatch } from 'react-redux';
+import useSound from 'use-sound';
+import clickSound from '../../assets/mouseClick.wav'
 // import './auth.css'
 
 function Auth({ action }) {
   const endPoint = action;
   console.log(endPoint);
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  
+  const [clickSoundPlay] = useSound(clickSound);
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    clickSoundPlay();
     const data = new FormData(e.currentTarget);
     const user = Object.fromEntries(data.entries());
 
@@ -29,6 +32,7 @@ function Auth({ action }) {
     }
   };
   const handlePassport = () => {
+    clickSoundPlay();
     window.location.href = 'http://localhost:3000/login/federated/google';
     navigate('/');
   };
