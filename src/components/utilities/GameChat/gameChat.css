@@ -40,6 +40,8 @@ form button{
 }
 
 .messageList {
+    height: 80%;
+    overflow-y: auto;
 }
 
 .chat::-webkit-scrollbar {

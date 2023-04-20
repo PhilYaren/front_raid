@@ -31,15 +31,11 @@ function GameChat() {
 
   return (
     <div className="chat">
-      <form onSubmit={handleSend}>
-        <textarea name="message" placeholder="Введите сообщение" />
-        <button type="submit">Отправить</button>
-      </form>
-      <div className="massageList">
+      <div className="messageList">
         {messages.map((message: any, id: number) => {
           return (
             <div className="oneMessage" key={id}>
-              <div className='dataMessage'>
+              <div className="dataMessage">
                 <p className="massage__name">{message.user}</p>
                 <p className="massage__time">{message.time}</p>
               </div>
@@ -48,6 +44,10 @@ function GameChat() {
           );
         })}
       </div>
+      <form onSubmit={handleSend}>
+        <textarea name="message" placeholder="Введите сообщение" />
+        <button type="submit">Отправить</button>
+      </form>
     </div>
   );
 }
