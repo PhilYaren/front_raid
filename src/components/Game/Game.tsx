@@ -37,6 +37,8 @@ import useSound from 'use-sound';
 import submitDrumSound from '../../assets/submitCardDrum.wav'
 import spinnerSound from '../../assets/spinnerSoundShort3s.mp3'
 import clickSound from '../../assets/mouseClick.wav'
+import cardFlipSound from '../../assets/Card-flip-sound-effect.mp3'
+
 
 function Game() {
   // const [modalActive, setModalActive] = useState(false);
@@ -59,6 +61,7 @@ function Game() {
     // playerHand: ['/img/bonaparte.jpg', "/img/Professor.jpg", "/img/dwarf.jpg",],
     playerHand: players[user.id]?.hand,
   });
+  const [playCardFlip] = useSound(cardFlipSound);
 
   useEffect(() => {
     sessionSocket.on('update_state', (state: any) => {
@@ -302,12 +305,14 @@ function Game() {
         sensors={sensors}
         collisionDetection={closestCorners}
         onDragStart={(e) => {
+          playCardFlip();
           handleDragStart(e, setActiveId);
         }}
         onDragOver={(e) => {
           handleDragOver(e, items, setItems);
         }}
         onDragEnd={(e) => {
+          playCardFlip();
           handleDragEnd(e, items, setItems, setActiveId);
         }}
       >

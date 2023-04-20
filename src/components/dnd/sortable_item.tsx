@@ -23,7 +23,8 @@ export function Item(props) {
   };
 
   return (
-    <div style={style} className='cardItem cssanimation' onMouseEnter={()=> play()} onMouseLeave={()=>stop()}>
+    // <div style={style} className='cardItem cssanimation' onMouseEnter={()=> play()} onMouseLeave={()=>stop()}>
+    <div style={style} className='cardItem cssanimation'>
       <img style={{ width: '100px' }} src={card.image} alt="Карточка" />
     </div>
   );
