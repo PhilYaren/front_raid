@@ -10,7 +10,7 @@ export const chatSocket = io(`${URL}/chat`, {
   autoConnect: false,
   reconnectionDelay: 10000,
 });
-4
+
 export const sessionSocket = io(`${URL}/sessions`, {
   autoConnect: false,
   reconnectionDelay: 10000,

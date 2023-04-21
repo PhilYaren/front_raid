@@ -7,7 +7,13 @@ import useSound from 'use-sound';
 import clickSound from '../../assets/mouseClick.wav'
 // import './auth.css'
 
-function Auth({ action }) {
+type PropsAuth = {
+  action: boolean | string,
+}
+
+type Dispatch<A> = (value: A) => void
+
+function Auth({ action }: PropsAuth) {
   const endPoint = action;
   const dispatch = useDispatch();
   const navigate = useNavigate();

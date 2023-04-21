@@ -173,7 +173,7 @@ function Game() {
         // let winNumber = 3;
         let position = players[order[current]].position;
         const finalPosition = position + Number(winNumber);
-        const kek = setInterval(() => {
+        const moveInterval = setInterval(() => {
           if (position + 1 <= finalPosition) {
             if (position + 1 === finalPosition) {
               sessionSocket.emit('move_player', {
@@ -183,7 +183,7 @@ function Game() {
               });
               const element = document.getElementById(`${position + 1}`);
               const el = element?.dataset;
-              const { color, effect } = el;
+              const { color, effect }: DOMStringMap = el;
               const data = {
                 color,
                 effect: effect || null,
@@ -200,7 +200,7 @@ function Game() {
                 data: { id: id, position: 1 },
                 final: true,
               });
-              clearInterval(kek);
+              clearInterval(moveInterval);
             } else {
               sessionSocket.emit('move_player', {
                 room: session,
@@ -209,7 +209,7 @@ function Game() {
             }
             position += 1;
           } else {
-            clearInterval(kek);
+            clearInterval(moveInterval);
           }
         }, 500);
       });
