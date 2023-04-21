@@ -629,9 +629,7 @@ function Game() {
                 <p>Start</p>
                 {order?.map((player: string, i: number, ord: any) => {
                   const arr = ['red', 'blue', 'yellow'];
-                  // tranform: translate(-50%, -50%);
                   const pos = -(100 / (ord.length + 1)); // 1: 50, 2: 25, 3: 16.6
-                  console.log(pos);
                   return (
                     <span
                       key={player}

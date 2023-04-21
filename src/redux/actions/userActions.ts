@@ -10,26 +10,25 @@ export const checkAuth = () => (dispatch: Dispatch) => {
   axios
     .get('/user/')
     .then((res) => dispatch(setAuthUser(res.data)))
-    .catch((err) => console.log(err));
+    .catch((err) => console.error(err));
 };
 
 export const loginUser = (data: any) => (dispatch: Dispatch) => {
-  console.log(data);
   axios
     .post('/user/login', data)
     .then((res) => dispatch(setAuthUser(res.data)))
-    .catch(console.log);
+    .catch(err => console.error(err));
 };
 
 export const signupUser = (data: any) => (dispatch: Dispatch) => {
   axios
     .post('/user/register', data)
     .then((res) => dispatch(setAuthUser(res.data)))
-    .catch(console.log);
+    .catch(err => console.error(err));
 };
 
 export const logoutUserAsync = () => (dispatch: Dispatch) => {
   axios('/user/logout')
     .then(() => dispatch(logoutUser()))
-    .catch(console.log);
+    .catch(err => console.error(err));
 };

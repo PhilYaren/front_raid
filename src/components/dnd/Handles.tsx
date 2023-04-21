@@ -1,6 +1,7 @@
 import React from 'react';
 import { arrayMove } from '@dnd-kit/sortable';
 import cardFlipSound from '../../assets/Card-flip-sound-effect.mp3'
+import {DragStartEvent} from "@dnd-kit/core";
 
 const wrapperStyle = {
   display: 'flex',
@@ -19,12 +20,10 @@ export function findContainer(id: any, items: any) {
       desiredContainer = itemsKey;
     }
   }
-  console.log('desiredContainer =====>', desiredContainer);
-
   return desiredContainer;
 }
 
-export function handleDragStart(event, setActiveId) {
+export function handleDragStart(event: DragStartEvent, setActiveId) {
   const { active } = event;
   const { id } = active;
   setActiveId(id);
@@ -40,7 +39,6 @@ export function handleDragOver(event, items, setItems) {
   const overContainer = findContainer(overId, items);
 
   if (!activeContainer || !overContainer || activeContainer === overContainer) {
-    // console.log('returning =====>');
     return;
   }
 

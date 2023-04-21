@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Container } from '@mui/material';
@@ -32,7 +32,6 @@ function Home() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  console.log(sessionSocket);
   if (first) {
     sessionSocket.emit('get_rooms');
     setFirst(false);
@@ -63,10 +62,6 @@ function Home() {
   useEffect(() => {
     chatSocket.on('receive_message', (message: Message) => {
       dispatch(actionMessage(message));
-      
-      console.log(user.userName, '<===message userName');
-      console.log(message.userName, '<===message userName');
-      
     });
   }, [chatSocket]);
 
@@ -146,20 +141,6 @@ function Home() {
         {create && (
           <Modal active={create} setActive={setCreate}>
             <CreateAndJoinGame handle={handleNewGame} />
-            {/* <form onSubmit={handleNewGame}> */}
-            {/* <input type="text" placeholder="Название комнаты" name="name" />
-            <input
-              type="password"
-              placeholder="Пароль от сессии"
-              name="password"
-            />
-            <select name="size">
-              <option value="2">2 игрока</option>
-              <option value="3">3 игрока</option>
-            </select>
-
-            <button type="submit">DA</button> */}
-            {/* </form> */}
           </Modal>
         )}
         <div className={styles.chatContainer}>
@@ -185,7 +166,7 @@ function Home() {
                 value={form.message}
                 onChange={handleInput}
               />
-              <button type="submit">submit</button>
+              <button type="submit">Отправить</button>
             </form>
           </>
         </div>
@@ -249,13 +230,11 @@ function Home() {
                   старту, то фишка возвращается на старт.
                 </li>
                 <li>
-                  Если фишка попадает на клетку с "сердечком", тогда нужно взять
-                  из колоды карту, а дальше действовать в зависимости от цвета
+                  Если фишка попадает на клетку с "сердечком", тогда вы воруте случайную карту соперника, а дальше действовуете в зависимости от цвета
                   клеточки.
                 </li>
                 <li>
-                  Если фишка попадает на клетку с "цветочком", тогда нужно
-                  положить в колоду любую свою карту, а дальше действовать в
+                  Если фишка попадает на клетку с "цветочком", тогда случайная ваша карта уходит в колоду, а дальше действовать в
                   зависимости от цвета клеточки.
                 </li>
                 <li>

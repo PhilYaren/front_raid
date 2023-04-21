@@ -1,11 +1,8 @@
 import { AppBar, Box, Tab, Tabs, Toolbar, Typography } from '@mui/material';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
-import { User } from '../../types';
 import { useDispatch, useSelector } from 'react-redux';
-import { StateFromReducersMapObject } from '@reduxjs/toolkit';
 import { logoutUserAsync } from '../../redux/actions/userActions';
-import { SocketContext } from '../../context/websoket/websoket-context';
 import { socket, chatSocket } from '../../socket';
 import './Navbar.css';
 import Modal from '../Modal/Modal';
@@ -21,7 +18,6 @@ function Navbar() {
     clickSoundPlay();
     setModalActive(false);
     setModalActive(action);
-    // console.log(action);
   };
   const [tabIndex, setTabIndex] = useState(0);
   const user = useSelector((state: any) => state.user.user);
@@ -29,7 +25,6 @@ function Navbar() {
   const navigate = useNavigate();
   const path = useLocation();
 
-  console.log(socket);
   useEffect(() => {
     if (user) {
       setModalActive(false);

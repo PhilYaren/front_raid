@@ -9,10 +9,9 @@ import clickSound from '../../assets/mouseClick.wav'
 
 function Auth({ action }) {
   const endPoint = action;
-  console.log(endPoint);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  
+
   const [clickSoundPlay] = useSound(clickSound);
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -28,7 +27,7 @@ function Auth({ action }) {
       }
       navigate('/');
     } catch (e) {
-      console.log(e);
+      console.error(e);
     }
   };
   const handlePassport = () => {

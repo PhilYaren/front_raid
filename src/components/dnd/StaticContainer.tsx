@@ -12,7 +12,6 @@ function StaticContainer({
   first: boolean;
   secret: boolean;
 }): JSX.Element {
-  console.log('secret', secret);
   return (
     <div
       className="opponent"

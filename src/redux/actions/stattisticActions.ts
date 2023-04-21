@@ -11,6 +11,6 @@ export const setStatisticAsync = () => (dispatch: Dispatch) => {
       dispatch(setStatistic(res.data));
     })
     .catch((err) => {
-      console.log(err);
+      console.error(err);
     });
 };

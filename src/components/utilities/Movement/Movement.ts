@@ -1,5 +1,4 @@
 import { sessionSocket } from '../../../socket';
-import { getCurrentColor } from '../rotate-func/rotate';
 
 export function movement(
   order: any,
